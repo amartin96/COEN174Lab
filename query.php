@@ -22,9 +22,9 @@ $stmt = $db_conn->stmt_init();
 $stmt->prepare(file_get_contents("query.sql"));
 
 # bind the parameters of the prepared statement to the user input
-$t_start = "17:15";
-$t_end = "20:00";
-$course = "COEN 100";
+$t_start = $_POST["t_start"];
+$t_end = $_POST["t_end"];
+$course = $_POST["course"];
 $stmt->bind_param("sss", $t_start, $t_end, $course);
 
 # execute the statement and retrieve results
@@ -35,7 +35,7 @@ if (!$stmt->execute()) {
 $stmt->bind_result($fname, $lname, $email, $phone);
 
 while ($stmt->fetch()) {
-    printf("%s\t%s\t%s\t%s\n", $fname, $lname, $email, $phone);
+    printf("%s\t%s\t%s\t%s</br>", $fname, $lname, $email, $phone);
 }
 
 #$result = $db_conn->query("SHOW DATABASES");
