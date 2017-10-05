@@ -23,10 +23,11 @@ if (!$stmt->execute()) {
 $stmt->bind_result($fname, $lname, $email, $phone);
 
 # format results as associative array and convert to JSON
+$data = array();
 while ($stmt->fetch()) {
-    $data[] = array($fname, $lname, $email, $phone);
+    $data[] = array("fname" => $fname, "lname" => $lname, "email" => $email, "phone" => $phone);
 }
-echo json_encode($data);
+echo json_encode($data, JSON_PRETTY_PRINT);
 
 //while ($stmt->fetch()) {
 //    printf("%s\t%s\t%s\t%s</br>", $fname, $lname, $email, $phone);
