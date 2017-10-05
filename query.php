@@ -1,21 +1,9 @@
 <?php
 
-# ini_set('display_errors', 'on');
-# error_reporting(E_ALL);
-
-define("DBHOST", "dbserver.engr.scu.edu");
-define("DBUSER", "amartin");
-define("DBPASS", "password");
-define("DBNAME", "sdb_amartin");
+require("dbconn.php");
 
 # connect to the database
-$db_conn = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-
-# check for connection errors
-if (mysqli_connect_errno()) {
-    error_log(__FILE__ . " - Error connecting to database: " . mysqli_connect_error());
-    exit(1);
-}
+$db_conn = dbconn();
 
 # create the SQL prepared statement
 $stmt = $db_conn->stmt_init();
@@ -34,11 +22,14 @@ if (!$stmt->execute()) {
 }
 $stmt->bind_result($fname, $lname, $email, $phone);
 
+# format results as associative array and convert to JSON
 while ($stmt->fetch()) {
-    printf("%s\t%s\t%s\t%s</br>", $fname, $lname, $email, $phone);
+    $data[] = array($fname, $lname, $email, $phone);
 }
+echo json_encode($data);
 
-#$result = $db_conn->query("SHOW DATABASES");
-#var_dump(mysqli_fetch_assoc($result));
+//while ($stmt->fetch()) {
+//    printf("%s\t%s\t%s\t%s</br>", $fname, $lname, $email, $phone);
+//}
 
 ?>
