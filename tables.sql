@@ -8,9 +8,10 @@ DROP TABLE IF EXISTS Courses;
 -- TA info
 CREATE TABLE TeachingAssistants (
     id      INTEGER PRIMARY KEY,
-    fname   VARCHAR(255) NOT NULL,
-    lname   VARCHAR(255) NOT NULL,
-    email   VARCHAR(255) NOT NULL,
+    hash    VARCHAR(255) NOT NULL,
+    fname   VARCHAR(255),
+    lname   VARCHAR(255),
+    email   VARCHAR(255),
     phone   VARCHAR(12)
 );
 
