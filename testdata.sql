@@ -1,5 +1,5 @@
-INSERT INTO TeachingAssistants VALUES (0, "Bob", "Jones", "bjones@scu.edu", "111-111-1111");
-INSERT INTO TeachingAssistants VALUES (1, "Bill", "Ding", "bding@scu.edu", "222-222-2222");
+INSERT INTO TeachingAssistants VALUES (0, "0", "Bob", "Jones", "bjones@scu.edu", "111-111-1111");
+INSERT INTO TeachingAssistants VALUES (1, "0", "Bill", "Ding", "bding@scu.edu", "222-222-2222");
 
 INSERT INTO AvailableTimes VALUES (0, "9:15", "12:00");
 INSERT INTO AvailableTimes VALUES (0, "17:00", "20:30");
