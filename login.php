@@ -22,7 +22,7 @@ $db = dbconn();
 
 # fetch hashed password from database
 $stmt = $db->stmt_init();
-$stmt->prepare("SELECT hash FROM TeachingAssistants WHERE username = ?");
+$stmt->prepare("SELECT hash FROM TeachingAssistants WHERE id = ?");
 $stmt->bind_param("s", $_POST["username"]);
 
 if ($stmt->execute()) {
