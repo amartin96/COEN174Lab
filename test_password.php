@@ -3,8 +3,8 @@
 require "dbconn.php";
 require "password.php";
 
-if ($argc != 2) {
-    echo "Usage: php test_password.php USERNAME PASSWORD";
+if ($argc != 3) {
+    echo "Usage: php test_password.php USERNAME PASSWORD\n";
     exit(1);
 }
 
