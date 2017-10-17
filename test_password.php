@@ -10,6 +10,8 @@ $stmt->bind_param("ss", $_GET["username"], $_GET["password"]);
 
 if (!$stmt->execute()) {
     echo "ERROR: failed to execute query!";
+} else {
+    echo "SUCCESS!"
 }
 
 ?>
