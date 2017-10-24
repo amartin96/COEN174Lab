@@ -1,42 +1,34 @@
 <?php
 
-require("password.php");
-require("dbconn.php");
+require "helper.php";
 
-function printLoginWithMessage($message)
-{
-    # load the login page
-    $html = new DOMDocument();
-    $html->loadHTMLFile("login.html");
+session_start();
 
-    # add an invalid credentials message
-    $node = $html->createTextNode($message);
-    $html->getElementsByTagName("body")->item(0)->appendChild($node);
-
-    # print the HTML
-    echo $html->saveHTML();
+# check for an existing session and log out if necessary
+if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
+    logout();
+    session_start();
 }
 
-# connect to the database
-$db = dbconn();
-
-# fetch hashed password from database
+# connect to the database and prepare the query
+$db = connectToDatabase();
 $stmt = $db->stmt_init();
 $stmt->prepare("SELECT hash FROM TeachingAssistants WHERE id = ?");
 $stmt->bind_param("s", $_POST["username"]);
 
+# attempt to authenticate login credentials
 if ($stmt->execute()) {
     $stmt->bind_result($result);
-
-    # determine whether credentials authenticate
     if ($stmt->fetch() && password_verify($_POST["password"], $result)) {
-        echo file_get_contents("client.html");
+        # valid credentials
+        echo json_encode(array("status" => SUCCESS));
     } else {
-        printLoginWithMessage("Invalid login");
+        # invalid credentials
+        echo json_encode(array("status" => INVALID_LOGIN));
     }
 } else {
-    // ERROR
-    printLoginWithMessage("Server error");
+    # query failed to execute
+    echo json_encode(array("status" => SERVER_ERROR));
 }
 
 ?>
