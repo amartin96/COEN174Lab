@@ -29,8 +29,4 @@ while ($stmt->fetch()) {
 }
 echo json_encode($data, JSON_PRETTY_PRINT);
 
-//while ($stmt->fetch()) {
-//    printf("%s\t%s\t%s\t%s</br>", $fname, $lname, $email, $phone);
-//}
-
 ?>
