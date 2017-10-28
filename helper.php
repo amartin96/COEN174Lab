@@ -17,7 +17,7 @@ define("DBNAME", "sdb_amartin");
  *  in the constants in this file.  If the connection fails, prints
  *  an error message and exits.
  *
- *  @return A mysqli object representing the connection to the database
+ *  @return mysqli
  */
 function connectToDatabase()
 {
@@ -33,7 +33,7 @@ function connectToDatabase()
  *  Completely terminates a session by removing all session variables,
  *  unsetting the session ID cookie, and destroying the session.
  *
- *  @return true if a session existed and was successfully terminated, else false
+ *  @return bool
  */
 function logout()
 {

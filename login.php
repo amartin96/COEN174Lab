@@ -21,6 +21,8 @@ if ($stmt->execute()) {
     $stmt->bind_result($result);
     if ($stmt->fetch() && password_verify($_POST["password"], $result)) {
         # valid credentials
+        $_SESSION["username"] = $_POST["username"];
+        $_SESSION["password"] = $_POST["password"];
         echo json_encode(array("status" => SUCCESS));
     } else {
         # invalid credentials
