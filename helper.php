@@ -8,16 +8,17 @@ define("INVALID_ARGS", 3);
 
 # database credentials
 define("DBHOST", "dbserver.engr.scu.edu");
+#define("DBHOST", "127.0.0.1");
 define("DBUSER", "amartin");
 define("DBPASS", "password");
 define("DBNAME", "sdb_amartin");
 
 /**
- *  Connect to the MySQL database using the credentials defined
- *  in the constants in this file.  If the connection fails, prints
- *  an error message and exits.
+ * Connect to the MySQL database using the credentials defined
+ * in the constants in this file.  If the connection fails, prints
+ * an error message and exits.
  *
- *  @return mysqli
+ * @return mysqli
  */
 function connectToDatabase()
 {
@@ -30,10 +31,51 @@ function connectToDatabase()
 }
 
 /**
- *  Completely terminates a session by removing all session variables,
- *  unsetting the session ID cookie, and destroying the session.
+ * Attempt to log in using the given credentials.
  *
- *  @return bool
+ * @param string $username
+ * @param string $password
+ * @return int
+ */
+function login($username, $password)
+{
+    # connect to the database and prepare the query
+    $db = connectToDatabase();
+    $stmt = $db->stmt_init();
+    $stmt->prepare("SELECT hash FROM TeachingAssistants WHERE id = ?");
+    $stmt->bind_param("s", $username);
+
+    # attempt to authenticate login credentials
+    if ($stmt->execute()) {
+        $stmt->bind_result($result);
+        if ($stmt->fetch() && password_verify($password, $result)) {
+            # valid credentials
+            return SUCCESS;
+        }
+        # invalid credentials
+        return INVALID_LOGIN;
+    }
+    # query failed to execute
+    return SERVER_ERROR;
+}
+
+/**
+ * @return int
+ */
+function sessionLogin()
+{
+    # check for the existence of a valid session
+    if (session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
+        return INVALID_LOGIN;
+    }
+    return login($_SESSION["username"], $_SESSION["password"]);
+}
+
+/**
+ * Completely terminates a session by removing all session variables,
+ * unsetting the session ID cookie, and destroying the session.
+ *
+ * @return bool
  */
 function logout()
 {

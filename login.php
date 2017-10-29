@@ -10,27 +10,12 @@ if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
     session_start();
 }
 
-# connect to the database and prepare the query
-$db = connectToDatabase();
-$stmt = $db->stmt_init();
-$stmt->prepare("SELECT hash FROM TeachingAssistants WHERE id = ?");
-$stmt->bind_param("s", $_POST["username"]);
-
-# attempt to authenticate login credentials
-if ($stmt->execute()) {
-    $stmt->bind_result($result);
-    if ($stmt->fetch() && password_verify($_POST["password"], $result)) {
-        # valid credentials
-        $_SESSION["username"] = $_POST["username"];
-        $_SESSION["password"] = $_POST["password"];
-        echo json_encode(array("status" => SUCCESS));
-    } else {
-        # invalid credentials
-        echo json_encode(array("status" => INVALID_LOGIN));
-    }
-} else {
-    # query failed to execute
-    echo json_encode(array("status" => SERVER_ERROR));
+# attempt to log in with the given credentials
+$status = login($_POST["username"], $_POST["password"]);
+if ($status == SUCCESS) {
+    $_SESSION["username"] = $_POST["username"];
+    $_SESSION["password"] = $_POST["password"];
 }
+echo json_encode(array("status" => $status));
 
 ?>
