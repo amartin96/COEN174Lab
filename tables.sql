@@ -18,6 +18,7 @@ CREATE TABLE TeachingAssistants (
 -- Mapping of TA IDs to times they are available as a sub
 CREATE TABLE AvailableTimes (
     ta_id   INTEGER NOT NULL,
+    day     ENUM('M', 'T', 'W', 'Th', 'F'),
     t_start TIME NOT NULL,
     t_end   TIME NOT NULL,
     FOREIGN KEY (ta_id)
@@ -46,6 +47,7 @@ CREATE TABLE QualifiedCourses (
 CREATE TABLE Sections (
     id      INTEGER PRIMARY KEY,
     name    VARCHAR(8),
+    day     ENUM('M', 'T', 'W', 'Th', 'F'),
     t_start TIME,
     t_end   TIME,
     FOREIGN KEY (name)
