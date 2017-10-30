@@ -6,6 +6,7 @@ const INVALID_ARGS = 3;
 // bind event handlers
 $("#login-submit").click(login);
 $("#test-checkstatus").click(checkstatus);
+$("#test-submit").click(query);
 $("#test-logout").click(logout);
 
 // login button event handler
@@ -32,6 +33,17 @@ function checkstatus()
     });
 }
 
+function query()
+{
+    var course = $("#test-course").val();
+    var day = $("#test-day").val();
+    var t_start = $("#test-t_start").val();
+    var t_end = $("#test-t_end").val();
+    $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
+        alert(data);
+    });
+}
+
 // logout button event handler
 function logout()
 {
@@ -49,4 +61,9 @@ function logout()
 $(function() {
     // hide all divs other than login
     $("#test").hide();
+    $("#query").hide();
+    $("#availableTA").hide();
+    $("#TAinfo").hide();
+    $("#ClassCheckboxList").hide();
+    $("#Admin").hide();
 });
