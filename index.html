@@ -46,5 +46,97 @@
 
         </div>
 
+        <div id="availableTA">
+              <h2>Available TAs</h2>
+                  <table width="80%" align="center">
+                      <tr style="text-align: center">
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                      </tr>
+
+                      <tr style="text-align: center">
+                        <th>Jack Smith</th>
+                        <td>jsmith@scu.edu</td>
+                        <td>333-333-3333</td>
+                      </tr>
+
+                      <tr style="text-align: center">
+                        <th>John Smith</th>
+                        <td>jsmith1@scu.edu</td>
+                        <td>444-444-4444</td>
+                      </tr>
+
+                      <tr style="text-align: center">
+                        <th>James Smith</th>
+                        <td>jsmith2@scu.edu</td>
+                        <td>555-555-5555</td>
+                      </tr>
+
+                  </table>
+          </div>
+
+          <div id="TA info">
+            <input type="text" id="TA info-StudentID" placeholder="StudentID"readonly>
+            <input type="password" id="TA info-password" placeholder="Password">
+            <input type="text" id="TA info-First-Name" placeholder="First-Name">
+            <input type="text" id="TA info-Last-Name" placeholder="Last-Name">
+            <input type="text" id="TA info-Email" placeholder="Email">
+            <input type="text" id="TA info-Phone-Number" placeholder="Phone-Number">
+            <button type="button" id="TA info-save">Save</button>
+
+          <div id="Class Checkbox List">
+            <input type="checkbox" name="class" value="100"> COEN 100<br>
+            <input type="checkbox" name="class" value="200" checked> COEN 200<br>
+            <input type="checkbox" name="class" value="250"> COEN 250<br>
+            <input type="checkbox" name="class" value="300" checked> COEN 300<br>
+            <input type="submit" value="Submit">
+          </div>
+
+        </div>
+
+        <div id = "Admin">
+            <div style = "width: 50%">
+                <div style = "width: 50%; float: left">Teaching Assistant ID: <input type="text" id="Admin-studentID" placeholder="W1234567"></div>
+                <div style = "width: 50%; float: right">Temporary Password: <input type="text" id="password"></div>
+                <div><button style = "float: right" type="button" id="login-submit">Add</button></div>
+            </div>
+            
+        
+          <div id="Current">
+              <h2>Current Teaching Assistants</h2>
+                    <table width="80%" align="center" >
+                       <tr>
+                         <th>Name</th>
+                         <th>Email</th>
+                         <th>Phone</th>
+                      </tr>
+    
+                       <tr style="text-align: center">
+                           <th>Jack Smith</th>
+                           <td>jsmith@scu.edu</td>
+                           <td>333-333-3333</td>
+                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
+                       </tr>
+    
+                       <tr style="text-align: center">
+                           <th>John Smith</th>
+                           <td>jsmith1@scu.edu</td>
+                           <td>444-444-4444</td>
+                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
+                       </tr>
+
+                       <tr style="text-align: center">
+                           <th>James Smith</th>
+                           <td>jsmith2@scu.edu</td>
+                           <td>555-555-5555</td>
+                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
+                       </tr>
+
+                    </table>
+          </div>
+
+        </div>
+
     </body>
 </html>
