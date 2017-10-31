@@ -13,20 +13,54 @@
     <body>
 
         <div id="login">
+            <b>TA Login</b><br>
             <input type="text" id="login-username" placeholder="User Name">
             <input type="password" id="login-password" placeholder="Password">
-            <button type="button" id="login-submit">Login</button>
+            <button id="login-submit">Login</button>
+            <br><b>Admin Login</b><br>
+            <input type="text" id="login-admin-username" placeholder="User Name">
+            <input type="password" id="login-admin-password" placeholder="Password">
+            <button id="login-admin-submit">Login</button>
         </div>
 
         <div id="test">
-            <button type="button" id="test-checkstatus">Am I logged in?</button>
-            <button type="button" id="test-logout">Logout</button>
-            <br>
+            <button id="test-checkstatus">Am I logged in?</button>
+            <button id="test-logout">Logout</button>
+            <br><b>Search</b><br>
             <input type="text" id="test-course" placeholder="Course Name">
             <input type="text" id="test-day" placeholder="Day">
             <input type="text" id="test-t_start" placeholder="Start Time">
             <input type="text" id="test-t_end" placeholder="End Time">
             <button id="test-submit">Go</button>
+            <br><b>Change Personal Information</b><br>
+            <input type="text" id="test-modify-fname" placeholder="First Name">
+            <input type="text" id="test-modify-lname" placeholder="Last Name">
+            <input type="text" id="test-modify-email" placeholder="E-Mail">
+            <input type="text" id="test-modify-phone" placeholder="Phone Number">
+            <button id="test-modify-submit">Save</button>
+            <br><b>Add Qualified Course</b><br>
+            <input type="text" id="test-add-course" placeholder="Course Name">
+            <button id="test-add-course-submit">Add</button>
+            <br><b>Add Available Time</b><br>
+            <input type="text" id="test-add-day" placeholder="Day">
+            <input type="text" id="test-add-t_start" placeholder="Start Time">
+            <input type="text" id="test-add-t_end" placeholder="End Time">
+            <button id="test-add-time-submit">Add</button>
+            <br>
+            <button id="test-clear-data">Clear All Courses and Times</button>
+            <br><b>Change Password</b><br>
+            <input type="password" id="test-password" placeholder="password">
+            <button id="test-password-submit">Change</button>
+        </div>
+
+        <div id="test-admin">
+            <button id="test-admin-logout">Logout</button>
+            <br>
+            <button id="test-admin-list">List TAs</button>
+            <br><b>Add / Remove Teaching Assistants</b><br>NOTE: Default password for new accounts is "password"<br>
+            <input type="text" id="test-admin-id" placeholder="Student ID">
+            <button id="test-admin-add">Add</button>
+            <button id="test-admin-remove">Remove</button>
         </div>
 
         <div id= "query">

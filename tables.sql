@@ -5,6 +5,12 @@ DROP TABLE IF EXISTS TeachingAssistants;
 DROP TABLE IF EXISTS Sections;
 DROP TABLE IF EXISTS Courses;
 
+-- Admin Credentials
+CREATE TABLE Admins (
+    username    VARCHAR(255) UNIQUE NOT NULL,
+    hash        VARCHAR(255) NOT NULL
+);
+
 -- TA info
 CREATE TABLE TeachingAssistants (
     id      INTEGER PRIMARY KEY,
@@ -37,10 +43,11 @@ CREATE TABLE QualifiedCourses (
     course_name VARCHAR(8),
     FOREIGN KEY (ta_id)
         REFERENCES TeachingAssistants(id)
-        ON DELETE CASCADE,
-    FOREIGN KEY (course_name)
-        REFERENCES Courses(name)
         ON DELETE CASCADE
+#     ,
+#     FOREIGN KEY (course_name)
+#         REFERENCES Courses(name)
+#         ON DELETE CASCADE
 );
 
 -- Course info

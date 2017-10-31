@@ -35,14 +35,23 @@ function connectToDatabase()
  *
  * @param string $username
  * @param string $password
- * @return int
+ * @param string $type      One of: "user", "admin"
+ * @return int              Status code
  */
-function login($username, $password)
+function login($username, $password, $type = "user")
 {
+    if ($type === "admin") {
+        $query = "SELECT hash FROM Admins WHERE username = ?";
+    } else {
+        $query = "SELECT hash FROM TeachingAssistants WHERE id = ?";
+    }
+
     # connect to the database and prepare the query
     $db = connectToDatabase();
     $stmt = $db->stmt_init();
-    $stmt->prepare("SELECT hash FROM TeachingAssistants WHERE id = ?");
+//    $stmt->prepare("SELECT hash FROM TeachingAssistants WHERE id = ?");
+//    $stmt->bind_param("s", $username);
+    $stmt->prepare($query);
     $stmt->bind_param("s", $username);
 
     # attempt to authenticate login credentials
@@ -60,15 +69,16 @@ function login($username, $password)
 }
 
 /**
+ * @param string $type
  * @return int
  */
-function sessionLogin()
+function sessionLogin($type = "user")
 {
     # check for the existence of a valid session
     if (session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
         return INVALID_LOGIN;
     }
-    return login($_SESSION["username"], $_SESSION["password"]);
+    return login($_SESSION["username"], $_SESSION["password"], $type);
 }
 
 /**

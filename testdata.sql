@@ -1,3 +1,5 @@
+INSERT INTO Admins VALUES ('admin', 0);
+
 INSERT INTO TeachingAssistants VALUES (0, '0', 'Bob', 'Jones', 'bjones@scu.edu', '111-111-1111');
 INSERT INTO TeachingAssistants VALUES (1, '0', 'Bill', 'Ding', 'bding@scu.edu', '222-222-2222');
 
