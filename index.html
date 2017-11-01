@@ -49,10 +49,17 @@
             <input type="text" id="test-modify-email" placeholder="E-Mail">
             <input type="text" id="test-modify-phone" placeholder="Phone Number">
             <button id="test-modify-submit">Save</button>
-            <br><b>Add Qualified Course</b><br>
-            <input type="text" id="test-add-course" placeholder="Course Name">
-            <button id="test-add-course-submit">Add</button>
-            <br><b>Add Available Time</b><br>
+            <br><br><b>Add Qualified Course</b><br>
+            <form>
+                <input type='checkbox' class = "classcheck" value='COEN 100'/>
+                <label for="checkbox_1">COEN 100</label>
+                <input type='checkbox' class="classcheck" value='COEN 200'>
+                <label for="checkbox_2">COEN 200</label>
+                <input type='checkbox' class="classcheck" value='COEN 300'/>
+                <label for="checkbox_3">COEN 300</label>
+            </form>
+            <button id="add-course-submit">Add</button>
+            <br><br><b>Add Available Time</b><br>
             <button id="test-add-time-submit">Save</button><br>
             <div class = "row">
             
@@ -198,11 +205,6 @@
             <button type="button" id="TA info-save">Save</button>
 
           <div id="ClassCheckboxList">
-            <input type="checkbox" name="class" value="100"> COEN 100<br>
-            <input type="checkbox" name="class" value="200" checked> COEN 200<br>
-            <input type="checkbox" name="class" value="250"> COEN 250<br>
-            <input type="checkbox" name="class" value="300" checked> COEN 300<br>
-            <input type="submit" value="Submit">
           </div>
 
         </div>

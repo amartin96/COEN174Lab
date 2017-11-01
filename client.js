@@ -9,7 +9,7 @@ $("#login-admin-submit").click(loginAdmin);
 $("#test-checkstatus").click(checkstatus);
 $("#test-submit").click(querySearch);
 $("#test-modify-submit").click(queryModifyInfo);
-$("#test-add-course-submit").click(queryAddCourse);
+$("#add-course-submit").click(queryAddCourse);
 $("#test-add-time-submit").click(queryAddTime);
 $("#test-clear-data").click(queryClearData);
 $("#test-password-submit").click(queryChangePassword);
@@ -145,9 +145,16 @@ function queryModifyInfo()
 
 function queryAddCourse()
 {
-    var course = $("#test-add-course").val();
-    $.post("server.php", { query: "add-course", course: course }, function(data) {
-        alert(data);
+    $(".classcheck").each(function() { 
+        if ($(this).is(":checked"))
+        {
+            var course = $(this).val();
+            $.post("server.php", { query: "add-course", course: course }, function(data) {
+            alert(data);});
+        } else {    
+            // Remove $(this).val() from the database
+        }
+
     });
 }
 
