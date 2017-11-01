@@ -86,7 +86,7 @@ $("#add-row-m").click(function(){
 
     var counter = $('#m-table tr').length;
 
-    var markup = '<tr><td><input type="text" class="form-control" id="M' + counter + '-start-time"></td><td> to </td><td><input type="text" class="form-control" id="M' + counter + '-end-time"></td></tr>';
+    var markup = '<tr><td><input type="text" size = "8" id="M' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="M' + counter + '-end-time"></td></tr>';
 
     $('#m-table').append(markup);
 
@@ -96,7 +96,7 @@ $("#add-row-t").click(function(){
 
     var counter = $('#t-table tr').length;
 
-    var markup = '<tr><td><input type="text" class="form-control" id="T' + counter + '-start-time"></td><td> to </td><td><input type="text" class="form-control" id="T' + counter + '-end-time"></td></tr>';
+    var markup = '<tr><td><input type="text" size = "8" id="T' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="T' + counter + '-end-time"></td></tr>';
 
     $('#t-table').append(markup);
 
@@ -106,7 +106,7 @@ $("#add-row-w").click(function(){
 
     var counter = $('#w-table tr').length;
 
-    var markup = '<tr><td><input type="text" class="form-control" id="W' + counter + '-start-time"></td><td> to </td><td><input type="text" class="form-control" id="W' + counter + '-end-time"></td></tr>';
+    var markup = '<tr><td><input type="text" size = "8" id="W' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="W' + counter + '-end-time"></td></tr>';
 
     $('#w-table').append(markup);
 
@@ -116,7 +116,7 @@ $("#add-row-r").click(function(){
 
     var counter = $('#r-table tr').length;
 
-    var markup = '<tr><td><input type="text" class="form-control" id="R' + counter + '-start-time"></td><td> to </td><td><input type="text" class="form-control" id="R' + counter + '-end-time"></td></tr>';
+    var markup = '<tr><td><input type="text" size = "8" id="R' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="R' + counter + '-end-time"></td></tr>';
 
     $('#r-table').append(markup);
 
@@ -126,7 +126,7 @@ $("#add-row-f").click(function(){
 
     var counter = $('#f-table tr').length;
 
-    var markup = '<tr><td><input type="text" class="form-control" id="F' + counter + '-start-time"></td><td> to </td><td><input type="text" class="form-control" id="F' + counter + '-end-time"></td></tr>';
+    var markup = '<tr><td><input type="text" size = "8" id="F' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="F' + counter + '-end-time"></td></tr>';
 
     $('#f-table').append(markup);
 
