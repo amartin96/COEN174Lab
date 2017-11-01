@@ -6,12 +6,16 @@
 
         <!-- import jQuery -->
         <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        
+        <!-- Import Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
 
         <!-- import local scripts -->
         <script defer src="client.js"></script>
     </head>
     <body>
-
+        <div class = "container">
         <div id="login">
             <b>TA Login</b><br>
             <input type="text" id="login-username" placeholder="User Name">
@@ -36,8 +40,8 @@
                 <option value="F">Friday</option>
             </select>
 
-            <input type="time" id="test-t_start" placeholder="Start Time">
-            <input type="time" id="test-t_end" placeholder="End Time">
+            <input type="text" id="test-t_start" placeholder="Start Time">
+            <input type="text" id="test-t_end" placeholder="End Time">
             <button id="test-submit">Go</button>
             <br><b>Change Personal Information</b><br>
             <input type="text" id="test-modify-fname" placeholder="First Name">
@@ -50,58 +54,69 @@
             <button id="test-add-course-submit">Add</button>
             <br><b>Add Available Time</b><br>
             <button id="test-add-time-submit">Save</button><br>
+            <div class = "row">
             
+            <div class="col-xs-2">
             <table id = "m-table">
                 <tr>
                     <th>Monday</th>
                 </tr>
                 <tr>
-                    <td><input type="time" id="M1-start-time"> to <input type="time" id="M1-end-time"></td>
+                    <td><input type="text" class="form-control" id="M1-start-time"></td><td> to </td><td><input type="text" class="form-control" id="M1-end-time"></td>
                 </tr>
             </table>
             <button id="add-row-m">Add Time Slot</button>
+            </div>
             
+            <div class="col-xs-2">    
             <table id = "t-table">
                 <tr>
                     <th>Tuesday</th>
                 </tr>
                 <tr>
-                    <td><input type="time" id="T1-start-time"> to <input type="time" id="T1-end-time"></td>
+                    <td><input type="text" class="form-control" id="T1-start-time"></td><td> to </td><td><input type="text" class="form-control" id="T1-end-time"></td>
                 </tr>
             </table>
             <button id="add-row-t">Add Time Slot</button>
+            </div>
             
+            <div class="col-xs-2">
             <table id = "w-table">
                 <tr>
                     <th>Wednesday</th>
                 </tr>
                 <tr>
-                    <td><input type="time" id="W1-start-time"> to <input type="time" id="W1-end-time"></td>
+                    <td><input type="text" class="form-control" id="W1-start-time"></td><td> to </td><td><input type="text" class="form-control" id="W1-end-time"></td>
                 </tr>
             </table>
             <button id="add-row-w">Add Time Slot</button>
+            </div>
             
+            <div class="col-xs-2">
             <table id = "r-table">
                 <tr>
                     <th>Thursday</th>
                 </tr>
                 <tr>
-                    <td><input type="time" id="R1-start-time"> to <input type="time" id="R1-end-time"></td>
+                    <td><input type="text" class="form-control" id="R1-start-time"></td><td> to </td><td><input type="text" class="form-control" id="R1-end-time"></td>
                 </tr>
             </table>
             <button id="add-row-r">Add Time Slot</button>
+            </div>
             
-                        
+              
+            <div class="col-xs-2">
             <table id = "f-table">
                 <tr>
                     <th>Friday</th>
                 </tr>
                 <tr>
-                    <td><input type="time" id="F1-start-time"> to <input type="time" id="F1-end-time"></td>
+                    <td><input type="text" class="form-control" id="F1-start-time"></td><td> to </td><td><input type="text" class="form-control" id="F1-end-time"></td>
                 </tr>
             </table>
             <button id="add-row-f">Add Time Slot</button>
-            
+            </div>
+            </div>
             
             <br>
             <button id="test-clear-data">Clear All Courses and Times</button>
@@ -234,6 +249,7 @@
           </div>
 
         </div>
+    </div>
 
     </body>
 </html>
