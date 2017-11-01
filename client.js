@@ -82,6 +82,56 @@ function querySearch()
     });
 }
 
+$("#add-row-m").click(function(){
+
+    var counter = $('#m-table tr').length;
+
+    var markup = '<tr><td><input type = "time" id="M' + counter + '-start-time"> to <input type = "time" id="M' + counter + '-end-time">';
+
+    $('#m-table').append(markup);
+
+});
+
+$("#add-row-t").click(function(){
+
+    var counter = $('#t-table tr').length;
+
+    var markup = '<tr><td><input type = "time" id="T' + counter + '-start-time"> to <input type = "time" id="T' + counter + '-end-time">';
+
+    $('#t-table').append(markup);
+
+});
+
+$("#add-row-w").click(function(){
+
+    var counter = $('#w-table tr').length;
+
+    var markup = '<tr><td><input type = "time" id="W' + counter + '-start-time"> to <input type = "time" id="W' + counter + '-end-time">';
+
+    $('#w-table').append(markup);
+
+});
+
+$("#add-row-r").click(function(){
+
+    var counter = $('#r-table tr').length;
+
+    var markup = '<tr><td><input type = "time" id="R' + counter + '-start-time"> to <input type = "time" id="R' + counter + '-end-time">';
+
+    $('#r-table').append(markup);
+
+});
+
+$("#add-row-f").click(function(){
+
+    var counter = $('#f-table tr').length;
+
+    var markup = '<tr><td><input type = "time" id="F' + counter + '-start-time"> to <input type = "time" id="F' + counter + '-end-time">';
+
+    $('#f-table').append(markup);
+
+});
+
 function queryModifyInfo()
 {
     var fname = $("#test-modify-fname").val();
@@ -103,12 +153,45 @@ function queryAddCourse()
 
 function queryAddTime()
 {
-    var day = $("#test-add-day").val();
-    var t_start = $("#test-add-t_start").val();
-    var t_end = $("#test-add-t_end").val();
-    $.post("server.php", { query: "add-time", day: day, t_start: t_start, t_end: t_end }, function(data) {
+    for (i = 1; i < $('#m-table tr').length; i++) { 
+        var t_start = $('#M' + i + '-start-time').val();
+        var t_end = $('#M' + i + '-end-time').val();
+        $.post("server.php", { query: "add-time", day: "M", t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
-    });
+        });
+    }
+    
+    for (i = 1; i < $('#t-table tr').length; i++) { 
+        var t_start = $('#T' + i + '-start-time').val();
+        var t_end = $('#T' + i + '-end-time').val();
+        $.post("server.php", { query: "add-time", day: "T", t_start: t_start, t_end: t_end }, function(data) {
+        alert(data);
+        });
+    }
+    
+    for (i = 1; i < $('#w-table tr').length; i++) { 
+        var t_start = $('#W' + i + '-start-time').val();
+        var t_end = $('#W' + i + '-end-time').val();
+        $.post("server.php", { query: "add-time", day: "W", t_start: t_start, t_end: t_end }, function(data) {
+        alert(data);
+        });
+    }
+        
+    for (i = 1; i < $('#r-table tr').length; i++) { 
+        var t_start = $('#R' + i + '-start-time').val();
+        var t_end = $('#R' + i + '-end-time').val();
+        $.post("server.php", { query: "add-time", day: "R", t_start: t_start, t_end: t_end }, function(data) {
+        alert(data);
+        });
+    }
+    
+    for (i = 1; i < $('#f-table tr').length; i++) { 
+        var t_start = $('#F' + i + '-start-time').val();
+        var t_end = $('#F' + i + '-end-time').val();
+        $.post("server.php", { query: "add-time", day: "F", t_start: t_start, t_end: t_end }, function(data) {
+        alert(data);
+        });
+    }
 }
 
 function queryClearData()

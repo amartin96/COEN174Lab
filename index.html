@@ -28,9 +28,16 @@
             <button id="test-logout">Logout</button>
             <br><b>Search</b><br>
             <input type="text" id="test-course" placeholder="Course Name">
-            <input type="text" id="test-day" placeholder="Day">
-            <input type="text" id="test-t_start" placeholder="Start Time">
-            <input type="text" id="test-t_end" placeholder="End Time">
+            <select id="test-day">
+                <option value="M">Monday</option>
+                <option value="T">Tuesday</option>
+                <option value="W">Wednesday</option>
+                <option value="R">Thursday</option>
+                <option value="F">Friday</option>
+            </select>
+
+            <input type="time" id="test-t_start" placeholder="Start Time">
+            <input type="time" id="test-t_end" placeholder="End Time">
             <button id="test-submit">Go</button>
             <br><b>Change Personal Information</b><br>
             <input type="text" id="test-modify-fname" placeholder="First Name">
@@ -42,10 +49,60 @@
             <input type="text" id="test-add-course" placeholder="Course Name">
             <button id="test-add-course-submit">Add</button>
             <br><b>Add Available Time</b><br>
-            <input type="text" id="test-add-day" placeholder="Day">
-            <input type="text" id="test-add-t_start" placeholder="Start Time">
-            <input type="text" id="test-add-t_end" placeholder="End Time">
-            <button id="test-add-time-submit">Add</button>
+            <button id="test-add-time-submit">Save</button><br>
+            
+            <table id = "m-table">
+                <tr>
+                    <th>Monday</th>
+                </tr>
+                <tr>
+                    <td><input type="time" id="M1-start-time"> to <input type="time" id="M1-end-time"></td>
+                </tr>
+            </table>
+            <button id="add-row-m">Add Time Slot</button>
+            
+            <table id = "t-table">
+                <tr>
+                    <th>Tuesday</th>
+                </tr>
+                <tr>
+                    <td><input type="time" id="T1-start-time"> to <input type="time" id="T1-end-time"></td>
+                </tr>
+            </table>
+            <button id="add-row-t">Add Time Slot</button>
+            
+            <table id = "w-table">
+                <tr>
+                    <th>Wednesday</th>
+                </tr>
+                <tr>
+                    <td><input type="time" id="W1-start-time"> to <input type="time" id="W1-end-time"></td>
+                </tr>
+            </table>
+            <button id="add-row-w">Add Time Slot</button>
+            
+            <table id = "r-table">
+                <tr>
+                    <th>Thursday</th>
+                </tr>
+                <tr>
+                    <td><input type="time" id="R1-start-time"> to <input type="time" id="R1-end-time"></td>
+                </tr>
+            </table>
+            <button id="add-row-r">Add Time Slot</button>
+            
+                        
+            <table id = "f-table">
+                <tr>
+                    <th>Friday</th>
+                </tr>
+                <tr>
+                    <td><input type="time" id="F1-start-time"> to <input type="time" id="F1-end-time"></td>
+                </tr>
+            </table>
+            <button id="add-row-f">Add Time Slot</button>
+            
+            
             <br>
             <button id="test-clear-data">Clear All Courses and Times</button>
             <br><b>Change Password</b><br>
