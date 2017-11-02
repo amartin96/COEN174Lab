@@ -77,6 +77,8 @@ function querySearch()
     var day = $("#test-day").val();
     var t_start = $("#test-t_start").val();
     var t_end = $("#test-t_end").val();
+    t_start = ConvertTimeformat(t_start);
+    t_end = ConvertTimeformat(t_end);
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
     });
@@ -166,14 +168,22 @@ function queryAddTime()
     for (i = 1; i < $('#m-table tr').length; i++) { 
         var t_start = $('#M' + i + '-start-time').val();
         var t_end = $('#M' + i + '-end-time').val();
+        if (t_start != "" && t_end != "" )
+            {
+        t_start = ConvertTimeformat(t_start);
+        t_end = ConvertTimeformat(t_end);
+                
         $.post("server.php", { query: "add-time", day: "M", t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
         });
+            }
     }
     
     for (i = 1; i < $('#t-table tr').length; i++) { 
         var t_start = $('#T' + i + '-start-time').val();
         var t_end = $('#T' + i + '-end-time').val();
+        t_start = ConvertTimeformat(t_start);
+        t_end = ConvertTimeformat(t_end);
         $.post("server.php", { query: "add-time", day: "T", t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
         });
@@ -182,6 +192,8 @@ function queryAddTime()
     for (i = 1; i < $('#w-table tr').length; i++) { 
         var t_start = $('#W' + i + '-start-time').val();
         var t_end = $('#W' + i + '-end-time').val();
+        t_start = ConvertTimeformat(t_start);
+        t_end = ConvertTimeformat(t_end);
         $.post("server.php", { query: "add-time", day: "W", t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
         });
@@ -190,6 +202,8 @@ function queryAddTime()
     for (i = 1; i < $('#r-table tr').length; i++) { 
         var t_start = $('#R' + i + '-start-time').val();
         var t_end = $('#R' + i + '-end-time').val();
+        t_start = ConvertTimeformat(t_start);
+        t_end = ConvertTimeformat(t_end);
         $.post("server.php", { query: "add-time", day: "R", t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
         });
@@ -198,10 +212,26 @@ function queryAddTime()
     for (i = 1; i < $('#f-table tr').length; i++) { 
         var t_start = $('#F' + i + '-start-time').val();
         var t_end = $('#F' + i + '-end-time').val();
+        t_start = ConvertTimeformat(t_start);
+        t_end = ConvertTimeformat(t_end);
         $.post("server.php", { query: "add-time", day: "F", t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
         });
     }
+}
+
+function ConvertTimeformat(str) {
+    var time = str;
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if (AMPM == "PM" && hours < 12) hours = hours + 12;
+    if (AMPM == "AM" && hours == 12) hours = hours - 12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if (hours < 10) sHours = "0" + sHours;
+    if (minutes < 10) sMinutes = "0" + sMinutes;
+    return(sHours + ":" + sMinutes);
 }
 
 function queryClearData()

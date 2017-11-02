@@ -9,8 +9,8 @@
         
         <!-- Import Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+        <link rel="stylesheet" href="base.css">
         <!-- import local scripts -->
         <script defer src="client.js"></script>
     </head>
@@ -51,41 +51,44 @@
             <button id="test-modify-submit">Save</button>
             <br><br><b>Add Qualified Course</b><br>
             <form>
-                <input id ="checkbox_1" type='checkbox' class = "classcheck" value='COEN 10'/>
-                <label for="checkbox_1">COEN 10</label>
-                <input id ="checkbox_2" type='checkbox' class="classcheck" value='COEN 11'>
-                <label for="checkbox_2">COEN 11</label>
-                <input id ="checkbox_3" type='checkbox' class="classcheck" value='COEN 12'/>
-                <label for="checkbox_3">COEN 12</label>
-                <input id ="checkbox_4" type='checkbox' class = "classcheck" value='COEN 20'/>
-                <label for="checkbox_4">COEN 20</label>
-                <input id ="checkbox_5" type='checkbox' class="classcheck" value='COEN 21'>
-                <label for="checkbox_5">COEN 21</label>
-                <input id ="checkbox_6" type='checkbox' class="classcheck" value='COEN 44'/>
-                <label for="checkbox_6">COEN 44</label>
-                <input id ="checkbox_7" type='checkbox' class = "classcheck" value='COEN 70'/>
-                <label for="checkbox_7">COEN 70</label>
+                <input id ="COEN 10" type='checkbox' class = "classcheck" value='COEN 10'/>
+                <label for="COEN 10">COEN 10</label>
+                <input id ="COEN 11" type='checkbox' class="classcheck" value='COEN 11'>
+                <label for="COEN 11">COEN 11</label>
+                <input id ="COEN 12" type='checkbox' class="classcheck" value='COEN 12'/>
+                <label for="COEN 12">COEN 12</label>
+                <input id ="COEN 20" type='checkbox' class = "classcheck" value='COEN 20'/>
+                <label for="COEN 20">COEN 20</label>
+                <input id ="COEN 21" type='checkbox' class="classcheck" value='COEN 21'>
+                <label for="COEN 21">COEN 21</label>
+                <input id ="COEN 44" type='checkbox' class="classcheck" value='COEN 44'/>
+                <label for="COEN 44">COEN 44</label>
+                <input id ="COEN 70" type='checkbox' class = "classcheck" value='COEN 70'/>
+                <label for="COEN 70">COEN 70</label>
 
             </form>
             <button id="add-course-submit">Add</button>
-            <br><br><b>Add Available Time</b><br>
+            
+            <br><br><b>Add Available Time (in format HH:MM AM/PM)</b><br>
             <button id="test-add-time-submit">Save</button><br>
             <div class = "row">
             
             <div class="col-xs-2">
-            <table id = "m-table">
+            <table id = "m-table" align="center">
                 <tr>
                     <th>Mon</th>
                 </tr>
                 <tr>
-                    <td><input size = "8" type="text" id="M1-start-time"></td><td> to </td><td><input size = "8" type="text" id="M1-end-time"></td>
+                    <td><input type="text" size = "8" id="M1-start-time"></td><td> to </td><td><input type="text" size = "8" id="M1-end-time"></td>
                 </tr>
             </table>
+            <div style="display: flex; align-items: center; justify-content: center">
             <button id="add-row-m">Add Time Slot</button>
             </div>
+            </div>
             
-            <div class="col-xs-2">    
-            <table id = "t-table">
+            <div class="col-xs-3">    
+            <table id = "t-table" align="center">
                 <tr>
                     <th>Tues</th>
                 </tr>
@@ -93,11 +96,13 @@
                     <td><input type="text" size = "8" id="T1-start-time"></td><td> to </td><td><input type="text" size = "8" id="T1-end-time"></td>
                 </tr>
             </table>
-            <button id="add-row-t">Add Time Slot</button>
+            <div style="display: flex; align-items: center; justify-content: center">
+            <button id="add-row-t" text-align="center">Add Time Slot</button>
+            </div>
             </div>
             
             <div class="col-xs-2">
-            <table id = "w-table">
+            <table id = "w-table" align="center">
                 <tr>
                     <th>Wed</th>
                 </tr>
@@ -105,11 +110,13 @@
                     <td><input type="text" size = "8" id="W1-start-time"></td><td>to</td><td><input type="text" size = "8" id="W1-end-time"></td>
                 </tr>
             </table>
+            <div style="display: flex; align-items: center; justify-content: center">
             <button id="add-row-w">Add Time Slot</button>
             </div>
+            </div>
             
-            <div class="col-xs-2">
-            <table id = "r-table">
+            <div class="col-xs-3">   
+            <table id = "r-table" align="center">
                 <tr>
                     <th>Thurs</th>
                 </tr>
@@ -117,12 +124,14 @@
                     <td><input type="text" size = "8" id="R1-start-time"></td><td> to </td><td><input type="text" size = "8" id="R1-end-time"></td>
                 </tr>
             </table>
+            <div style="display: flex; align-items: center; justify-content: center">
             <button id="add-row-r">Add Time Slot</button>
+            </div>
             </div>
             
               
             <div class="col-xs-2">
-            <table id = "f-table">
+            <table id = "f-table" align="center">
                 <tr>
                     <th>Fri</th>
                 </tr>
@@ -130,7 +139,9 @@
                     <td><input type="text" size = "8" id="F1-start-time"></td><td> to </td><td><input type="text" size = "8" id="F1-end-time"></td>
                 </tr>
             </table>
+            <div style="display: flex; align-items: center; justify-content: center">
             <button id="add-row-f">Add Time Slot</button>
+                </div>
             </div>
             </div>
             
@@ -260,7 +271,7 @@
           </div>
 
         </div>
-    </div>
-
+    
+</div>
     </body>
 </html>
