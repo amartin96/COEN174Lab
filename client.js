@@ -153,6 +153,9 @@ function queryAddCourse()
             alert(data);});
         } else {    
             // Remove $(this).val() from the database
+            // var course = $(this).val();
+            // $.post("server.php", { query: "remove-course", course: course }, function(data) {
+            //alert(data);});
         }
 
     });
