@@ -199,6 +199,15 @@ function queryAddTime(){
             }
             t_hours = add15totime(t_hours);
         });
+        
+        if (highlighted == true)
+        {
+            t_end = t_hours;
+            alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
+            $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
+            alert(data);
+            });
+        }
     }
 }
 
