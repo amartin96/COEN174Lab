@@ -13,6 +13,8 @@ $("#add-course-submit").click(queryAddCourse);
 $("#test-save-time").click(queryAddTime);
 $("#go-to-admin-login").click(gotoAdminLogin);
 $("#go-to-ta-login").click(gotoTALogin);
+$("#go-to-info").click(gotoInfo);
+$("#go-to-query").click(gotoQuery);
 $("#test-clear-data").click(queryClearData);
 $("#test-password-submit").click(queryChangePassword);
 $("#test-admin-list").click(queryListUsers);
@@ -31,6 +33,8 @@ function login()
         if (data.status === SUCCESS) {
             //alert("login successful");
             $("#login").hide();
+            $("#whole-page").show();
+            $("#header").show();
             $("#test").show();
             $.post("server.php", { query: "get-info" }, function(data) {
                 //alert(data);
@@ -74,6 +78,20 @@ function gotoAdminLogin(){
 function gotoTALogin(){
     $("#admin-login").hide();
     $("#login").show();
+}
+
+function gotoInfo(){
+    $("#test").hide();
+    $("#query-li").removeClass('active');
+    $("#info-li").addClass('active');
+    $("#TAinfo").show();
+}
+
+function gotoQuery(){
+    $("#TAinfo").hide();
+    $("#query-li").addClass('active');
+    $("#info-li").removeClass('active');
+    $("#test").show();
 }
 
 function checkstatus()
@@ -359,6 +377,8 @@ function logout()
     });
     $("#test").hide();
     $("#test-admin").hide();
+    $("#whole-page").hide();
+    $("#header").hide();
     $("#login").show();
 }
 
@@ -373,6 +393,9 @@ $(function() {
     $("#ClassCheckboxList").hide();
     $("#Admin").hide();
     $("#admin-login").hide();
+    $("#header").hide();
+    $("#TAinfo").hide();
+    $("#whole-page").hide();
     
     // Create table dragging functionality
           var isMouseDown = false;

@@ -65,10 +65,29 @@
             </div>
         </div>
         
-        <div class = "container">
-        <div id="test">
+        <div id ="whole-page" style="width:100%;  background-color: #f2f2f2; min-height: 100vh">
+    
+        <div class = "container" id = "header" style="padding: 0">
+<!--            <div style="font-family:langdon; font-size: 50px; color: #333333">TA EMERGENCY COVERAGE</div>-->
+            
+            <nav class="navbar navbar-default" style="background-color: #122E53">
+            <div class="container-fluid" >
+                <ul class="nav navbar-nav">
+                    <li id ="query-li" class="active"><a id="go-to-query">FIND AN AVAILABLE TA</a></li>
+                    <li id ="info-li"><a id="go-to-info">AVAILABILITY / CONTACT INFO</a></li>
+                </ul>
+            </div>
+            </nav>
+        </div>
+        
+    
+        <div class = "container" id ="main-content">
+        <div id="test" style="min-height:100vh;">
+            <br>
+
             <button id="test-checkstatus">Am I logged in?</button>
             <button id="test-logout">Logout</button>
+            <br>
             <br><b>Search</b><br>
             <input type="text" id="test-course" placeholder="Course Name">
             <select id="test-day">
@@ -82,6 +101,9 @@
             <input type="time" id="test-t_start">
             <input type="time" id="test-t_end">
             <button id="test-submit">Go</button>
+        </div>
+            
+        <div id = "TAinfo">
             <br><b>Change Personal Information</b><br>
             <input type="text" id="test-modify-fname" placeholder="First Name">
             <input type="text" id="test-modify-lname" placeholder="Last Name">
@@ -643,94 +665,9 @@
             <button type="button" id="query-search">Search</button>
 
         </div>
-            
-        <div id="availableTA">
-              <h2>Available TAs</h2>
-                  <table width="80%" align="center">
-                      <tr style="text-align: center">
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                      </tr>
-
-                      <tr style="text-align: center">
-                        <th>Jack Smith</th>
-                        <td>jsmith@scu.edu</td>
-                        <td>333-333-3333</td>
-                      </tr>
-
-                      <tr style="text-align: center">
-                        <th>John Smith</th>
-                        <td>jsmith1@scu.edu</td>
-                        <td>444-444-4444</td>
-                      </tr>
-
-                      <tr style="text-align: center">
-                        <th>James Smith</th>
-                        <td>jsmith2@scu.edu</td>
-                        <td>555-555-5555</td>
-                      </tr>
-
-                  </table>
-          </div>
-
-          <div id="TAinfo">
-            <input type="text" id="TA info-StudentID" placeholder="StudentID"readonly>
-            <input type="password" id="TA info-password" placeholder="Password">
-            <input type="text" id="TA info-First-Name" placeholder="First-Name">
-            <input type="text" id="TA info-Last-Name" placeholder="Last-Name">
-            <input type="text" id="TA info-Email" placeholder="Email">
-            <input type="text" id="TA info-Phone-Number" placeholder="Phone-Number">
-            <button type="button" id="TA info-save">Save</button>
-
-          <div id="ClassCheckboxList">
-          </div>
-
-        </div>
-
-        <div id = "Admin">
-            <div style = "width: 50%">
-                <div style = "width: 50%; float: left">Teaching Assistant ID: <input type="text" id="Admin-studentID" placeholder="W1234567"></div>
-                <div style = "width: 50%; float: right">Temporary Password: <input type="text" id="password"></div>
-                <div><button style = "float: right" type="button" id="submit">Add</button></div>
-            </div>
-            
-        
-          <div id="Current">
-              <h2>Current Teaching Assistants</h2>
-                    <table width="80%" align="center" >
-                       <tr>
-                         <th>Name</th>
-                         <th>Email</th>
-                         <th>Phone</th>
-                      </tr>
-    
-                       <tr style="text-align: center">
-                           <th>Jack Smith</th>
-                           <td>jsmith@scu.edu</td>
-                           <td>333-333-3333</td>
-                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
-                       </tr>
-    
-                       <tr style="text-align: center">
-                           <th>John Smith</th>
-                           <td>jsmith1@scu.edu</td>
-                           <td>444-444-4444</td>
-                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
-                       </tr>
-
-                       <tr style="text-align: center">
-                           <th>James Smith</th>
-                           <td>jsmith2@scu.edu</td>
-                           <td>555-555-5555</td>
-                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
-                       </tr>
-
-                    </table>
-          </div>
-
-        </div>
+        
     
 </div>
+            </div>
     </body>
 </html>
