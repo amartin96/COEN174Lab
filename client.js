@@ -11,6 +11,8 @@ $("#test-submit").click(querySearch);
 $("#test-modify-submit").click(queryModifyInfo);
 $("#add-course-submit").click(queryAddCourse);
 $("#test-save-time").click(queryAddTime);
+$("#go-to-admin-login").click(gotoAdminLogin);
+$("#go-to-ta-login").click(gotoTALogin);
 $("#test-clear-data").click(queryClearData);
 $("#test-password-submit").click(queryChangePassword);
 $("#test-admin-list").click(queryListUsers);
@@ -56,12 +58,22 @@ function loginAdmin()
         data = JSON.parse(data);
         if (data.status === SUCCESS) {
             //alert("login successful");
-            $("#login").hide();
+            $("#admin-login").hide();
             $("#test-admin").show();
         } else {
             alert("login failed");
         }
     });
+}
+
+function gotoAdminLogin(){
+    $("#login").hide();
+    $("#admin-login").show();
+}
+
+function gotoTALogin(){
+    $("#admin-login").hide();
+    $("#login").show();
 }
 
 function checkstatus()
@@ -360,6 +372,7 @@ $(function() {
     $("#TAinfo").hide();
     $("#ClassCheckboxList").hide();
     $("#Admin").hide();
+    $("#admin-login").hide();
     
     // Create table dragging functionality
           var isMouseDown = false;
