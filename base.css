@@ -13,6 +13,12 @@
     src: url(fonts/Sharp-Sans-Book.otf);
 }
 
+@font-face {
+    font-family: langdon;
+    src: url(fonts/Langdon.otf);
+}
+
+
 a{
     cursor: pointer;
 }
@@ -25,8 +31,8 @@ div#login, div#admin-login {
 }
 
 div.title { 
-    font-family: sharp-sans-extrabold;
-    font-size: 50px;
+    font-family: langdon;
+    font-size: 65px;
     text-align: center;
     width: 75%;
     height: auto;
