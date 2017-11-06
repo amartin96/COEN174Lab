@@ -22,6 +22,7 @@ $("#test-admin-add").click(queryAddUser);
 $("#test-admin-remove").click(queryRemoveUser);
 $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
+$("#change-password").click(gotoChangePassword);
 
 // login button event handler
 function login()
@@ -44,6 +45,7 @@ function login()
                     $("#test-modify-lname").val(data.result.lname);
                     $("#test-modify-email").val(data.result.email);
                     $("#test-modify-phone").val(data.result.phone);
+                    $("#studentid").val(data.result.id);
                 } else {
                     alert("get-info failed, status " + data.status);
                 }
@@ -63,6 +65,7 @@ function loginAdmin()
         if (data.status === SUCCESS) {
             //alert("login successful");
             $("#admin-login").hide();
+            $("#whole-page").show();
             $("#test-admin").show();
         } else {
             alert("login failed");
@@ -82,16 +85,26 @@ function gotoTALogin(){
 
 function gotoInfo(){
     $("#test").hide();
+    $("#changepassword").hide();
     $("#query-li").removeClass('active');
     $("#info-li").addClass('active');
-    $("#TAinfo").show();
+    $("#TAinfo").show(); 
 }
 
 function gotoQuery(){
     $("#TAinfo").hide();
+    $("#changepassword").hide();
     $("#query-li").addClass('active');
     $("#info-li").removeClass('active');
     $("#test").show();
+}
+
+function gotoChangePassword(){
+    $("#TAinfo").hide();
+    $("#test").hide();
+    $("#info-li").removeClass('active');
+    $("#query-li").removeClass('active');
+    $("#changepassword").show();
 }
 
 function checkstatus()
@@ -103,12 +116,32 @@ function checkstatus()
 
 function querySearch()
 {
+    $("#available-TAs").hide();
     var course = $("#test-course").val();
     var day = $("#test-day").val();
     var t_start = $("#test-t_start").val();
     var t_end = $("#test-t_end").val();
+    t_start = ConvertTimeformat(t_start);
+    t_end = ConvertTimeformat(t_end);
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
+        var data = JSON.parse(data); 
+        if (data.length > 0)
+        {
+            $("#available-TAs").show();
+            $("#TA-availability-list").html("");
+            var markup = "";
+            for(var i = 0; i < data.length ; i++)
+                {
+                markup = '<tr><td>' + data[i].fname + '</td><td>' + data[i].lname +'</td><td>' + data[i].email +'</td><td>' + data[i].phone +'</td></tr>';
+                $('#TA-availability-list').append(markup); 
+                }
+        }
+        else
+        {
+            alert("No available TAs found");
+        }
+        
     });
 }
 
@@ -314,19 +347,19 @@ function add15totime(str){
 //    }
 //}
 //
-//function ConvertTimeformat(str) {
-//    var time = str;
-//    var hours = Number(time.match(/^(\d+)/)[1]);
-//    var minutes = Number(time.match(/:(\d+)/)[1]);
-//    var AMPM = time.match(/\s(.*)$/)[1];
-//    if (AMPM == "PM" && hours < 12) hours = hours + 12;
-//    if (AMPM == "AM" && hours == 12) hours = hours - 12;
-//    var sHours = hours.toString();
-//    var sMinutes = minutes.toString();
-//    if (hours < 10) sHours = "0" + sHours;
-//    if (minutes < 10) sMinutes = "0" + sMinutes;
-//    return(sHours + ":" + sMinutes);
-//}
+function ConvertTimeformat(str) {
+    var time = str;
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if (AMPM == "PM" && hours < 12) hours = hours + 12;
+    if (AMPM == "AM" && hours == 12) hours = hours - 12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if (hours < 10) sHours = "0" + sHours;
+    if (minutes < 10) sMinutes = "0" + sMinutes;
+    return(sHours + ":" + sMinutes);
+}
 
 function queryClearData()
 {
@@ -338,9 +371,15 @@ function queryClearData()
 function queryChangePassword()
 {
     var password = $("#test-password").val();
-    $.post("server.php", { query: "change-password", password: password }, function(data) {
+    var repeat = $("#test-password-repeat").val();
+    if (password == repeat)
+    {
+        $.post("server.php", { query: "change-password", password: password }, function(data) {
         alert(data);
-    });
+        });
+    } else{
+        alert("Passwords don't match")
+    }
 }
 
 function queryListUsers()
@@ -379,6 +418,7 @@ function logout()
     $("#test-admin").hide();
     $("#whole-page").hide();
     $("#header").hide();
+    $("#changepassword").hide();
     $("#login").show();
 }
 
@@ -396,10 +436,12 @@ $(function() {
     $("#header").hide();
     $("#TAinfo").hide();
     $("#whole-page").hide();
+    $("#available-TAs").hide();
+    $("#changepassword").hide();
     
     // Create table dragging functionality
           var isMouseDown = false;
-          var highlighted
+          var highlighted;
           $("table#availability-table td.selectable")
             .mousedown(function () {
               isMouseDown = true;

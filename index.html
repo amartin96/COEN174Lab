@@ -66,7 +66,8 @@
         </div>
         
         <div id ="whole-page" style="width:100%;  background-color: #f2f2f2; min-height: 100vh">
-    
+        
+            
         <div class = "container" id = "header" style="padding: 0">
 <!--            <div style="font-family:langdon; font-size: 50px; color: #333333">TA EMERGENCY COVERAGE</div>-->
             
@@ -74,19 +75,26 @@
             <div class="container-fluid" >
                 <ul class="nav navbar-nav">
                     <li id ="query-li" class="active"><a id="go-to-query">FIND AN AVAILABLE TA</a></li>
-                    <li id ="info-li"><a id="go-to-info">AVAILABILITY / CONTACT INFO</a></li>
+                    <li id ="info-li"><a id="go-to-info">CONTACT INFO/ AVAILABILITY</a></li>
                 </ul>
+                <div class = "dropdown" style = "float: right;">
+                    <button id = "settings-button"><i class="icon-cog icon-2x"></i></button>  
+                    <div class="dropdown-content">
+                    <a id="change-password">CHANGE PASSWORD</a>
+                    <a id="test-logout">LOG OUT</a>
+                    </div>
+                </div>
             </div>
             </nav>
         </div>
         
     
         <div class = "container" id ="main-content">
+            <div id = "TApages">
         <div id="test" style="min-height:100vh;">
             <br>
 
             <button id="test-checkstatus">Am I logged in?</button>
-            <button id="test-logout">Logout</button>
             <br>
             <br><b>Search</b><br>
             <input type="text" id="test-course" placeholder="Course Name">
@@ -98,46 +106,112 @@
                 <option value="F">Friday</option>
             </select>
 
-            <input type="time" id="test-t_start">
-            <input type="time" id="test-t_end">
+            <input type="text" id="test-t_start" placeholder="9:00 AM">
+            <input type="text" id="test-t_end" placeholder="12:00 PM">
             <button id="test-submit">Go</button>
+            
+            <div id = "available-TAs">
+                <br><br>
+                <div>Available Replacement TAs:</div>
+                <br>
+            <table id = "TA-availability-list" style = "width: 100%">
+            </table>
+            </div>
         </div>
             
         <div id = "TAinfo">
-            <br><b>Change Personal Information</b><br>
-            <input type="text" id="test-modify-fname" placeholder="First Name">
-            <input type="text" id="test-modify-lname" placeholder="Last Name">
-            <input type="text" id="test-modify-email" placeholder="E-Mail">
-            <input type="text" id="test-modify-phone" placeholder="Phone Number">
-            <button id="test-modify-submit">Save</button>
+                <div class = "subtitle2" style="width:80%; margin-top:10px">CONTACT INFORMATION:</div>
+                <hr/>
+                <button id="test-modify-submit" style="float:right;">Save</button>
+                
+                <div class = "enterdata">
+                <div class = "row" style="margin-top: 25px; margin-bottom: 20px; padding: 0 20px">
+                    <div class = "col-xs-3">Student ID: <input type="text" id="studentid"  style= "width: 50px; border: 0; margin-left: 15px" readonly></div>
+<!--                    <div class = "col-xs-4">Password: <input type="password" id="test-password" placeholder="password"><button id="test-password-submit">Change</button></div>-->
+                </div>
+                <div class = "row" style="margin-top: 30px; margin-bottom: 30px; padding: 0 20px">
+                    <div class = "col-xs-3">
+                        <div>First Name:</div> 
+                        <div style = "overflow: hidden">
+                            <input type="text" id="test-modify-fname" placeholder="First Name">
+                        </div>
+                        
+                    </div>
+                    <div class = "col-xs-3">
+                        <div>Last Name:</div>
+                        <div style = "overflow: hidden">
+                            <input type="text" id="test-modify-lname" placeholder="Last Name"></div>
+                        </div>
+                    <div class = "col-xs-3"><div></div>
+                        <div>Email:</div> 
+                        <div style = "overflow: hidden">
+                            <input type="text" id="test-modify-email" placeholder="E-Mail">
+                        </div>
+                    </div>
+                    <div class = "col-xs-3">
+                        <div>Phone:</div> 
+                        <div style = "overflow: hidden">
+                        <input type="text" id="test-modify-phone" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div id = "qualified-courses" width="100%">
+    
+            <div class = "subtitle2">COURSES QUALIFIED TO TA FOR:</div>
+                    <hr/>
+                <div class ="clearfix" style="width: 100%; display:block">
+                <button id="add-course-submit" style = "float: right">Save</button>
+                <div class ="col-xs-6">
+                <table style="width: 100%; margin-left: 30px;">
+                <tr>
+                    <td width = "33.3%"><input id ="COEN 10" type='checkbox' class = "classcheck" value='COEN 10'/>
+                <label for="COEN 10">COEN 10</label></td>
+                    <td width = "33.3%"> <input id ="COEN 11" type='checkbox' class="classcheck" value='COEN 11'>
+                <label for="COEN 11">COEN 11</label></td>
+                    <td width = "33.3%"><input id ="COEN 12" type='checkbox' class="classcheck" value='COEN 12'/>
+                <label for="COEN 12">COEN 12</label></td>
+                </tr>
+                <tr>
+                    <td><input id ="COEN 20" type='checkbox' class = "classcheck" value='COEN 20'/>
+                <label for="COEN 20">COEN 20</label></td>
+                    <td><input id ="COEN 21" type='checkbox' class="classcheck" value='COEN 21'>
+                <label for="COEN 21">COEN 21</label></td>
+                    <td><input id ="COEN 44" type='checkbox' class="classcheck" value='COEN 44'/>
+                <label for="COEN 44">COEN 44</label></td>
+                </tr>
+                <tr>
+                    <td><input id ="COEN 45" type='checkbox' class = "classcheck" value='COEN 45'/>
+                <label for="COEN 45">COEN 45</label></td>
+                    <td><input id ="COEN 70" type='checkbox' class = "classcheck" value='COEN 70'/>
+                <label for="COEN 70">COEN 70</label></td>
+                    <td><input id ="COEN 123" type='checkbox' class = "classcheck" value='COEN 123'/>
+                <label for="COEN 123">COEN 123</label></td>
+                </tr>
+                <tr>
+                    <td><input id ="COEN 127" type='checkbox' class = "classcheck" value='COEN 127'/>
+                <label for="COEN 127">COEN 127</label></td>
+                    <td><input id ="COEN 160" type='checkbox' class = "classcheck" value='COEN 160'/>
+                <label for="COEN 160">COEN 160</label></td>
+                    <td><input id ="COEN 174" type='checkbox' class = "classcheck" value='COEN 174'/>
+                        <label for="COEN 174">COEN 174</label></td>
+                </tr>
+                <tr>
+                    <td><input id ="COEN 175" type='checkbox' class = "classcheck" value='COEN 175'/>
+                <label for="COEN 175">COEN 175</label></td>
+                    <td><input id ="COEN 177" type='checkbox' class = "classcheck" value='COEN 177'/>
+                        <label for="COEN 177">COEN 177</label></td>
+                    <td><input id ="COEN 178" type='checkbox' class = "classcheck" value='COEN 178'/>
+                <label for="COEN 178">COEN 178</label></td>
+                </tr>
+                
+                </table>
+                </div>
+                
+                </div>
             
-            <div> 
-            <br><b>Change Password</b><br>
-            <input type="password" id="test-password" placeholder="password">
-            <button id="test-password-submit">Change</button>
             </div>
-            
-            <br><br><b>Add Qualified Course</b><br>
-            <form>
-                <input id ="COEN 10" type='checkbox' class = "classcheck" value='COEN 10'/>
-                <label for="COEN 10">COEN 10</label>
-                <input id ="COEN 11" type='checkbox' class="classcheck" value='COEN 11'>
-                <label for="COEN 11">COEN 11</label>
-                <input id ="COEN 12" type='checkbox' class="classcheck" value='COEN 12'/>
-                <label for="COEN 12">COEN 12</label>
-                <input id ="COEN 20" type='checkbox' class = "classcheck" value='COEN 20'/>
-                <label for="COEN 20">COEN 20</label>
-                <input id ="COEN 21" type='checkbox' class="classcheck" value='COEN 21'>
-                <label for="COEN 21">COEN 21</label>
-                <input id ="COEN 44" type='checkbox' class="classcheck" value='COEN 44'/>
-                <label for="COEN 44">COEN 44</label>
-                <input id ="COEN 70" type='checkbox' class = "classcheck" value='COEN 70'/>
-                <label for="COEN 70">COEN 70</label>
-
-            </form>
-            <button id="add-course-submit">Add</button>
-            
-            <br><br><div>Add Available Time</div><br>
+            <div class = "subtitle2">YOUR AVAILABILITY:</div>
 <!--
             <button id="test-add-time-submit">Save</button><br>
             <div class = "row">
@@ -238,7 +312,6 @@
         <tr><td><div>6:00 PM</div></td></tr>
         <tr><td><div>7:00 PM</div></td></tr>
         <tr><td><div>8:00 PM</div></td></tr>
-        <tr><td><div>9:00 PM</div></td></tr>
     </table>
         
       <table cellpadding="0" cellspacing="0"  style = "float: left" id = "availability-table" width = "80%">
@@ -249,34 +322,6 @@
           <th>Thu</th>
           <th>Fri</th>
         </thead>
-        <tr class = "table-border">
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-        </tr>
-        <tr>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-        </tr>
-        <tr class = "mid-border">
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-        </tr>
-        <tr>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-          <td class="selectable"> </td>
-        </tr>
         <tr class = "table-border">
           <td class="selectable"> </td>
           <td class="selectable"> </td>
@@ -632,18 +677,9 @@
             
 
         </div>
-
-        <div id="test-admin">
-            <button id="test-admin-logout">Logout</button>
-            <br>
-            <button id="test-admin-list">List TAs</button>
-            <br><b>Add / Remove Teaching Assistants</b><br>NOTE: Default password for new accounts is "password"<br>
-            <input type="text" id="test-admin-id" placeholder="Student ID">
-            <button id="test-admin-add">Add</button>
-            <button id="test-admin-remove">Remove</button>
-        </div>
-
-        <div id= "query">
+            
+            
+                  <div id= "query">
         <select>
             <option value="Choose a Class">Choose a class</option>
             <option value="COEN 100">COEN 100</option>
@@ -666,8 +702,40 @@
 
         </div>
         
+        <div id = "changepassword">
+            <div class = "subtitle">CHANGE PASSWORD</div>
+            <div class = "container enterdata">
+                <table>
+                <tr>
+                    <td>New password: </td>
+                    <td><input type="password" id="test-password" placeholder="password"></td>
+                </tr>
+                <tr>
+                    <td>Repeat password: </td>
+                    <td><input type="password" id="test-password-repeat" placeholder="password"></td>
+                </tr>
+                </table>
+                <button id="test-password-submit">Change</button>
+            </div>
+        
+        </div>  
+               
+            </div>
+            
+        <div id="test-admin">
+            <button id="test-admin-logout">Logout</button>
+            <br>
+            <button id="test-admin-list">List TAs</button>
+            <br><b>Add / Remove Teaching Assistants</b><br>NOTE: Default password for new accounts is "password"<br>
+            <input type="text" id="test-admin-id" placeholder="00001234567">
+            <button id="test-admin-add">Add</button>
+            <button id="test-admin-remove">Remove</button>
+        </div>
+
+
+        
     
 </div>
-            </div>
+        </div>
     </body>
 </html>
