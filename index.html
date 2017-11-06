@@ -91,12 +91,71 @@
     
         <div class = "container" id ="main-content">
             <div id = "TApages">
-        <div id="test" style="min-height:100vh;">
-            <br>
-
-            <button id="test-checkstatus">Am I logged in?</button>
-            <br>
-            <br><b>Search</b><br>
+        <div id="test" style="min-height:100vh; padding-top: 20px;">
+            <div class = "subtitle2" style="width:80%; margin-top:10px">SEARCH FOR REPLACEMENT TA</div>
+                <hr/>
+            <div class = "enterdata">
+   
+            <div class = "row" style="margin-top: 30px; margin-bottom: 15px; padding: 0 20px">
+                    <div class = "col-xs-3">
+                        <div style = "width:55px; float:left">Course:</div> 
+                        <div style = "margin-left: 55px">
+                    <select id="test-course">
+                            <option value="" selected disabled hidden>Choose Course</option>
+                            <option value="COEN 10">COEN 10</option>
+                            <option value="COEN 11">COEN 11</option>
+                            <option value="COEN 12">COEN 12</option>
+                            <option value="COEN 20">COEN 20</option>
+                            <option value="COEN 21">COEN 21</option>
+                            <option value="COEN 44">COEN 44</option>
+                            <option value="COEN 45">COEN 45</option>
+                            <option value="COEN 70">COEN 70</option>
+                            <option value="COEN 123">COEN 123</option>
+                            <option value="COEN 127">COEN 127</option>
+                            <option value="COEN 160">COEN 160</option>
+                            <option value="COEN 174">COEN 174</option>
+                            <option value="COEN 175">COEN 175</option>
+                            <option value="COEN 177">COEN 177</option>
+                            <option value="COEN 178">COEN 178</option>
+                    </select>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class = "col-xs-3">
+                        <div style = "width:35px; float:left">Day: </div>
+                        <div style = "margin-left: 35px">
+                        <select id="test-day">
+                            <option value="" selected disabled hidden>Choose Day</option>
+                            <option value="M">Monday</option>
+                            <option value="T">Tuesday</option>
+                            <option value="W">Wednesday</option>
+                            <option value="R">Thursday</option>
+                            <option value="F">Friday</option>
+                    </select>
+                        </div>
+                </div>
+                    <div class = "col-xs-3"><div></div>
+                        <div style = "width:82px; float:left">Start Time: </div> 
+                        <div style = "margin-left: 82px">
+                            <input type="text" id="test-t_start" placeholder="9:00 AM">
+                        </div>
+                    </div>
+                    <div class = "col-xs-3">
+                        <div style = "width:74px; float:left">End Time: </div> 
+                        <div style = "margin-left: 74px">
+                        <input type="text" id="test-t_end" placeholder="12:00 PM">
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+<!--
+                
+                
             <input type="text" id="test-course" placeholder="Course Name">
             <select id="test-day">
                 <option value="M">Monday</option>
@@ -108,48 +167,51 @@
 
             <input type="text" id="test-t_start" placeholder="9:00 AM">
             <input type="text" id="test-t_end" placeholder="12:00 PM">
-            <button id="test-submit">Go</button>
-            
-            <div id = "available-TAs">
-                <br><br>
-                <div>Available Replacement TAs:</div>
-                <br>
-            <table id = "TA-availability-list" style = "width: 100%">
-            </table>
+-->
+            <button id="test-submit" style="float: right; margin-right: 20px">Search</button>
             </div>
+            <div id = "available-TAs" style="margin-top: 70px">
+                <div class = "subtitle2" >AVAILABLE REPLACEMENTS</div>
+                <hr style="border-top: 1px solid #aaaaaa;"/>
+            <div id = "TA-availability-list" style = "width: 100%">
+            </div>
+            </div>
+            
         </div>
             
-        <div id = "TAinfo">
-                <div class = "subtitle2" style="width:80%; margin-top:10px">CONTACT INFORMATION:</div>
+        <div id = "TAinfo" style="padding-top: 20px;">
+
+                <button id="save-all" style = "float: right; margin-bottom: 15px;">Save All</button>
+                <div class = "subtitle2" style="width:80%; margin-top:10px">CONTACT INFORMATION</div>
                 <hr/>
                 <button id="test-modify-submit" style="float:right;">Save</button>
                 
                 <div class = "enterdata">
                 <div class = "row" style="margin-top: 25px; margin-bottom: 20px; padding: 0 20px">
-                    <div class = "col-xs-3">Student ID: <input type="text" id="studentid"  style= "width: 50px; border: 0; margin-left: 15px" readonly></div>
+                    <div class = "col-xs-3">Student ID: <input type="text" id="studentid"  style= "width: 50px; border: 0; margin-left: 5px" readonly></div>
 <!--                    <div class = "col-xs-4">Password: <input type="password" id="test-password" placeholder="password"><button id="test-password-submit">Change</button></div>-->
                 </div>
                 <div class = "row" style="margin-top: 30px; margin-bottom: 30px; padding: 0 20px">
                     <div class = "col-xs-3">
-                        <div>First Name:</div> 
+                        <div style = "width:85px; float:left">First Name:</div> 
                         <div style = "overflow: hidden">
                             <input type="text" id="test-modify-fname" placeholder="First Name">
                         </div>
                         
                     </div>
                     <div class = "col-xs-3">
-                        <div>Last Name:</div>
+                        <div style = "width:84px; float:left">Last Name:</div>
                         <div style = "overflow: hidden">
                             <input type="text" id="test-modify-lname" placeholder="Last Name"></div>
                         </div>
                     <div class = "col-xs-3"><div></div>
-                        <div>Email:</div> 
+                        <div style = "width:47px; float:left">Email:</div> 
                         <div style = "overflow: hidden">
                             <input type="text" id="test-modify-email" placeholder="E-Mail">
                         </div>
                     </div>
                     <div class = "col-xs-3">
-                        <div>Phone:</div> 
+                        <div style = "width:53px; float:left">Phone:</div> 
                         <div style = "overflow: hidden">
                         <input type="text" id="test-modify-phone" placeholder="Phone Number">
                         </div>
@@ -158,7 +220,7 @@
                 </div>
                 <div id = "qualified-courses" width="100%">
     
-            <div class = "subtitle2">COURSES QUALIFIED TO TA FOR:</div>
+            <div class = "subtitle2">COURSES QUALIFIED TO TEACH</div>
                     <hr/>
                 <div class ="clearfix" style="width: 100%; display:block">
                 <button id="add-course-submit" style = "float: right">Save</button>
@@ -211,7 +273,7 @@
                 </div>
             
             </div>
-            <div class = "subtitle2">YOUR AVAILABILITY:</div>
+            <div class = "subtitle2">YOUR AVAILABILITY</div>
 <!--
             <button id="test-add-time-submit">Save</button><br>
             <div class = "row">
@@ -295,9 +357,9 @@
      
             <button id="test-save-time" style = "float: right">Save</button>
     <div class = "row"> 
-        <div class = "col-xs-8 col-xs-push-1">
+        <div id ="availability" style = "margin-top: 25px" class = "col-xs-9 col-xs-push-1">
             
-    <table cellpadding="0" style = "float: left" cellspacing="0"  id="time-table"  width = "20%">
+    <table cellpadding="0" style = "float: left;" cellspacing="0"  id="time-table"  width = "15%">
         <th/>
         <tr><td><div>8:00 AM</div></td></tr>
         <tr><td><div>9:00 AM</div></td></tr>
@@ -314,13 +376,13 @@
         <tr><td><div>8:00 PM</div></td></tr>
     </table>
         
-      <table cellpadding="0" cellspacing="0"  style = "float: left" id = "availability-table" width = "80%">
+      <table cellpadding="0" cellspacing="0"  style = "float: left" id = "availability-table" width = "85%">
         <thead>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
         </thead>
         <tr class = "table-border">
           <td class="selectable"> </td>
@@ -702,8 +764,9 @@
 
         </div>
         
-        <div id = "changepassword">
-            <div class = "subtitle">CHANGE PASSWORD</div>
+        <div id = "changepassword" style="padding-top: 20px;">
+            <div class = "subtitle2" style="margin-top: 10px;">CHANGE PASSWORD</div>
+            <hr/>
             <div class = "container enterdata">
                 <table>
                 <tr>
@@ -715,7 +778,7 @@
                     <td><input type="password" id="test-password-repeat" placeholder="password"></td>
                 </tr>
                 </table>
-                <button id="test-password-submit">Change</button>
+                <button id="test-password-submit" style="margin-top: 15px">Change</button>
             </div>
         
         </div>  

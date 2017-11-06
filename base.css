@@ -53,27 +53,37 @@ div.subtitle {
 }
 
 label {
-    font-family: sharp-sans-semibold;
+    font-family: roboto;
+    font-weight: 500;
 }
 
 
 div.subtitle2 { 
     font-family: langdon;
-    font-size: 24px;
-    color: #3d3d3d;
+    font-size: 22px;
+    color: #444444;
     margin-top: 40px;
     margin-bottom: 0px;
+    text-align: left;
 }
 
 
 div.enterdata{
-    font-family: sharp-sans-semibold;
+    font-family: roboto;
+    font-weight: 600;
     font-size: 15px;
+}
+
+div.enterdata input[type="text"]{
+    color: black;
+    font-weight: 400;
 }
 
 div.enterdata input, div.enterdata button {
     font-family: helvetica;
     font-size: 12px;
+    color: black;
+    font-weight: 400;
 }
 
 div.modal-box { 
@@ -109,9 +119,16 @@ div.login-field input{
     border: 0px solid;
 }
 
-#TAinfo input[type ="text"] {
+
+
+div#availability td{
+    
+}
+
+#main-content input[type ="text"], #main-content input[type ="password"], #main-content select {
     color: #444;
     font-size: 13px;
+    font-weight: 400;
     width:100%;
     line-height: 20px;
     border-radius: 3px;
@@ -136,13 +153,19 @@ div.icon {
     top: calc(50% - 10px); /* 50% - 3/4 of icon height */
 }
 
-#TAinfo button {
+#main-content button{
     background-color: #eee;
     border: 1px solid #aaa; 
+    font-size: 14px;
     padding: 0px 15px;
     font-family: sharp-sans-book;
     color: #333;
 }
+
+#main-content button:hover{
+    background-color: #f6f6f6;
+}
+
 
 .btn:hover {
     background-color: #0168b5;
@@ -165,6 +188,13 @@ div.icon {
 div#main-content{
     background-color: #ffffff;
     border-radius: 5px;
+}
+
+div#available-TAs{
+    font-size: 20px;
+    font-family: roboto;
+    color: #555;
+    text-align: center;
 }
 
 
@@ -286,9 +316,10 @@ table#availability-table td{
 }
 
 table#availability-table th {
-    font-size: 12px;
+    font-size: 14px;
     width: 20%;
     height: 18px;
+    font-family: roboto;
     text-align: center;
 }
 
@@ -314,7 +345,7 @@ table#availability-table tr.table-border td.highlighted {
                      
 table#time-table th {
     width: 100%;
-    height: 6px;
+    height: 9px;
 }
 
 table#time-table td{

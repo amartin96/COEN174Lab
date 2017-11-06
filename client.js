@@ -8,6 +8,7 @@ $("#login-submit").click(login);
 $("#login-admin-submit").click(loginAdmin);
 $("#test-checkstatus").click(checkstatus);
 $("#test-submit").click(querySearch);
+$("#save-all").click(saveAllInfo);
 $("#test-modify-submit").click(queryModifyInfo);
 $("#add-course-submit").click(queryAddCourse);
 $("#test-save-time").click(queryAddTime);
@@ -133,7 +134,7 @@ function querySearch()
             var markup = "";
             for(var i = 0; i < data.length ; i++)
                 {
-                markup = '<tr><td>' + data[i].fname + '</td><td>' + data[i].lname +'</td><td>' + data[i].email +'</td><td>' + data[i].phone +'</td></tr>';
+                markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr style="border-top: 1px solid #aaaaaa;"/>';
                 $('#TA-availability-list').append(markup); 
                 }
         }
@@ -194,6 +195,12 @@ function querySearch()
 //    $('#f-table').append(markup);
 //
 //});
+
+function saveAllInfo(){
+    queryModifyInfo();
+    queryAddCourse();
+    queryAddTime();
+}
 
 function queryModifyInfo()
 {
