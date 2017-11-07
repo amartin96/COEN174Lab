@@ -1,22 +1,28 @@
 @font-face {
-    font-family: sharp-sans-extrabold;
-    src: url(fonts/Sharp-Sans-Extrabold.otf);
-}
-
-@font-face {
-    font-family: sharp-sans-semibold;
-    src: url(fonts/Sharp-Sans-Semibold.otf);
-}
-
-@font-face {
     font-family: sharp-sans-book;
     src: url(fonts/Sharp-Sans-Book.otf);
+}
+
+@font-face {
+    font-family: roboto-medium;
+    src: url(fonts/Roboto-Medium.ttf);
+}
+
+@font-face {
+    font-family: roboto-bold;
+    src: url(fonts/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(fonts/Roboto-Regular.ttf);
 }
 
 @font-face {
     font-family: langdon;
     src: url(fonts/Langdon.otf);
 }
+
 
 
 a{
@@ -159,6 +165,7 @@ div.icon {
     font-size: 14px;
     padding: 0px 15px;
     font-family: sharp-sans-book;
+    border-radius: 4px;
     color: #333;
 }
 
@@ -201,7 +208,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #122E53;
+    border-top: 1px solid #ccc;
     margin-top: 0;
     margin-bottom: 15px;
     padding: 0;
@@ -374,5 +381,10 @@ html[xmlns] .clearfix {
 
 * html .clearfix {
     height: 1%;
+}
+
+select {
+        -moz-appearance: none;
+
 }
            
