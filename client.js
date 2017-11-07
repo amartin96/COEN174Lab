@@ -442,7 +442,11 @@ function queryListUsers()
 
         alert(data);
 
+
         var data = JSON.parse(data);
+
+        alert(data.length);
+        
         if (data.length > 0)
         {
             var markup = "";
