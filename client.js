@@ -69,6 +69,7 @@ function loginAdmin()
             $("#admin-login").hide();
             $("#whole-page").show();
             $("#test-admin").show();
+            queryListUsers();
         } else {
             alert("login failed");
         }
