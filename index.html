@@ -101,7 +101,7 @@
                         <div style = "width:55px; float:left">Course:</div> 
                         <div style = "margin-left: 55px">
                     <select id="test-course">
-                            <option value="" selected disabled hidden>Choose Course</option>
+                            <option value="" selected hidden>Choose Course</option>
                             <option value="COEN 10">COEN 10</option>
                             <option value="COEN 11">COEN 11</option>
                             <option value="COEN 12">COEN 12</option>
@@ -109,10 +109,19 @@
                             <option value="COEN 21">COEN 21</option>
                             <option value="COEN 44">COEN 44</option>
                             <option value="COEN 45">COEN 45</option>
+                            <option value="COEN 60">COEN 60</option>
                             <option value="COEN 70">COEN 70</option>
+                            <option value="COEN 79">COEN 79</option>
+                            <option value="COEN 122">COEN 122</option>
                             <option value="COEN 123">COEN 123</option>
                             <option value="COEN 127">COEN 127</option>
+                            <option value="COEN 146">COEN 146</option>
+                            <option value="COEN 148">COEN 148</option>
+                            <option value="COEN 152">COEN 152</option>
                             <option value="COEN 160">COEN 160</option>
+                            <option value="COEN 161">COEN 161</option>
+                            <option value="COEN 163">COEN 163</option>
+                            <option value="COEN 164">COEN 164</option>
                             <option value="COEN 174">COEN 174</option>
                             <option value="COEN 175">COEN 175</option>
                             <option value="COEN 177">COEN 177</option>
@@ -126,7 +135,7 @@
                         <div style = "width:35px; float:left">Day: </div>
                         <div style = "margin-left: 35px">
                         <select id="test-day">
-                            <option value="" selected disabled hidden>Choose Day</option>
+                            <option value="" selected hidden>Choose Day</option>
                             <option value="M">Monday</option>
                             <option value="T">Tuesday</option>
                             <option value="W">Wednesday</option>
@@ -224,49 +233,122 @@
                     <hr/>
                 <div class ="clearfix" style="width: 100%; display:block">
                 <button id="add-course-submit" style = "float: right">Save</button>
-                <div class ="col-xs-6">
+                <div class ="col-xs-7">
                 <table style="width: 100%; margin-left: 30px;">
                 <tr>
-                    <td width = "33.3%"><input id ="COEN 10" type='checkbox' class = "classcheck" value='COEN 10'/>
-                <label for="COEN 10">COEN 10</label></td>
-                    <td width = "33.3%"> <input id ="COEN 11" type='checkbox' class="classcheck" value='COEN 11'>
-                <label for="COEN 11">COEN 11</label></td>
-                    <td width = "33.3%"><input id ="COEN 12" type='checkbox' class="classcheck" value='COEN 12'/>
-                <label for="COEN 12">COEN 12</label></td>
+                    <td style="width: 25%">
+                        <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 10" type='checkbox' class = "classcheck" value='COEN 10'/>
+                                <label for="COEN 10">COEN 10</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 11" type='checkbox' class="classcheck" value='COEN 11'>
+                                <label for="COEN 11">COEN 11</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 12" type='checkbox' class="classcheck" value='COEN 12'/>
+                                <label for="COEN 12">COEN 12</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 20" type='checkbox' class="classcheck" value='COEN 20'/>
+                                <label for="COEN 20">COEN 20</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 21" type='checkbox' class="classcheck" value='COEN 21'/>
+                                <label for="COEN 21">COEN 21</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 44" type='checkbox' class="classcheck" value='COEN 44'/>
+                                <label for="COEN 44">COEN 44</label>
+                            </tr>
+                        </table>  
+                    </td>
+                    <td style="width: 25%">
+                            <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 45" type='checkbox' class = "classcheck" value='COEN 45'/>
+                                <label for="COEN 45">COEN 45</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 60" type='checkbox' class="classcheck" value='COEN 60'>
+                                <label for="COEN 60">COEN 60</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 70" type='checkbox' class="classcheck" value='COEN 70'/>
+                                <label for="COEN 70">COEN 70</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 79" type='checkbox' class="classcheck" value='COEN 79'/>
+                                <label for="COEN 79">COEN 79</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 122" type='checkbox' class="classcheck" value='COEN 122'/>
+                                <label for="COEN 122">COEN 122</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 123" type='checkbox' class="classcheck" value='COEN 123'/>
+                                <label for="COEN 123">COEN 123</label>
+                            </td></tr>
+                            </table>
+                    </td>
+                    <td style="width: 25%">
+                        <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 127" type='checkbox' class = "classcheck" value='COEN 127'/>
+                                <label for="COEN 127">COEN 127</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 146" type='checkbox' class="classcheck" value='COEN 146'>
+                                <label for="COEN 146">COEN 146</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 148" type='checkbox' class="classcheck" value='COEN 148'/>
+                                <label for="COEN 148">COEN 148</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 152" type='checkbox' class="classcheck" value='COEN 152'/>
+                                <label for="COEN 152">COEN 152</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 160" type='checkbox' class="classcheck" value='COEN 160'/>
+                                <label for="COEN 160">COEN 160</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 161" type='checkbox' class="classcheck" value='COEN 161'/>
+                                <label for="COEN 161">COEN 161</label>
+                            </td></tr>
+                            </table>
+                    </td>
+                    <td style="width: 25%">
+                        <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 163" type='checkbox' class = "classcheck" value='COEN 163'/>
+                                <label for="COEN 163">COEN 163</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 164" type='checkbox' class="classcheck" value='COEN 164'>
+                                <label for="COEN 164">COEN 164</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 174" type='checkbox' class="classcheck" value='COEN 174'/>
+                                <label for="COEN 174">COEN 174</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 175" type='checkbox' class="classcheck" value='COEN 175'/>
+                                <label for="COEN 175">COEN 175</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 177" type='checkbox' class="classcheck" value='COEN 177'/>
+                                <label for="COEN 177">COEN 177</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 178" type='checkbox' class="classcheck" value='COEN 178'/>
+                                <label for="COEN 178">COEN 178</label>
+                            </td></tr>
+                        </table> 
+                    </td>
                 </tr>
-                <tr>
-                    <td><input id ="COEN 20" type='checkbox' class = "classcheck" value='COEN 20'/>
-                <label for="COEN 20">COEN 20</label></td>
-                    <td><input id ="COEN 21" type='checkbox' class="classcheck" value='COEN 21'>
-                <label for="COEN 21">COEN 21</label></td>
-                    <td><input id ="COEN 44" type='checkbox' class="classcheck" value='COEN 44'/>
-                <label for="COEN 44">COEN 44</label></td>
-                </tr>
-                <tr>
-                    <td><input id ="COEN 45" type='checkbox' class = "classcheck" value='COEN 45'/>
-                <label for="COEN 45">COEN 45</label></td>
-                    <td><input id ="COEN 70" type='checkbox' class = "classcheck" value='COEN 70'/>
-                <label for="COEN 70">COEN 70</label></td>
-                    <td><input id ="COEN 123" type='checkbox' class = "classcheck" value='COEN 123'/>
-                <label for="COEN 123">COEN 123</label></td>
-                </tr>
-                <tr>
-                    <td><input id ="COEN 127" type='checkbox' class = "classcheck" value='COEN 127'/>
-                <label for="COEN 127">COEN 127</label></td>
-                    <td><input id ="COEN 160" type='checkbox' class = "classcheck" value='COEN 160'/>
-                <label for="COEN 160">COEN 160</label></td>
-                    <td><input id ="COEN 174" type='checkbox' class = "classcheck" value='COEN 174'/>
-                        <label for="COEN 174">COEN 174</label></td>
-                </tr>
-                <tr>
-                    <td><input id ="COEN 175" type='checkbox' class = "classcheck" value='COEN 175'/>
-                <label for="COEN 175">COEN 175</label></td>
-                    <td><input id ="COEN 177" type='checkbox' class = "classcheck" value='COEN 177'/>
-                        <label for="COEN 177">COEN 177</label></td>
-                    <td><input id ="COEN 178" type='checkbox' class = "classcheck" value='COEN 178'/>
-                <label for="COEN 178">COEN 178</label></td>
-                </tr>
-                
                 </table>
                 </div>
                 
@@ -726,7 +808,7 @@
             </div>
            </div>  
                 <br>
-            <div>
+            <div style="margin-top: 20px">
             <button id="test-clear-data">Clear All Courses and Times</button>
             </div>
             

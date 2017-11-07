@@ -122,8 +122,51 @@ function querySearch()
     var day = $("#test-day").val();
     var t_start = $("#test-t_start").val();
     var t_end = $("#test-t_end").val();
+    
+    var t_start_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_start); 
+    var t_end_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_end); 
+    
+    var invalid = false;
+    
+    if (course == "")
+    {
+        alert("Please select a course");  
+        invalid = true;
+    }
+    
+    if (day == "")
+    {
+        alert("Please select a day");       
+        invalid = true;
+    }
+    
+    if (t_start == "")
+    {
+        alert("Please enter a start time");       
+        invalid = true;
+    }
+    
+    if (t_end == "")
+    {
+        alert("Please enter an end time");       
+        invalid = true;
+    }
+    
+    if (!(t_start_is_valid && t_end_is_valid) && !(invalid))
+    {
+        alert("Please enter time in HH:MM AM/PM format");       
+        invalid = true;
+    }
+    
+    if (invalid)
+    {
+         return;   
+    }
+    
     t_start = ConvertTimeformat(t_start);
     t_end = ConvertTimeformat(t_end);
+    
+    
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
         var data = JSON.parse(data); 
@@ -359,8 +402,8 @@ function ConvertTimeformat(str) {
     var hours = Number(time.match(/^(\d+)/)[1]);
     var minutes = Number(time.match(/:(\d+)/)[1]);
     var AMPM = time.match(/\s(.*)$/)[1];
-    if (AMPM == "PM" && hours < 12) hours = hours + 12;
-    if (AMPM == "AM" && hours == 12) hours = hours - 12;
+    if ((AMPM == "PM" || AMPM == "pm") && hours < 12) hours = hours + 12;
+    if ((AMPM == "AM" || AMPM == "am") && hours == 12) hours = hours - 12;
     var sHours = hours.toString();
     var sMinutes = minutes.toString();
     if (hours < 10) sHours = "0" + sHours;
