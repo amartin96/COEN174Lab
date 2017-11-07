@@ -1,4 +1,4 @@
-SELECT lname, fname, email, phone
+SELECT fname, lname, email, phone
 FROM TeachingAssistants
 WHERE id IN (
     SELECT ta_id
