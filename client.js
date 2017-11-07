@@ -445,12 +445,13 @@ function queryListUsers()
 
         var data = JSON.parse(data);
 
-        alert(data.length);
+        alert(data.result.length);
+        alert(data);
 
-        if (data.length > 0)
+        if (data.result.length > 0)
         {
             var markup = "";
-            for(var i = 0; i < data.length ; i++)
+            for(var i = 0; i < data.result.length ; i++)
                 {
                 markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr/>';
                 $('#TA-list').append(markup);
