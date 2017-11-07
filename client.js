@@ -25,6 +25,7 @@ $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
 
+
 // login button event handler
 function login()
 {
@@ -74,6 +75,8 @@ function loginAdmin()
     });
 }
 
+
+
 function gotoAdminLogin(){
     $("#login").hide();
     $("#admin-login").show();
@@ -89,7 +92,7 @@ function gotoInfo(){
     $("#changepassword").hide();
     $("#query-li").removeClass('active');
     $("#info-li").addClass('active');
-    $("#TAinfo").show(); 
+    $("#TAinfo").show();
 }
 
 function gotoQuery(){
@@ -122,54 +125,54 @@ function querySearch()
     var day = $("#test-day").val();
     var t_start = $("#test-t_start").val();
     var t_end = $("#test-t_end").val();
-    
-    var t_start_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_start); 
-    var t_end_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_end); 
-    
+
+    var t_start_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_start);
+    var t_end_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_end);
+
     var invalid = false;
-    
+
     if (course == "")
     {
-        alert("Please select a course");  
+        alert("Please select a course");
         invalid = true;
     }
-    
+
     if (day == "")
     {
-        alert("Please select a day");       
+        alert("Please select a day");
         invalid = true;
     }
-    
+
     if (t_start == "")
     {
-        alert("Please enter a start time");       
+        alert("Please enter a start time");
         invalid = true;
     }
-    
+
     if (t_end == "")
     {
-        alert("Please enter an end time");       
+        alert("Please enter an end time");
         invalid = true;
     }
-    
+
     if (!(t_start_is_valid && t_end_is_valid) && !(invalid))
     {
-        alert("Please enter time in HH:MM AM/PM format");       
+        alert("Please enter time in HH:MM AM/PM format");
         invalid = true;
     }
-    
+
     if (invalid)
     {
-         return;   
+         return;
     }
-    
+
     t_start = ConvertTimeformat(t_start);
     t_end = ConvertTimeformat(t_end);
-    
-    
+
+
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         alert(data);
-        var data = JSON.parse(data); 
+        var data = JSON.parse(data);
         if (data.length > 0)
         {
             $("#available-TAs").show();
@@ -178,14 +181,14 @@ function querySearch()
             for(var i = 0; i < data.length ; i++)
                 {
                 markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr/>';
-                $('#TA-availability-list').append(markup); 
+                $('#TA-availability-list').append(markup);
                 }
         }
         else
         {
             alert("No available TAs found");
         }
-        
+
     });
 }
 
@@ -258,13 +261,13 @@ function queryModifyInfo()
 
 function queryAddCourse()
 {
-    $(".classcheck").each(function() { 
+    $(".classcheck").each(function() {
         if ($(this).is(":checked"))
         {
             var course = $(this).val();
             $.post("server.php", { query: "add-course", course: course }, function(data) {
             alert(data);});
-        } else {    
+        } else {
             // Remove $(this).val() from the database
             // var course = $(this).val();
             // $.post("server.php", { query: "remove-course", course: course }, function(data) {
@@ -277,21 +280,21 @@ function queryAddCourse()
 
 function queryAddTime(){
     var days = ["M", "T", "W", "R", "F"];
-    
+
     for(var i = 0 ; i < 5 ; i++)
     {
-        
+
         var t_hours = "8:00";
         var t_start = "";
         var t_end = "";
         var highlighted = false;
         var k = i + 1;
-        
+
         $("#availability-table tr td:nth-child(" + k +")").each(function () {
-            
+
             if ($(this).hasClass('highlighted'))
             {
-                
+
                 if(highlighted == false)
                 {
                 highlighted = true;
@@ -308,11 +311,11 @@ function queryAddTime(){
                     $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                     alert(data);
                     });
-                }   
+                }
             }
             t_hours = add15totime(t_hours);
         });
-        
+
         if (highlighted == true)
         {
             t_end = t_hours;
@@ -333,30 +336,30 @@ function add15totime(str){
     if (sminutes == "60")
         {
             sminutes = "00";
-            hours++;     
+            hours++;
         }
-    
+
     var shours = hours.toString();
     return(shours + ":" + sminutes);
 }
 
 //function queryAddTime()
 //{
-//    for (i = 1; i < $('#m-table tr').length; i++) { 
+//    for (i = 1; i < $('#m-table tr').length; i++) {
 //        var t_start = $('#M' + i + '-start-time').val();
 //        var t_end = $('#M' + i + '-end-time').val();
 //        if (t_start != "" && t_end != "" )
 //            {
 //        t_start = ConvertTimeformat(t_start);
 //        t_end = ConvertTimeformat(t_end);
-//                
+//
 //        $.post("server.php", { query: "add-time", day: "M", t_start: t_start, t_end: t_end }, function(data) {
 //        alert(data);
 //        });
 //            }
 //    }
-//    
-//    for (i = 1; i < $('#t-table tr').length; i++) { 
+//
+//    for (i = 1; i < $('#t-table tr').length; i++) {
 //        var t_start = $('#T' + i + '-start-time').val();
 //        var t_end = $('#T' + i + '-end-time').val();
 //        t_start = ConvertTimeformat(t_start);
@@ -365,8 +368,8 @@ function add15totime(str){
 //        alert(data);
 //        });
 //    }
-//    
-//    for (i = 1; i < $('#w-table tr').length; i++) { 
+//
+//    for (i = 1; i < $('#w-table tr').length; i++) {
 //        var t_start = $('#W' + i + '-start-time').val();
 //        var t_end = $('#W' + i + '-end-time').val();
 //        t_start = ConvertTimeformat(t_start);
@@ -375,8 +378,8 @@ function add15totime(str){
 //        alert(data);
 //        });
 //    }
-//        
-//    for (i = 1; i < $('#r-table tr').length; i++) { 
+//
+//    for (i = 1; i < $('#r-table tr').length; i++) {
 //        var t_start = $('#R' + i + '-start-time').val();
 //        var t_end = $('#R' + i + '-end-time').val();
 //        t_start = ConvertTimeformat(t_start);
@@ -385,8 +388,8 @@ function add15totime(str){
 //        alert(data);
 //        });
 //    }
-//    
-//    for (i = 1; i < $('#f-table tr').length; i++) { 
+//
+//    for (i = 1; i < $('#f-table tr').length; i++) {
 //        var t_start = $('#F' + i + '-start-time').val();
 //        var t_end = $('#F' + i + '-end-time').val();
 //        t_start = ConvertTimeformat(t_start);
@@ -435,8 +438,27 @@ function queryChangePassword()
 function queryListUsers()
 {
     $.post("server_admin.php", { query: "list-users" }, function(data) {
+
         alert(data);
+
+        var data = JSON.parse(data);
+        if (data.length > 0)
+        {
+            var markup = "";
+            for(var i = 0; i < data.length ; i++)
+                {
+                markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr/>';
+                $('#TA-list').append(markup);
+                }
+        }
+        else
+        {
+            alert("No TAs found");
+        }
+
+
     });
+
 }
 
 function queryAddUser()
@@ -488,7 +510,7 @@ $(function() {
     $("#whole-page").hide();
     $("#available-TAs").hide();
     $("#changepassword").hide();
-    
+
     // Create table dragging functionality
           var isMouseDown = false;
           var highlighted;
