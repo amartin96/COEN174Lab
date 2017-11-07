@@ -24,7 +24,8 @@ function querySearch()
     while ($stmt->fetch()) {
         $data[] = array("fname" => $fname, "lname" => $lname, "email" => $email, "phone" => $phone);
     }
-    echo json_encode($data, JSON_PRETTY_PRINT);
+   echo json_encode($data, JSON_PRETTY_PRINT);
+    
 }
 
 function queryGetInfo()
@@ -41,7 +42,7 @@ function queryGetInfo()
 
     $stmt->bind_result($fname, $lname, $email, $phone);
     $stmt->fetch();
-    $data = array("fname" => $fname, "lname" => $lname, "email" => $email, "phone" => $phone);
+    $data = array("fname" => $fname, "lname" => $lname, "email" => $email, "phone" => $phone, "id" => $_SESSION["username"]);
     echo json_encode(array("status" => SUCCESS, "result" => $data), JSON_PRETTY_PRINT);
 }
 

@@ -5,65 +5,825 @@
         <title>TA Emergency Coverage System</title>
 
         <!-- import jQuery -->
-        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+<!--        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+        <script defer src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+        
+        
+        <!-- Import Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>   
+        
+        <link rel="stylesheet" href="base.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <!-- import local scripts -->
         <script defer src="client.js"></script>
     </head>
     <body>
-
+        
         <div id="login">
-            <b>TA Login</b><br>
-            <input type="text" id="login-username" placeholder="User Name">
-            <input type="password" id="login-password" placeholder="Password">
-            <button id="login-submit">Login</button>
-            <br><b>Admin Login</b><br>
-            <input type="text" id="login-admin-username" placeholder="User Name">
-            <input type="password" id="login-admin-password" placeholder="Password">
-            <button id="login-admin-submit">Login</button>
+<!--             <img src = "images/SCU-engineering-logo.png" style="width:100px;height:120px; float: right; margin: 30px 70px 0 0"/>-->
+            <div class = "title">TA EMERGENCY COVERAGE</div>
+            <div class = "modal-box">
+            <div class = "login-field">
+            <div style = "font-family: sharp-sans-book; font-size: 15px; padding:25px 0 0 0">LOGIN</div>
+            <div class = "icon" style="margin:20px 0 0 0"><i class="icon-user icon-large"></i></div>
+            <div style = "overflow: hidden">
+                <input type="text" id="login-username" placeholder="W1234567" style="margin:20px 0 0 0; padding-left: 5px">
+            </div>
+            <div class = "icon" style="margin:8px 0 0 0"><i class="icon-lock icon-large"></i></div>
+            <div style = "overflow: hidden">
+            <input type="password" id="login-password" placeholder="Password" style="margin:8px 0 0 0; padding-left: 5px">
+            </div>
+            <button id="login-submit" style="margin:24px 0 0 0">LOGIN</button>
+            </div>
+                
+            </div>
+            <div style="margin: 0 auto; position: relative; text-align: right; width:30%; padding-right: 15px">
+                <a id="go-to-admin-login" style="color:white">Admin Login</a>
+            </div>
         </div>
-
-        <div id="test">
-            <button id="test-checkstatus">Am I logged in?</button>
-            <button id="test-logout">Logout</button>
-            <br><b>Search</b><br>
+        
+        <div id="admin-login" style="background-color: #C6C5C5">
+        <!--             <img src = "images/SCU-engineering-logo.png" style="width:100px;height:120px; float: right; margin: 30px 70px 0 0"/>-->
+            <div class = "title" style="color: #333333">TA EMERGENCY COVERAGE</div>
+            <div class = "modal-box">
+            <div class = "login-field">
+            <div style = "font-family: sharp-sans-book; font-size: 15px; padding:25px 0 0 0">ADMIN LOGIN</div>
+            <div class = "icon" style="margin:20px 0 0 0"><i class="icon-user icon-large"></i></div>
+            <div style = "overflow: hidden">
+                <input type="text" id="login-admin-username" placeholder="Username" style="margin:20px 0 0 0; padding-left: 5px">
+            </div>
+            <div class = "icon" style="margin:8px 0 0 0"><i class="icon-lock icon-large"></i></div>
+            <div style = "overflow: hidden">
+            <input type="password" id="login-admin-password" placeholder="Password" style="margin:8px 0 0 0; padding-left: 5px">
+            </div>
+            <button id="login-admin-submit" style="margin:24px 0 0 0">LOGIN</button>
+            </div>
+            </div>
+            <div style="margin: 0 auto; position: relative; text-align: right; width:30%; padding-right: 15px">
+                <a id="go-to-ta-login" style="color:#333333">TA Login</a>
+            </div>
+        </div>
+        
+        <div id ="whole-page" style="width:100%;  background-color: #f2f2f2; min-height: 100vh">
+        
+            
+        <div class = "container" id = "header" style="padding: 0">
+<!--            <div style="font-family:langdon; font-size: 50px; color: #333333">TA EMERGENCY COVERAGE</div>-->
+            
+            <nav class="navbar navbar-default" style="background-color: #122E53">
+            <div class="container-fluid" >
+                <ul class="nav navbar-nav">
+                    <li id ="query-li" class="active"><a id="go-to-query">FIND AN AVAILABLE TA</a></li>
+                    <li id ="info-li"><a id="go-to-info">CONTACT INFO / AVAILABILITY</a></li>
+                </ul>
+                <div class = "dropdown" style = "float: right;">
+                    <button id = "settings-button"><i class="icon-cog icon-2x"></i></button>  
+                    <div class="dropdown-content">
+                    <a id="change-password">CHANGE PASSWORD</a>
+                    <a id="test-logout">LOG OUT</a>
+                    </div>
+                </div>
+            </div>
+            </nav>
+        </div>
+        
+    
+        <div class = "container" id ="main-content">
+            <div id = "TApages">
+        <div id="test" style="min-height:100vh; padding-top: 20px;">
+            <div class = "subtitle2" style="width:80%; margin-top:10px">SEARCH FOR REPLACEMENT TA</div>
+                <hr/>
+            <div class = "enterdata">
+   
+            <div class = "row" style="margin-top: 30px; margin-bottom: 15px; padding: 0 20px">
+                    <div class = "col-xs-3">
+                        <div style = "width:55px; float:left">Course:</div> 
+                        <div style = "margin-left: 55px">
+                    <select id="test-course">
+                            <option value="" selected hidden>Choose Course</option>
+                            <option value="COEN 10">COEN 10</option>
+                            <option value="COEN 11">COEN 11</option>
+                            <option value="COEN 12">COEN 12</option>
+                            <option value="COEN 20">COEN 20</option>
+                            <option value="COEN 21">COEN 21</option>
+                            <option value="COEN 44">COEN 44</option>
+                            <option value="COEN 45">COEN 45</option>
+                            <option value="COEN 60">COEN 60</option>
+                            <option value="COEN 70">COEN 70</option>
+                            <option value="COEN 79">COEN 79</option>
+                            <option value="COEN 122">COEN 122</option>
+                            <option value="COEN 123">COEN 123</option>
+                            <option value="COEN 127">COEN 127</option>
+                            <option value="COEN 146">COEN 146</option>
+                            <option value="COEN 148">COEN 148</option>
+                            <option value="COEN 152">COEN 152</option>
+                            <option value="COEN 160">COEN 160</option>
+                            <option value="COEN 161">COEN 161</option>
+                            <option value="COEN 163">COEN 163</option>
+                            <option value="COEN 164">COEN 164</option>
+                            <option value="COEN 174">COEN 174</option>
+                            <option value="COEN 175">COEN 175</option>
+                            <option value="COEN 177">COEN 177</option>
+                            <option value="COEN 178">COEN 178</option>
+                    </select>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class = "col-xs-3">
+                        <div style = "width:35px; float:left">Day: </div>
+                        <div style = "margin-left: 35px">
+                        <select id="test-day">
+                            <option value="" selected hidden>Choose Day</option>
+                            <option value="M">Monday</option>
+                            <option value="T">Tuesday</option>
+                            <option value="W">Wednesday</option>
+                            <option value="R">Thursday</option>
+                            <option value="F">Friday</option>
+                    </select>
+                        </div>
+                </div>
+                    <div class = "col-xs-3"><div></div>
+                        <div style = "width:82px; float:left">Start Time: </div> 
+                        <div style = "margin-left: 82px">
+                            <input type="text" id="test-t_start" placeholder="9:00 AM">
+                        </div>
+                    </div>
+                    <div class = "col-xs-3">
+                        <div style = "width:74px; float:left">End Time: </div> 
+                        <div style = "margin-left: 74px">
+                        <input type="text" id="test-t_end" placeholder="12:00 PM">
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+<!--
+                
+                
             <input type="text" id="test-course" placeholder="Course Name">
-            <input type="text" id="test-day" placeholder="Day">
-            <input type="text" id="test-t_start" placeholder="Start Time">
-            <input type="text" id="test-t_end" placeholder="End Time">
-            <button id="test-submit">Go</button>
-            <br><b>Change Personal Information</b><br>
-            <input type="text" id="test-modify-fname" placeholder="First Name">
-            <input type="text" id="test-modify-lname" placeholder="Last Name">
-            <input type="text" id="test-modify-email" placeholder="E-Mail">
-            <input type="text" id="test-modify-phone" placeholder="Phone Number">
-            <button id="test-modify-submit">Save</button>
-            <br><b>Add Qualified Course</b><br>
-            <input type="text" id="test-add-course" placeholder="Course Name">
-            <button id="test-add-course-submit">Add</button>
-            <br><b>Add Available Time</b><br>
-            <input type="text" id="test-add-day" placeholder="Day">
-            <input type="text" id="test-add-t_start" placeholder="Start Time">
-            <input type="text" id="test-add-t_end" placeholder="End Time">
-            <button id="test-add-time-submit">Add</button>
-            <br>
+            <select id="test-day">
+                <option value="M">Monday</option>
+                <option value="T">Tuesday</option>
+                <option value="W">Wednesday</option>
+                <option value="R">Thursday</option>
+                <option value="F">Friday</option>
+            </select>
+
+            <input type="text" id="test-t_start" placeholder="9:00 AM">
+            <input type="text" id="test-t_end" placeholder="12:00 PM">
+-->
+            <button id="test-submit" style="float: right; margin-right: 20px">Search</button>
+            </div>
+            <div id = "available-TAs" style="margin-top: 100px">
+                <div class = "subtitle2" >AVAILABLE REPLACEMENTS</div>
+                <hr/>
+            <div id = "TA-availability-list" style = "width: 100%">
+            </div>
+            </div>
+            
+        </div>
+            
+        <div id = "TAinfo" style="padding-top: 20px;">
+
+                <button id="save-all" style = "float: right; margin-bottom: 15px;">Save All</button>
+                <div class = "subtitle2" style="width:80%; margin-top:10px">CONTACT INFORMATION</div>
+                <hr/>
+                <button id="test-modify-submit" style="float:right;">Save</button>
+                
+                <div class = "enterdata">
+                <div class = "row" style="margin-top: 25px; margin-bottom: 20px; padding: 0 20px">
+                    <div class = "col-xs-3">Student ID: <input type="text" id="studentid"  style= "width: 50px; border: 0; margin-left: 5px" readonly></div>
+<!--                    <div class = "col-xs-4">Password: <input type="password" id="test-password" placeholder="password"><button id="test-password-submit">Change</button></div>-->
+                </div>
+                <div class = "row" style="margin-top: 30px; margin-bottom: 30px; padding: 0 20px">
+                    <div class = "col-xs-3">
+                        <div style = "width:85px; float:left">First Name:</div> 
+                        <div style = "overflow: hidden">
+                            <input type="text" id="test-modify-fname" placeholder="First Name">
+                        </div>
+                        
+                    </div>
+                    <div class = "col-xs-3">
+                        <div style = "width:84px; float:left">Last Name:</div>
+                        <div style = "overflow: hidden">
+                            <input type="text" id="test-modify-lname" placeholder="Last Name"></div>
+                        </div>
+                    <div class = "col-xs-3"><div></div>
+                        <div style = "width:47px; float:left">Email:</div> 
+                        <div style = "overflow: hidden">
+                            <input type="text" id="test-modify-email" placeholder="E-Mail">
+                        </div>
+                    </div>
+                    <div class = "col-xs-3">
+                        <div style = "width:53px; float:left">Phone:</div> 
+                        <div style = "overflow: hidden">
+                        <input type="text" id="test-modify-phone" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div id = "qualified-courses" width="100%">
+    
+            <div class = "subtitle2">COURSES QUALIFIED TO TEACH</div>
+                    <hr/>
+                <div class ="clearfix" style="width: 100%; display:block">
+                <button id="add-course-submit" style = "float: right">Save</button>
+                <div class ="col-xs-7">
+                <table style="width: 100%; margin-left: 30px;">
+                <tr>
+                    <td style="width: 25%">
+                        <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 10" type='checkbox' class = "classcheck" value='COEN 10'/>
+                                <label for="COEN 10">COEN 10</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 11" type='checkbox' class="classcheck" value='COEN 11'>
+                                <label for="COEN 11">COEN 11</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 12" type='checkbox' class="classcheck" value='COEN 12'/>
+                                <label for="COEN 12">COEN 12</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 20" type='checkbox' class="classcheck" value='COEN 20'/>
+                                <label for="COEN 20">COEN 20</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 21" type='checkbox' class="classcheck" value='COEN 21'/>
+                                <label for="COEN 21">COEN 21</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 44" type='checkbox' class="classcheck" value='COEN 44'/>
+                                <label for="COEN 44">COEN 44</label>
+                            </tr>
+                        </table>  
+                    </td>
+                    <td style="width: 25%">
+                            <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 45" type='checkbox' class = "classcheck" value='COEN 45'/>
+                                <label for="COEN 45">COEN 45</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 60" type='checkbox' class="classcheck" value='COEN 60'>
+                                <label for="COEN 60">COEN 60</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 70" type='checkbox' class="classcheck" value='COEN 70'/>
+                                <label for="COEN 70">COEN 70</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 79" type='checkbox' class="classcheck" value='COEN 79'/>
+                                <label for="COEN 79">COEN 79</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 122" type='checkbox' class="classcheck" value='COEN 122'/>
+                                <label for="COEN 122">COEN 122</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 123" type='checkbox' class="classcheck" value='COEN 123'/>
+                                <label for="COEN 123">COEN 123</label>
+                            </td></tr>
+                            </table>
+                    </td>
+                    <td style="width: 25%">
+                        <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 127" type='checkbox' class = "classcheck" value='COEN 127'/>
+                                <label for="COEN 127">COEN 127</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 146" type='checkbox' class="classcheck" value='COEN 146'>
+                                <label for="COEN 146">COEN 146</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 148" type='checkbox' class="classcheck" value='COEN 148'/>
+                                <label for="COEN 148">COEN 148</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 152" type='checkbox' class="classcheck" value='COEN 152'/>
+                                <label for="COEN 152">COEN 152</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 160" type='checkbox' class="classcheck" value='COEN 160'/>
+                                <label for="COEN 160">COEN 160</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 161" type='checkbox' class="classcheck" value='COEN 161'/>
+                                <label for="COEN 161">COEN 161</label>
+                            </td></tr>
+                            </table>
+                    </td>
+                    <td style="width: 25%">
+                        <table style="width: 100%">
+                            <tr><td>
+                                <input id ="COEN 163" type='checkbox' class = "classcheck" value='COEN 163'/>
+                                <label for="COEN 163">COEN 163</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 164" type='checkbox' class="classcheck" value='COEN 164'>
+                                <label for="COEN 164">COEN 164</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 174" type='checkbox' class="classcheck" value='COEN 174'/>
+                                <label for="COEN 174">COEN 174</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 175" type='checkbox' class="classcheck" value='COEN 175'/>
+                                <label for="COEN 175">COEN 175</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 177" type='checkbox' class="classcheck" value='COEN 177'/>
+                                <label for="COEN 177">COEN 177</label>
+                            </td></tr>
+                            <tr><td>
+                                <input id ="COEN 178" type='checkbox' class="classcheck" value='COEN 178'/>
+                                <label for="COEN 178">COEN 178</label>
+                            </td></tr>
+                        </table> 
+                    </td>
+                </tr>
+                </table>
+                </div>
+                
+                </div>
+            
+            </div>
+            <div class = "subtitle2">YOUR AVAILABILITY</div>
+<!--
+            <button id="test-add-time-submit">Save</button><br>
+            <div class = "row">
+            
+            <div class="col-xs-2">
+            <table id = "m-table" align="center">
+                <tr>
+                    <th>Mon</th>
+                </tr>
+                <tr>
+                    <td><input type="text" size = "8" id="M1-start-time"></td><td> to </td><td><input type="text" size = "8" id="M1-end-time"></td>
+                </tr>
+            </table>
+            <div style="display: flex; align-items: center; justify-content: center">
+            <button id="add-row-m">Add Time Slot</button>
+            </div>
+            </div>
+            
+            <div class="col-xs-3">    
+            <table id = "t-table" align="center">
+                <tr>
+                    <th>Tues</th>
+                </tr>
+                <tr>
+                    <td><input type="text" size = "8" id="T1-start-time"></td><td> to </td><td><input type="text" size = "8" id="T1-end-time"></td>
+                </tr>
+            </table>
+            <div style="display: flex; align-items: center; justify-content: center">
+            <button id="add-row-t" text-align="center">Add Time Slot</button>
+            </div>
+            </div>
+            
+            <div class="col-xs-2">
+            <table id = "w-table" align="center">
+                <tr>
+                    <th>Wed</th>
+                </tr>
+                <tr>
+                    <td><input type="text" size = "8" id="W1-start-time"></td><td>to</td><td><input type="text" size = "8" id="W1-end-time"></td>
+                </tr>
+            </table>
+            <div style="display: flex; align-items: center; justify-content: center">
+            <button id="add-row-w">Add Time Slot</button>
+            </div>
+            </div>
+            
+            <div class="col-xs-3">   
+            <table id = "r-table" align="center">
+                <tr>
+                    <th>Thurs</th>
+                </tr>
+                <tr>
+                    <td><input type="text" size = "8" id="R1-start-time"></td><td> to </td><td><input type="text" size = "8" id="R1-end-time"></td>
+                </tr>
+            </table>
+            <div style="display: flex; align-items: center; justify-content: center">
+            <button id="add-row-r">Add Time Slot</button>
+            </div>
+            </div>
+            
+              
+            <div class="col-xs-2">
+            <table id = "f-table" align="center">
+                <tr>
+                    <th>Fri</th>
+                </tr>
+                <tr>
+                    <td><input type="text" size = "8" id="F1-start-time"></td><td> to </td><td><input type="text" size = "8" id="F1-end-time"></td>
+                </tr>
+            </table>
+            <div style="display: flex; align-items: center; justify-content: center">
+            <button id="add-row-f">Add Time Slot</button>
+                </div>
+            </div>
+            </div>
+-->
+            
+
+            <hr/>
+
+     
+            <button id="test-save-time" style = "float: right">Save</button>
+    <div class = "row"> 
+        <div id ="availability" style = "margin-top: 25px" class = "col-xs-9 col-xs-push-1">
+            
+    <table cellpadding="0" style = "float: left;" cellspacing="0"  id="time-table"  width = "15%">
+        <th/>
+        <tr><td><div>8:00 AM</div></td></tr>
+        <tr><td><div>9:00 AM</div></td></tr>
+        <tr><td><div>10:00 AM</div></td></tr>
+        <tr><td><div>11:00 AM</div></td></tr>
+        <tr><td><div>12:00 PM</div></td></tr>
+        <tr><td><div>1:00 PM</div></td></tr>
+        <tr><td><div>2:00 PM</div></td></tr>
+        <tr><td><div>3:00 PM</div></td></tr>
+        <tr><td><div>4:00 PM</div></td></tr>
+        <tr><td><div>5:00 PM</div></td></tr>
+        <tr><td><div>6:00 PM</div></td></tr>
+        <tr><td><div>7:00 PM</div></td></tr>
+        <tr><td><div>8:00 PM</div></td></tr>
+    </table>
+        
+      <table cellpadding="0" cellspacing="0"  style = "float: left" id = "availability-table" width = "85%">
+        <thead>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+        </thead>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "table-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr class = "mid-border">
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+          <td class="selectable"> </td>
+        </tr>
+        <tr>
+          <td class="selectable" style= "border-bottom: 2px solid #c4c4c4"> </td>
+          <td class="selectable" style= "border-bottom: 2px solid #c4c4c4"> </td>
+          <td class="selectable" style= "border-bottom: 2px solid #c4c4c4"> </td>
+          <td class="selectable" style= "border-bottom: 2px solid #c4c4c4"> </td>
+          <td class="selectable" style= "border-bottom: 2px solid #c4c4c4"> </td>
+        </tr>
+         
+            
+      </table>
+            </div>
+           </div>  
+                <br>
+            <div style="margin-top: 20px">
             <button id="test-clear-data">Clear All Courses and Times</button>
-            <br><b>Change Password</b><br>
-            <input type="password" id="test-password" placeholder="password">
-            <button id="test-password-submit">Change</button>
-        </div>
+            </div>
+            
+            
+            <br><br>
+            
+        
+                    
+            
+            
 
-        <div id="test-admin">
-            <button id="test-admin-logout">Logout</button>
-            <br>
-            <button id="test-admin-list">List TAs</button>
-            <br><b>Add / Remove Teaching Assistants</b><br>NOTE: Default password for new accounts is "password"<br>
-            <input type="text" id="test-admin-id" placeholder="Student ID">
-            <button id="test-admin-add">Add</button>
-            <button id="test-admin-remove">Remove</button>
         </div>
-
-        <div id= "query">
+            
+            
+                  <div id= "query">
         <select>
             <option value="Choose a Class">Choose a class</option>
             <option value="COEN 100">COEN 100</option>
@@ -85,98 +845,42 @@
             <button type="button" id="query-search">Search</button>
 
         </div>
-
-        <div id="availableTA">
-              <h2>Available TAs</h2>
-                  <table width="80%" align="center">
-                      <tr style="text-align: center">
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                      </tr>
-
-                      <tr style="text-align: center">
-                        <th>Jack Smith</th>
-                        <td>jsmith@scu.edu</td>
-                        <td>333-333-3333</td>
-                      </tr>
-
-                      <tr style="text-align: center">
-                        <th>John Smith</th>
-                        <td>jsmith1@scu.edu</td>
-                        <td>444-444-4444</td>
-                      </tr>
-
-                      <tr style="text-align: center">
-                        <th>James Smith</th>
-                        <td>jsmith2@scu.edu</td>
-                        <td>555-555-5555</td>
-                      </tr>
-
-                  </table>
-          </div>
-
-          <div id="TAinfo">
-            <input type="text" id="TA info-StudentID" placeholder="StudentID"readonly>
-            <input type="password" id="TA info-password" placeholder="Password">
-            <input type="text" id="TA info-First-Name" placeholder="First-Name">
-            <input type="text" id="TA info-Last-Name" placeholder="Last-Name">
-            <input type="text" id="TA info-Email" placeholder="Email">
-            <input type="text" id="TA info-Phone-Number" placeholder="Phone-Number">
-            <button type="button" id="TA info-save">Save</button>
-
-          <div id="ClassCheckboxList">
-            <input type="checkbox" name="class" value="100"> COEN 100<br>
-            <input type="checkbox" name="class" value="200" checked> COEN 200<br>
-            <input type="checkbox" name="class" value="250"> COEN 250<br>
-            <input type="checkbox" name="class" value="300" checked> COEN 300<br>
-            <input type="submit" value="Submit">
-          </div>
-
+        
+        <div id = "changepassword" style="padding-top: 20px;">
+            <div class = "subtitle2" style="margin-top: 10px;">CHANGE PASSWORD</div>
+            <hr/>
+            <div class = "container enterdata">
+                <table>
+                <tr>
+                    <td>New password: </td>
+                    <td><input type="password" id="test-password" placeholder="password"></td>
+                </tr>
+                <tr>
+                    <td>Repeat password: </td>
+                    <td><input type="password" id="test-password-repeat" placeholder="password"></td>
+                </tr>
+                </table>
+                <button id="test-password-submit" style="margin-top: 15px">Change</button>
+            </div>
+        
+        </div>  
+               
+            </div>
+            
+        <div id="test-admin">
+            <button id="test-admin-logout">Logout</button>
+            <br>
+            <button id="test-admin-list">List TAs</button>
+            <br><b>Add / Remove Teaching Assistants</b><br>NOTE: Default password for new accounts is "password"<br>
+            <input type="text" id="test-admin-id" placeholder="00001234567">
+            <button id="test-admin-add">Add</button>
+            <button id="test-admin-remove">Remove</button>
         </div>
 
-        <div id = "Admin">
-            <div style = "width: 50%">
-                <div style = "width: 50%; float: left">Teaching Assistant ID: <input type="text" id="Admin-studentID" placeholder="W1234567"></div>
-                <div style = "width: 50%; float: right">Temporary Password: <input type="text" id="password"></div>
-                <div><button style = "float: right" type="button" id="submit">Add</button></div>
-            </div>
-            
-        
-          <div id="Current">
-              <h2>Current Teaching Assistants</h2>
-                    <table width="80%" align="center" >
-                       <tr>
-                         <th>Name</th>
-                         <th>Email</th>
-                         <th>Phone</th>
-                      </tr>
-    
-                       <tr style="text-align: center">
-                           <th>Jack Smith</th>
-                           <td>jsmith@scu.edu</td>
-                           <td>333-333-3333</td>
-                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
-                       </tr>
-    
-                       <tr style="text-align: center">
-                           <th>John Smith</th>
-                           <td>jsmith1@scu.edu</td>
-                           <td>444-444-4444</td>
-                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
-                       </tr>
 
-                       <tr style="text-align: center">
-                           <th>James Smith</th>
-                           <td>jsmith2@scu.edu</td>
-                           <td>555-555-5555</td>
-                           <th><div><button type="button" id="admin-delete">Delete</button></div></th>
-                       </tr>
-
-                    </table>
-          </div>
-
-        </div>
-
+        
+    
+</div>
+        </div>
     </body>
 </html>
