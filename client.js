@@ -453,7 +453,7 @@ function queryListUsers()
             var markup = "";
             for(var i = 0; i < data.result.length ; i++)
                 {
-                markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr/>';
+                markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone +'</td></tr></table><hr/>';
                 $('#TA-list').append(markup);
                 }
         }
