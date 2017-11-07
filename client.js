@@ -446,7 +446,7 @@ function queryListUsers()
         var data = JSON.parse(data);
 
         alert(data.length);
-        
+
         if (data.length > 0)
         {
             var markup = "";
@@ -472,6 +472,7 @@ function queryAddUser()
     $.post("server_admin.php", { query: "add-user", id: id }, function(data) {
         alert(data);
     });
+
 }
 
 function queryRemoveUser()
