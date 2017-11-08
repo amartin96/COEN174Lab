@@ -4,7 +4,6 @@ require "helper.php";
 
 function queryListUsers()
 {
-    $data = array();
     $db = connectToDatabase();
     $stmt = $db->stmt_init();
     $stmt->prepare("SELECT fname, lname, email, phone FROM TeachingAssistants");
