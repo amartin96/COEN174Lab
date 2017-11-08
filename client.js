@@ -86,40 +86,40 @@ function populateContactInfo()
 }
 
 function populateCourses()
-{    
+{
     $.post("server.php", { query: "get-courses" }, function(data) {
         var data = JSON.parse(data);
-        
+
         $(".classcheck").each(function() {
-            
+
             var checked = false;
-            
+
             for(var i = 0 ; i < data.result.length ; i++)
             {
                 if ($(this).val() == data.result[i])
                 {
-                    $(this).prop('checked', true); 
+                    $(this).prop('checked', true);
                     checked = true;
                     break;
-                }    
-            } 
+                }
+            }
             if(!checked)
             {
                 $(this).prop('checked', false);
             }
-            
+
         });
-    
+
     });
 }
 
 function populateAvailability(){
     $.post("server.php", { query: "get-availability" }, function(data) {
-    var data = JSON.parse(data);    
+    var data = JSON.parse(data);
     var days = ["M", "T", "W", "R", "F"];
 
 
-        
+
     for(var i = 0 ; i < 5 ; i++)
     {
         var t_hours = "08:00:00";
@@ -127,18 +127,18 @@ function populateAvailability(){
         var t_end = "";
         var highlighted = false;
         var k = i + 1;
-        
+
         $("#availability-table tr td:nth-child(" + k +")").each(function () {
                 if(highlighted == true)
                 {
                     $(this).addClass('highlighted');
-                } 
-                else 
+                }
+                else
                 {
                     $(this).removeClass('highlighted');
                 }
-                
-                
+
+
                 for(var j = 0 ; j < data.result.length ; j++)
                 {
                     if ((data.result[j].day == days[i]) && (data.result[j].t_start == t_hours))
@@ -146,13 +146,13 @@ function populateAvailability(){
                         $(this).addClass('highlighted');
                         highlighted = true;
                         break;
-                    } 
-                    if ((data.result[j].day == days[i]) && (data.result[j].t_end == t_hours)) 
+                    }
+                    if ((data.result[j].day == days[i]) && (data.result[j].t_end == t_hours))
                     {
                         highlighted = false;
                         $(this).removeClass('highlighted');
                     }
-                } 
+                }
             t_hours = add15totime(t_hours);
             var time = t_hours;
             if (Number(time.match(/^(\d+)/)[1]) < 10)
@@ -160,30 +160,30 @@ function populateAvailability(){
                 t_hours = "0" + t_hours;
             }
         });
-        
-        
-        
-        
-        
+
+
+
+
+
     }
-    
+
     var checked = false;
-    
+
     for(var i = 0 ; i < data.result.length ; i++)
     {
         if ($(this).val() == data.result[i])
         {
-            $(this).prop('checked', true); 
+            $(this).prop('checked', true);
             checked = true;
             break;
-        }    
-    } 
+        }
+    }
         if(!checked)
         {
             $(this).prop('checked', false);
         }
 
-    
+
     });
 }
 
@@ -385,12 +385,12 @@ function queryAddCourse()
     $.post("server.php", { query: "clear-courses" }, function(data) {
         alert(data);
     });
-    
+
     $(".classcheck").each(function() {
         var course = $(this).val();
-        
+
         if ($(this).is(":checked"))
-        { 
+        {
             $.post("server.php", { query: "add-course", course: course }, function(data) {
             alert(data);});
         }
@@ -403,7 +403,7 @@ function queryAddTime(){
     $.post("server.php", { query: "clear-availability" }, function(data) {
         alert(data);
     });
-    
+
     var days = ["M", "T", "W", "R", "F"];
 
     for(var i = 0 ; i < 5 ; i++)
@@ -544,11 +544,11 @@ function queryClearData()
     $.post("server.php", { query: "clear-availability" }, function(data) {
         alert(data);
     });
-    
+
     $("#availability-table tr td").each(function () {
         $(this).removeClass('highlighted')
     });
-    
+
 }
 
 function queryChangePassword()
