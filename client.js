@@ -602,6 +602,7 @@ function queryAddUser()
         alert(id);
         if(id > 0){
           alert("ID: " + id + " has been added to the list of qualified TAs");
+          queryListUsers();
 
         }
     });
@@ -617,6 +618,7 @@ function queryRemoveUser()
           alert("ID: " + id + " has been removed from the list of qualified TAs");
           //var element = document.getElementById("test-admin-id");
           //element.index = "";
+          queryListUsers();
         }
     });
 }
