@@ -182,18 +182,9 @@ function queryClearAvailability()
 }
 
 # DEPRECATED
-function queryClearData()
+function queryClearCourses()
 {
     $db = connectToDatabase();
-    $stmt = $db->stmt_init();
-    $stmt->prepare("DELETE FROM AvailableTimes WHERE ta_id = ?");
-    $stmt->bind_param("s", $_SESSION["username"]);
-
-    if (!$stmt->execute()) {
-        echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query 1 in queryClearData"));
-        return;
-    }
-
     $stmt = $db->stmt_init();
     $stmt->prepare("DELETE FROM QualifiedCourses WHERE ta_id = ?");
     $stmt->bind_param("s", $_SESSION["username"]);
@@ -260,8 +251,8 @@ switch ($_POST["query"]) {
     case "add-time":
         queryAddTime();
         break;
-    case "clear-data":
-        queryClearData();
+    case "clear-courses":
+        queryClearCourses();
         break;
     case "change-password":
         queryChangePassword();

@@ -6,7 +6,7 @@ function queryListUsers()
 {
     $db = connectToDatabase();
     $stmt = $db->stmt_init();
-    $stmt->prepare("SELECT fname, lname, email, phone FROM TeachingAssistants");
+    $stmt->prepare("SELECT id, fname, lname, email, phone FROM TeachingAssistants");
 
     if (!$stmt->execute()) {
         echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in queryListUsers"));
@@ -14,9 +14,9 @@ function queryListUsers()
     }
 
     $data = array("status" => SUCCESS, "result" => array());
-    $stmt->bind_result($fname, $lname, $email, $phone);
+    $stmt->bind_result($id, $fname, $lname, $email, $phone);
     while ($stmt->fetch()) {
-        $data["result"][] = array("fname" => $fname, "lname" => $lname, "email" => $email, "phone" => $phone);
+        $data["result"][] = array("id" => $id, "fname" => $fname, "lname" => $lname, "email" => $email, "phone" => $phone);
     }
     echo json_encode($data, JSON_PRETTY_PRINT);
 }
