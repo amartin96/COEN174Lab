@@ -443,7 +443,6 @@ function queryListUsers()
 
         alert(data);
 
-
         var data = JSON.parse(data);
 
         alert(data.result.length);
@@ -473,6 +472,11 @@ function queryAddUser()
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "add-user", id: id }, function(data) {
         alert(data);
+        var data = JSON.parse(data);
+        alert(data.length);
+        if(data.length > 0){
+          alert("ID: " + data + " has been added to the list of qualified TAs");
+        }
     });
 
 }
@@ -502,7 +506,7 @@ function logout()
 //    $("#login").show();
     location.reload();
     document.getElementById('query-form').reset();
-    
+
 }
 
 // this runs when the webpage is finished loading
