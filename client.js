@@ -614,7 +614,8 @@ function queryRemoveUser()
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
-        if(data == 0){
+        var data = JSON.parse(data);
+        if(data === 0){
           alert("ID: " + id + " has been removed from the list of qualified TAs");
           //var element = document.getElementById("test-admin-id");
           //element.index = "";
