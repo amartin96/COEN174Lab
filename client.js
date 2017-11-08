@@ -39,6 +39,7 @@ function login()
             $("#whole-page").show();
             $("#header").show();
             $("#test").show();
+            gotoQuery();
             $.post("server.php", { query: "get-info" }, function(data) {
                 //alert(data);
                 data = JSON.parse(data);
@@ -493,12 +494,15 @@ function logout()
             alert(data.message);
         }
     });
-    $("#test").hide();
-    $("#test-admin").hide();
-    $("#whole-page").hide();
-    $("#header").hide();
-    $("#changepassword").hide();
-    $("#login").show();
+//    $("#test").hide();
+//    $("#test-admin").hide();
+//    $("#whole-page").hide();
+//    $("#header").hide();
+//    $("#changepassword").hide();
+//    $("#login").show();
+    location.reload();
+    document.getElementById('query-form').reset();
+    
 }
 
 // this runs when the webpage is finished loading

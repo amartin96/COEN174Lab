@@ -46,6 +46,48 @@ function queryGetInfo()
     echo json_encode(array("status" => SUCCESS, "result" => $data), JSON_PRETTY_PRINT);
 }
 
+function queryGetAvailability()
+{
+    $db = connectToDatabase();
+    $stmt = $db->stmt_init();
+    $stmt->prepare("SELECT day, t_start, t_end FROM AvailableTimes WHERE ta_id = ?");
+    $stmt->bind_param("s", $_SESSION["username"]);
+
+    if (!$stmt->execute()) {
+        echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in queryGetAvailability"));
+        return;
+    }
+
+    $data = array();
+    $stmt->bind_result($day, $t_start, $t_end);
+    while ($stmt->fetch()) {
+        $data[] = array("day" => $day, "t_start" => $t_start, "t_end" => $t_end);
+    }
+
+    echo json_encode(array("status" => SUCCESS, "result" => $data), JSON_PRETTY_PRINT);
+}
+
+function queryGetCourses()
+{
+    $db = connectToDatabase();
+    $stmt = $db->stmt_init();
+    $stmt->prepare("SELECT course_name FROM QualifiedCourses WHERE ta_id = ?");
+    $stmt->bind_param("s", $_SESSION["username"]);
+
+    if (!$stmt->execute()) {
+        echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in queryGetCourses"));
+        return;
+    }
+
+    $data = array();
+    $stmt->bind_result($course_name);
+    while ($stmt->fetch()) {
+        $data[] = $course_name;
+    }
+
+    echo json_encode(array("status" => SUCCESS, "result" => $data), JSON_PRETTY_PRINT);
+}
+
 function queryModifyInfo()
 {
     if (!isset($_POST["fname"]) || !isset($_POST["lname"]) || !isset($_POST["email"]) || !isset($_POST["phone"])) {
@@ -86,6 +128,25 @@ function queryAddCourse()
     echo json_encode(array("status" => SUCCESS));
 }
 
+function queryDeleteCourse()
+{
+    if (!isset($_POST["course_name"])) {
+        echo json_encode(array("status" => INVALID_ARGS, "message" => "unset course_name"));
+        return;
+    }
+
+    $db = connectToDatabase();
+    $stmt = $db->stmt_init();
+    $stmt->prepare("DELETE FROM QualifiedCourses WHERE ta_id = ? AND course_name = ?");
+    $stmt->bind_param("ss", $_SESSION["username"], $_POST["course_name"]);
+
+    if (!$stmt->execute()) {
+        echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in queryDeleteCourse"));
+        return;
+    }
+    echo json_encode(array("status" => SUCCESS));
+}
+
 function queryAddTime()
 {
     if (!isset($_POST["day"]) || !isset($_POST["t_start"]) || !isset($_POST["t_end"])) {
@@ -106,6 +167,21 @@ function queryAddTime()
     echo json_encode(array("status" => SUCCESS));
 }
 
+function queryClearAvailability()
+{
+    $db = connectToDatabase();
+    $stmt = $db->stmt_init();
+    $stmt->prepare("DELETE FROM AvailableTimes WHERE ta_id = ?");
+    $stmt->bind_param("s", $_SESSION["username"]);
+
+    if (!$stmt->execute()) {
+        echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in queryClearAvailability"));
+        return;
+    }
+    echo json_encode(array("status" => SUCCESS));
+}
+
+# DEPRECATED
 function queryClearData()
 {
     $db = connectToDatabase();
@@ -166,8 +242,20 @@ switch ($_POST["query"]) {
     case "modify-info":
         queryModifyInfo();
         break;
+    case "get-availability":
+        queryGetAvailability();
+        break;
+    case "clear-availability":
+        queryClearAvailability();
+        break;
+    case "get-courses":
+        queryGetCourses();
+        break;
     case "add-course":
         queryAddCourse();
+        break;
+    case "delete-course":
+        queryDeleteCourse();
         break;
     case "add-time":
         queryAddTime();
