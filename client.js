@@ -600,10 +600,9 @@ function queryAddUser()
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "add-user", id: id }, function(data) {
         alert(data);
-        var data = JSON.parse(data);
-        alert(data.length);
-        if(data.length > 0){
-          alert("ID: " + data + " has been added to the list of qualified TAs");
+        alert(id);
+        if(id > 0){
+          alert("ID: " + id + " has been added to the list of qualified TAs");
         }
     });
 
