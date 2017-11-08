@@ -578,6 +578,8 @@ function queryListUsers()
             var markup = "";
             for(var i = 0; i < data.result.length ; i++)
                 {
+                $('#TA-list').remove();
+                $('#TA-list').append();
                 markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].studentid + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone +'</td></tr></table><hr/>';
                 $('#TA-list').append(markup);
                 }
@@ -613,8 +615,8 @@ function queryRemoveUser()
         alert(data);
         if(data == 0){
           alert("ID: " + id + " has been removed from the list of qualified TAs");
-          var element = document.getElementById("test-admin-id");
-          element.index = "";
+          //var element = document.getElementById("test-admin-id");
+          //element.index = "";
         }
     });
 }
