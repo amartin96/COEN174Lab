@@ -573,9 +573,6 @@ function queryListUsers()
 
         var data = JSON.parse(data);
 
-        alert(data.result.length);
-        alert(data);
-
         if (data.result.length > 0)
         {
             var markup = "";
@@ -603,6 +600,7 @@ function queryAddUser()
         alert(id);
         if(id > 0){
           alert("ID: " + id + " has been added to the list of qualified TAs");
+          queryListUsers();
         }
     });
 
@@ -613,6 +611,10 @@ function queryRemoveUser()
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
+        if(data == 0){
+          alert("ID: " + id + " has been removed from the list of qualified TAs");
+          queryListUsers();
+        }
     });
 }
 
