@@ -570,12 +570,12 @@ function queryListUsers()
     $.post("server_admin.php", { query: "list-users" }, function(data) {
 
         alert(data);
+        $("#TA-list").html("");
 
         var data = JSON.parse(data);
 
         if (data.result.length > 0)
         {
-            $("#TA-list").html("");
             var markup = "";
             for(var i = 0; i < data.result.length ; i++)
                 {
