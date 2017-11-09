@@ -86,40 +86,40 @@ function populateContactInfo()
 }
 
 function populateCourses()
-{    
+{
     $.post("server.php", { query: "get-courses" }, function(data) {
         var data = JSON.parse(data);
-        
+
         $(".classcheck").each(function() {
-            
+
             var checked = false;
-            
+
             for(var i = 0 ; i < data.result.length ; i++)
             {
                 if ($(this).val() == data.result[i])
                 {
-                    $(this).prop('checked', true); 
+                    $(this).prop('checked', true);
                     checked = true;
                     break;
-                }    
-            } 
+                }
+            }
             if(!checked)
             {
                 $(this).prop('checked', false);
             }
-            
+
         });
-    
+
     });
 }
 
 function populateAvailability(){
     $.post("server.php", { query: "get-availability" }, function(data) {
-    var data = JSON.parse(data);    
+    var data = JSON.parse(data);
     var days = ["M", "T", "W", "R", "F"];
 
 
-        
+
     for(var i = 0 ; i < 5 ; i++)
     {
         var t_hours = "08:00:00";
@@ -127,18 +127,18 @@ function populateAvailability(){
         var t_end = "";
         var highlighted = false;
         var k = i + 1;
-        
+
         $("#availability-table tr td:nth-child(" + k +")").each(function () {
                 if(highlighted == true)
                 {
                     $(this).addClass('highlighted');
-                } 
-                else 
+                }
+                else
                 {
                     $(this).removeClass('highlighted');
                 }
-                
-                
+
+
                 for(var j = 0 ; j < data.result.length ; j++)
                 {
                     if ((data.result[j].day == days[i]) && (data.result[j].t_start == t_hours))
@@ -146,13 +146,13 @@ function populateAvailability(){
                         $(this).addClass('highlighted');
                         highlighted = true;
                         break;
-                    } 
-                    if ((data.result[j].day == days[i]) && (data.result[j].t_end == t_hours)) 
+                    }
+                    if ((data.result[j].day == days[i]) && (data.result[j].t_end == t_hours))
                     {
                         highlighted = false;
                         $(this).removeClass('highlighted');
                     }
-                } 
+                }
             t_hours = add15totime(t_hours);
             var time = t_hours;
             if (Number(time.match(/^(\d+)/)[1]) < 10)
@@ -160,30 +160,30 @@ function populateAvailability(){
                 t_hours = "0" + t_hours;
             }
         });
-        
-        
-        
-        
-        
+
+
+
+
+
     }
-    
+
     var checked = false;
-    
+
     for(var i = 0 ; i < data.result.length ; i++)
     {
         if ($(this).val() == data.result[i])
         {
-            $(this).prop('checked', true); 
+            $(this).prop('checked', true);
             checked = true;
             break;
-        }    
-    } 
+        }
+    }
         if(!checked)
         {
             $(this).prop('checked', false);
         }
 
-    
+
     });
 }
 
@@ -408,15 +408,13 @@ function queryAddCourse()
 {
     $.post("server.php", { query: "clear-courses" }, function(data) {
     });
-    
+
     var check = SUCCESS;
     
     $(".classcheck").each(function() {
         var course = $(this).val();
-        
-        
         if ($(this).is(":checked"))
-        { 
+        {
             $.post("server.php", { query: "add-course", course: course }, function(data) {
                 var data = JSON.parse(data);
                 check += data.status;
@@ -435,7 +433,7 @@ function queryAddCourse()
 function queryAddTime(){
     $.post("server.php", { query: "clear-availability" }, function(data) {
     });
-    
+
     var days = ["M", "T", "W", "R", "F"];
     var check = SUCCESS;
 
@@ -583,11 +581,11 @@ function queryClearData()
 {
     $.post("server.php", { query: "clear-availability" }, function(data) {
     });
-    
+
     $("#availability-table tr td").each(function () {
         $(this).removeClass('highlighted')
     });
-    
+
 }
 
 function queryChangePassword()
@@ -612,20 +610,18 @@ function queryListUsers()
     $.post("server_admin.php", { query: "list-users" }, function(data) {
 
         alert(data);
-
+        $("#TA-list").html("");
 
         var data = JSON.parse(data);
-
-        alert(data.result.length);
-        alert(data);
 
         if (data.result.length > 0)
         {
             var markup = "";
             for(var i = 0; i < data.result.length ; i++)
                 {
-                markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].studentid + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone +'</td></tr></table><hr/>';
+                markup = '<table id="test-admin-id-' + i + ' " style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].id + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone + '</td> <td><button id="test-admin-remove' + i + ' " >Remove</button></td> </tr></table><hr/>';
                 $('#TA-list').append(markup);
+
                 }
         }
         else
@@ -643,6 +639,12 @@ function queryAddUser()
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "add-user", id: id }, function(data) {
         alert(data);
+        alert(id);
+        if(id > 0){
+          alert("ID: " + id + " has been added to the list of qualified TAs");
+          queryListUsers();
+
+        }
     });
 
 }
@@ -652,6 +654,13 @@ function queryRemoveUser()
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
+        var data = JSON.parse(data);
+        if(data.status == SUCCESS){
+          alert("ID: " + id + " has been removed from the list of qualified TAs");
+          //var element = document.getElementById("test-admin-id");
+          //element.index = "";
+          queryListUsers();
+        }
     });
 }
 
@@ -672,7 +681,7 @@ function logout()
 //    $("#login").show();
     location.reload();
     document.getElementById('query-form').reset();
-    
+
 }
 
 // this runs when the webpage is finished loading
