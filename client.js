@@ -24,7 +24,7 @@ $("#test-admin-remove").click(queryRemoveUser);
 $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
-$("#test-admin-remove-?").click(queryRemoveUser);
+//$("#test-admin-remove-?").click(queryRemoveUser);
 
 
 // login button event handler
