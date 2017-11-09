@@ -239,8 +239,8 @@ function querySearch()
     var t_start = $("#test-t_start").val();
     var t_end = $("#test-t_end").val();
 
-    var t_start_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_start);
-    var t_end_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s([AaPp][Mm]))$/.test(t_end);
+    var t_start_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s?([AaPp][Mm]))$/.test(t_start);
+    var t_end_is_valid = /^((1[0-2]|0?[1-9]):([0-5][0-9])\s?([AaPp][Mm]))$/.test(t_end);
 
     var invalid = false;
 
@@ -268,9 +268,15 @@ function querySearch()
         invalid = true;
     }
 
-    if (!(t_start_is_valid && t_end_is_valid) && !(invalid))
+    if (!(t_start_is_valid) && (t_start != ""))
     {
-        alert("Please enter time in HH:MM AM/PM format");
+        alert('"' + t_start + '" is not a valid time. Make sure to enter time in HH:MM AM/PM format');
+        invalid = true;
+    }
+    
+    if (!(t_end_is_valid) && (t_end != ""))
+    {
+        alert('"' + t_end + '" is not a valid time. Make sure to enter time in HH:MM AM/PM format');
         invalid = true;
     }
 
@@ -284,23 +290,22 @@ function querySearch()
 
 
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
-        alert(data);
         var data = JSON.parse(data);
-        if (data.length > 0)
-        {
-            $("#available-TAs").show();
-            $("#TA-availability-list").html("");
-            var markup = "";
-            for(var i = 0; i < data.length ; i++)
-                {
-                markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr/>';
-                $('#TA-availability-list').append(markup);
-                }
-        }
-        else
-        {
-            alert("No available TAs found");
-        }
+            if (data.length > 0)
+            {
+                $("#available-TAs").show();
+                $("#TA-availability-list").html("");
+                var markup = "";
+                for(var i = 0; i < data.length ; i++)
+                    {
+                    markup = '<table style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data[i].fname + ' ' + data[i].lname +'</td><td style="width:33%;">' + data[i].email +'</td><td style="width:33%;">' + data[i].phone +'</td></tr></table><hr/>';
+                    $('#TA-availability-list').append(markup);
+                    }
+            }
+            else
+            {
+                alert("No available TAs found");
+            }
 
     });
 }
@@ -367,8 +372,8 @@ $("#populate-availability").click(function(){
 
 function saveAllInfo(){
     queryModifyInfo();
-    queryAddCourse();
-    queryAddTime();
+    window.setTimeout(queryAddCourse, 250);
+    window.setTimeout(queryAddTime, 250);
 }
 
 function queryModifyInfo()
@@ -377,36 +382,62 @@ function queryModifyInfo()
     var lname = $("#test-modify-lname").val();
     var email = $("#test-modify-email").val();
     var phone = $("#test-modify-phone").val();
+    
+    var phone_is_valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone);
+    
+    if (!(phone_is_valid) && (phone != ""))
+    {
+        alert("Please enter a valid 10 digit phone number");
+        return;
+    }
+    
+    
+    if (email.toUpperCase().indexOf('@SCU.EDU') <= -1)
+    {
+        alert("Please enter a valid SCU email");
+        return;
+    }
+        
     $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
-        alert(data);
+        var data = JSON.parse(data);
+        if (data.status === SUCCESS) {
+            alert("Contact information saved");
+        }
     });
 }
 
 function queryAddCourse()
 {
     $.post("server.php", { query: "clear-courses" }, function(data) {
-        alert(data);
     });
 
+    var check = SUCCESS;
+    
     $(".classcheck").each(function() {
         var course = $(this).val();
-
         if ($(this).is(":checked"))
         {
             $.post("server.php", { query: "add-course", course: course }, function(data) {
-            alert(data);});
+                var data = JSON.parse(data);
+                check += data.status;
+            });
         }
+        
 
     });
+    
+    if (check === SUCCESS) {
+        alert("Qualified courses saved");
+    }
 }
 
 
 function queryAddTime(){
     $.post("server.php", { query: "clear-availability" }, function(data) {
-        alert(data);
     });
 
     var days = ["M", "T", "W", "R", "F"];
+    var check = SUCCESS;
 
     for(var i = 0 ; i < 5 ; i++)
     {
@@ -416,7 +447,7 @@ function queryAddTime(){
         var t_end = "";
         var highlighted = false;
         var k = i + 1;
-
+        
         $("#availability-table tr td:nth-child(" + k +")").each(function () {
 
             if ($(this).hasClass('highlighted'))
@@ -434,9 +465,10 @@ function queryAddTime(){
                 {
                     highlighted = false;
                     t_end = t_hours;
-                    alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
+//                  alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
                     $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
-                    alert(data);
+                        var data = JSON.parse(data);
+                        check += data.status;                        
                     });
                 }
             }
@@ -448,10 +480,16 @@ function queryAddTime(){
             t_end = t_hours;
             alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
             $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
-            alert(data);
+                var data = JSON.parse(data);
+                check += data.status; 
             });
         }
     }
+    
+    if (check === SUCCESS) {
+        alert("Availability saved");
+    }
+    
 }
 
 function add15totime(str){
@@ -531,7 +569,7 @@ function ConvertTimeformat(str) {
     var time = str;
     var hours = Number(time.match(/^(\d+)/)[1]);
     var minutes = Number(time.match(/:(\d+)/)[1]);
-    var AMPM = time.match(/\s(.*)$/)[1];
+    var AMPM = time.match(/\s?(.*)$/)[1];
     if ((AMPM == "PM" || AMPM == "pm") && hours < 12) hours = hours + 12;
     if ((AMPM == "AM" || AMPM == "am") && hours == 12) hours = hours - 12;
     var sHours = hours.toString();
@@ -544,7 +582,6 @@ function ConvertTimeformat(str) {
 function queryClearData()
 {
     $.post("server.php", { query: "clear-availability" }, function(data) {
-        alert(data);
     });
 
     $("#availability-table tr td").each(function () {
@@ -560,10 +597,13 @@ function queryChangePassword()
     if (password == repeat)
     {
         $.post("server.php", { query: "change-password", password: password }, function(data) {
-        alert(data);
+            var data = JSON.parse(data);
+            if (data.status === SUCCESS) {
+                alert("Password saved successfully");
+            }
         });
     } else{
-        alert("Passwords don't match")
+        alert("Passwords don't match");
     }
 }
 
