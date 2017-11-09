@@ -290,6 +290,7 @@ function querySearch()
 
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         var data = JSON.parse(data);
+        
             if (data.length > 0)
             {
                 $("#available-TAs").show();
@@ -327,48 +328,6 @@ $("#populate-availability").click(function(){
     populateAvailability();
 });
 
-
-//
-//$("#add-row-t").click(function(){
-//
-//    var counter = $('#t-table tr').length;
-//
-//    var markup = '<tr><td><input type="text" size = "8" id="T' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="T' + counter + '-end-time"></td></tr>';
-//
-//    $('#t-table').append(markup);
-//
-//});
-//
-//$("#add-row-w").click(function(){
-//
-//    var counter = $('#w-table tr').length;
-//
-//    var markup = '<tr><td><input type="text" size = "8" id="W' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="W' + counter + '-end-time"></td></tr>';
-//
-//    $('#w-table').append(markup);
-//
-//});
-//
-//$("#add-row-r").click(function(){
-//
-//    var counter = $('#r-table tr').length;
-//
-//    var markup = '<tr><td><input type="text" size = "8" id="R' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="R' + counter + '-end-time"></td></tr>';
-//
-//    $('#r-table').append(markup);
-//
-//});
-//
-//$("#add-row-f").click(function(){
-//
-//    var counter = $('#f-table tr').length;
-//
-//    var markup = '<tr><td><input type="text" size = "8" id="F' + counter + '-start-time"></td><td> to </td><td><input type="text" size = "8" id="F' + counter + '-end-time"></td></tr>';
-//
-//    $('#f-table').append(markup);
-//
-//});
-
 function saveAllInfo(){
     queryModifyInfo();
     window.setTimeout(queryAddCourse, 250);
@@ -382,20 +341,41 @@ function queryModifyInfo()
     var email = $("#test-modify-email").val();
     var phone = $("#test-modify-phone").val();
     
+    var fname_is_valid = /^[a-zA-Z ]+$/.test(fname);
+    var lname_is_valid = /^[a-zA-Z ]+$/.test(lname);
     var phone_is_valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone);
+    
+    var invalid = false;
+    
+    if (!(fname_is_valid) || (fname == ""))
+    {
+        alert("Please enter a valid first name"); 
+        invalid = true;
+    }
+    
+    if (!(lname_is_valid) || (lname == ""))
+    {
+        alert("Please enter a valid last name");
+        invalid = true;
+    }   
     
     if (!(phone_is_valid) && (phone != ""))
     {
         alert("Please enter a valid 10 digit phone number");
-        return;
+        invalid = true;
     }
-    
     
     if (email.toUpperCase().indexOf('@SCU.EDU') <= -1)
     {
         alert("Please enter a valid SCU email");
+        invalid = true;
+    }
+    
+    if(invalid)
+    {
         return;
     }
+      
         
     $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
         var data = JSON.parse(data);
@@ -477,7 +457,7 @@ function queryAddTime(){
         if (highlighted == true)
         {
             t_end = t_hours;
-            alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
+//            alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
             $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                 var data = JSON.parse(data);
                 check += data.status; 
@@ -507,63 +487,6 @@ function add15totime(str){
     return(shours + ":" + sminutes + ":00");
 }
 
-//function queryAddTime()
-//{
-//    for (i = 1; i < $('#m-table tr').length; i++) {
-//        var t_start = $('#M' + i + '-start-time').val();
-//        var t_end = $('#M' + i + '-end-time').val();
-//        if (t_start != "" && t_end != "" )
-//            {
-//        t_start = ConvertTimeformat(t_start);
-//        t_end = ConvertTimeformat(t_end);
-//
-//        $.post("server.php", { query: "add-time", day: "M", t_start: t_start, t_end: t_end }, function(data) {
-//        alert(data);
-//        });
-//            }
-//    }
-//
-//    for (i = 1; i < $('#t-table tr').length; i++) {
-//        var t_start = $('#T' + i + '-start-time').val();
-//        var t_end = $('#T' + i + '-end-time').val();
-//        t_start = ConvertTimeformat(t_start);
-//        t_end = ConvertTimeformat(t_end);
-//        $.post("server.php", { query: "add-time", day: "T", t_start: t_start, t_end: t_end }, function(data) {
-//        alert(data);
-//        });
-//    }
-//
-//    for (i = 1; i < $('#w-table tr').length; i++) {
-//        var t_start = $('#W' + i + '-start-time').val();
-//        var t_end = $('#W' + i + '-end-time').val();
-//        t_start = ConvertTimeformat(t_start);
-//        t_end = ConvertTimeformat(t_end);
-//        $.post("server.php", { query: "add-time", day: "W", t_start: t_start, t_end: t_end }, function(data) {
-//        alert(data);
-//        });
-//    }
-//
-//    for (i = 1; i < $('#r-table tr').length; i++) {
-//        var t_start = $('#R' + i + '-start-time').val();
-//        var t_end = $('#R' + i + '-end-time').val();
-//        t_start = ConvertTimeformat(t_start);
-//        t_end = ConvertTimeformat(t_end);
-//        $.post("server.php", { query: "add-time", day: "R", t_start: t_start, t_end: t_end }, function(data) {
-//        alert(data);
-//        });
-//    }
-//
-//    for (i = 1; i < $('#f-table tr').length; i++) {
-//        var t_start = $('#F' + i + '-start-time').val();
-//        var t_end = $('#F' + i + '-end-time').val();
-//        t_start = ConvertTimeformat(t_start);
-//        t_end = ConvertTimeformat(t_end);
-//        $.post("server.php", { query: "add-time", day: "F", t_start: t_start, t_end: t_end }, function(data) {
-//        alert(data);
-//        });
-//    }
-//}
-//
 function ConvertTimeformat(str) {
     var time = str;
     var hours = Number(time.match(/^(\d+)/)[1]);

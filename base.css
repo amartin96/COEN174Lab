@@ -169,13 +169,15 @@ div.icon {
     color: #333;
 }
 
+#main-content button:focus{
+    outline:0;
+}
+
 #main-content button:hover{
     background-color: #f6f6f6;
 }
 
-.btn:hover {
-    background-color: #0168b5;
-} 
+
 
 #login-submit, #login-admin-submit{
     background-color: #035EA2; 
@@ -189,6 +191,10 @@ div.icon {
 #login-submit:hover, #login-admin-submit:hover{
     background-color: #0168b5;
     font-size: 15px;
+}
+
+#login-submit:focus, #login-admin-submit:focus{
+    outline: 0;
 }
 
 div#main-content{
