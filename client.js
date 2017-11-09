@@ -610,6 +610,8 @@ function queryAddUser()
 
 }
 
+
+
 function queryRemoveUser()
 {
     var id = $("#test-admin-id-?").val();
@@ -623,7 +625,7 @@ function queryRemoveUser()
           queryListUsers();
         }
     });
-}
+
 //
 //     $.post("server_admin.php", { query: "list-users" }, function(data) {
 //
