@@ -624,6 +624,7 @@ function queryRemoveUser()
           queryListUsers();
         }
     });
+}
 //
 //     $.post("server_admin.php", { query: "list-users" }, function(data) {
 //
