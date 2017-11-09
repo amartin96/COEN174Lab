@@ -614,7 +614,7 @@ function queryAddUser()
 
 function queryRemoveUser()
 {
-    var id = $("#test-admin-id-?").val();
+    var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
         var data = JSON.parse(data);
@@ -625,7 +625,7 @@ function queryRemoveUser()
           queryListUsers();
         }
     });
-
+}
 //
 //     $.post("server_admin.php", { query: "list-users" }, function(data) {
 //
