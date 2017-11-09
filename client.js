@@ -10,7 +10,7 @@ $("#test-checkstatus").click(checkstatus);
 $("#test-submit").click(querySearch);
 $("#save-all").click(saveAllInfo);
 $("#test-modify-submit").click(queryModifyInfo);
-$("#add-course-submit").click(queryAddCourse);
+$("#add-course-submit").click(queryAddCourses);
 $("#test-save-time").click(queryAddTime);
 $("#go-to-admin-login").click(gotoAdminLogin);
 $("#go-to-ta-login").click(gotoTALogin);
@@ -331,7 +331,7 @@ $("#populate-availability").click(function(){
 
 function saveAllInfo(){
     queryModifyInfo();
-    window.setTimeout(queryAddCourse, 250);
+    window.setTimeout(queryAddCourses, 250);
     window.setTimeout(queryAddTime, 250);
 }
 
@@ -377,25 +377,72 @@ function queryModifyInfo()
         return;
     }
 
-    $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
-        var data = JSON.parse(data);
-        if (data.status === SUCCESS) {
-            alert("Contact information saved");
-        }
-    });
+    
+    $.ajax({
+        type: "POST",
+        url: "server.php",
+        data: { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone },
+        success: function(data) {
+            var data = JSON.parse(data);
+            if (data.status === SUCCESS) {
+                alert("Contact information saved");
+            }
+        },
+        async:false
+    }); 
+    
+//    $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
+//        var data = JSON.parse(data);
+//        if (data.status === SUCCESS) {
+//            alert("Contact information saved");
+//        }
+//    });
+
 }
 
-function queryAddCourse()
-{
-    $.post("server.php", { query: "clear-courses" }, function(data) {
-    });
+//function queryAddCourses()
+//{
+//    clear_courses(function() {
+//          queryPostCourses();
+//        });
+//}
 
+//function clear_courses(callback){
+//    $.post("server.php", { query: "clear-courses" }, function(data) {
+//    });
+//    callback();
+//}
+
+
+function queryAddCourses()
+{ 
+    $.ajax({
+        type: "POST",
+        url: "server.php",
+        data: { query: "clear-courses" },
+        success: function(data) { },
+        async:false
+    });
+    
     var check = SUCCESS;
 
     $(".classcheck").each(function() {
         var course = $(this).val();
         if ($(this).is(":checked"))
         {
+          
+//        $.ajax({
+//            type: "POST",
+//            url: "server.php",
+//            data: { query: "add-course", course: course },
+//            success: function(data) {
+//                var data = JSON.parse(data);
+//                check += data.status;
+//            },
+//            async:false
+//        });
+            
+            
             $.post("server.php", { query: "add-course", course: course }, function(data) {
                 var data = JSON.parse(data);
                 check += data.status;
@@ -411,9 +458,30 @@ function queryAddCourse()
 }
 
 
+//function queryAddTime() {
+//    clear_availability(function() {
+//          queryPostAvailability();
+//        });
+//}
+//
+//function clear_availability(callback){
+//    $.post("server.php", { query: "clear-availability" }, function(data) {
+//    });
+//    callback();
+//}
+
+
 function queryAddTime(){
-    $.post("server.php", { query: "clear-availability" }, function(data) {
+    
+    $.ajax({
+        type: "POST",
+        url: "server.php",
+        data: { query: "clear-availability" },
+        success: function(data) {},
+        async:false
     });
+    
+    
 
     var days = ["M", "T", "W", "R", "F"];
     var check = SUCCESS;
@@ -445,6 +513,19 @@ function queryAddTime(){
                     highlighted = false;
                     t_end = t_hours;
 //                  alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
+                    
+//                        $.ajax({
+//                            type: "POST",
+//                            url: "server.php",
+//                            data: { query: "add-time", day: days[i], t_start: t_start, t_end: t_end },
+//                            success: function(data) {
+//                                var data = JSON.parse(data);
+//                                check += data.status;
+//                            },
+//                            async:false
+//                            });
+                    
+                    
                     $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                         var data = JSON.parse(data);
                         check += data.status;
@@ -458,10 +539,21 @@ function queryAddTime(){
         {
             t_end = t_hours;
 //            alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
-            $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
-                var data = JSON.parse(data);
-                check += data.status;
-            });
+//                        $.ajax({
+//                            type: "POST",
+//                            url: "server.php",
+//                            data: { query: "add-time", day: days[i], t_start: t_start, t_end: t_end },
+//                            success: function(data) {
+//                                var data = JSON.parse(data);
+//                                check += data.status;
+//                            },
+//                            async:false
+//                            });
+            
+                                $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
+                        var data = JSON.parse(data);
+                        check += data.status;
+                    });
         }
     }
 
