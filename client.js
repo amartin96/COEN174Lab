@@ -25,6 +25,8 @@ $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
 
+$("#test-admin-remove-?").click(queryRemoveUser);
+
 
 // login button event handler
 function login()
@@ -579,7 +581,7 @@ function queryListUsers()
             var markup = "";
             for(var i = 0; i < data.result.length ; i++)
                 {
-                markup = '<table id="test-admin-id-' + i + ' " style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].id + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone + '</td> <td><button id="test-admin-remove' + i + ' " >Remove</button></td> </tr></table><hr/>';
+                markup = '<table id="test-admin-id-' + i + ' " style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].id + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone + '</td> <td><button id="test-admin-remove-' + i + ' " >Remove</button></td> </tr></table><hr/>';
                 $('#TA-list').append(markup);
 
                 }
@@ -611,7 +613,7 @@ function queryAddUser()
 
 function queryRemoveUser()
 {
-    var id = $("#test-admin-id").val();
+    var id = $("#test-admin-id-?").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
         var data = JSON.parse(data);
@@ -622,6 +624,27 @@ function queryRemoveUser()
           queryListUsers();
         }
     });
+//
+//     $.post("server_admin.php", { query: "list-users" }, function(data) {
+//
+//         alert(data);
+//         $("#TA-list").html("");
+//
+//         var data = JSON.parse(data);
+//
+//         if (data.result.length > 0)
+//         {
+//             var markup = "";
+//             for(var i = 0; i < data.result.length ; i++)
+//                 {
+//                   if(data.result[i].id == id){
+//                     queryRemoveUser
+//                   }
+//                 markup = '<table id="test-admin-id-' + i + ' " style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].id + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone + '</td> <td><button id="test-admin-remove-' + i + ' " >Remove</button></td> </tr></table><hr/>';
+//                 $('#TA-list').append(markup);
+//
+//                 }
+//         }
 }
 
 // logout button event handler
