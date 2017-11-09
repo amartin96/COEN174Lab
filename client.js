@@ -25,6 +25,7 @@ $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
 //$("#test-admin-remove-?").click(queryRemoveUser);
+$("button[id*='test-admin-remove-']").click(queryRemoveUser);
 
 
 // login button event handler
@@ -272,7 +273,7 @@ function querySearch()
         alert('"' + t_start + '" is not a valid time. Make sure to enter time in HH:MM AM/PM format');
         invalid = true;
     }
-    
+
     if (!(t_end_is_valid) && (t_end != ""))
     {
         alert('"' + t_end + '" is not a valid time. Make sure to enter time in HH:MM AM/PM format');
@@ -363,8 +364,8 @@ function queryModifyInfo()
     {
         alert("Please enter a valid 10 digit phone number");
         invalid = true;
-    }
-    
+    }    
+
     if (email.toUpperCase().indexOf('@SCU.EDU') <= -1)
     {
         alert("Please enter a valid SCU email");
@@ -375,8 +376,7 @@ function queryModifyInfo()
     {
         return;
     }
-      
-        
+
     $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
         var data = JSON.parse(data);
         if (data.status === SUCCESS) {
@@ -391,7 +391,7 @@ function queryAddCourse()
     });
 
     var check = SUCCESS;
-    
+
     $(".classcheck").each(function() {
         var course = $(this).val();
         if ($(this).is(":checked"))
@@ -401,10 +401,10 @@ function queryAddCourse()
                 check += data.status;
             });
         }
-        
+
 
     });
-    
+
     if (check === SUCCESS) {
         alert("Qualified courses saved");
     }
@@ -426,7 +426,7 @@ function queryAddTime(){
         var t_end = "";
         var highlighted = false;
         var k = i + 1;
-        
+
         $("#availability-table tr td:nth-child(" + k +")").each(function () {
 
             if ($(this).hasClass('highlighted'))
@@ -447,7 +447,7 @@ function queryAddTime(){
 //                  alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
                     $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                         var data = JSON.parse(data);
-                        check += data.status;                        
+                        check += data.status;
                     });
                 }
             }
@@ -460,15 +460,15 @@ function queryAddTime(){
 //            alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
             $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                 var data = JSON.parse(data);
-                check += data.status; 
+                check += data.status;
             });
         }
     }
-    
+
     if (check === SUCCESS) {
         alert("Availability saved");
     }
-    
+
 }
 
 function add15totime(str){
@@ -549,7 +549,7 @@ function queryListUsers()
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td><button id=\"test-admin-remove-' + i + ' \" >Remove</button></td>';
+                  markup += '<td><button type=\"button\" id=\"test-admin-remove-' + i + ' \" >Remove</button></td>';
                   markup += '</tr>';
                   markup += '</table>';
                   $('#TA-list').append(markup);
