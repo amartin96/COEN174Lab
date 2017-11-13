@@ -710,7 +710,7 @@ function queryRemoveUser()
 //
 //                 }
 //         }
-}
+//}
 
 // logout button event handler
 function logout()
