@@ -651,7 +651,7 @@ function queryListUsers()
         {
             alert("No TAs found");
         }
-
+        alert(document.getElementById("test-admin-id").value);
 
     });
 
@@ -673,8 +673,9 @@ function queryAddUser()
 }
 
 function queryRemoveUserPre(idT){
-    var id1 = document.getElementById(idT);
+    var id1 = document.getElementById(idT).value;
     document.getElementById("test-admin-id").value = id1;
+    alert(document.getElementById("test-admin-id").value);
     queryRemoveUser();
 
 }
