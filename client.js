@@ -61,7 +61,8 @@ function loginAdmin()
             //alert("login successful");
             $("#admin-login").hide();
             $("#whole-page").show();
-            $("#test-admin").show();
+            $("#admin-header").show();
+            $("#admin-main").show();
             queryListUsers();
         } else {
             alert("login failed");
@@ -637,11 +638,11 @@ function queryListUsers()
                 {
                   markup = '<table style=\"width:100%; margin-top: 15px; margin-bottom: 20px\">';
                   markup += '<tr>';
-                  markup += '<td id=\"' + data.result[i].id + '\" style=\"width:33%;\">' + data.result[i].id + '</td>';
-                  markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
-                  markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
-                  markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td <button id=\"' + data.result[i].id + '\" style="margin-top: 15px" onclick="javascript:queryRemoveUserPre(' + data.result[i].id + ');"> Remove </button> </td>';
+                  markup += '<td id=\"' + data.result[i].id + '\" style=\"width:20%;\">' + data.result[i].id + '</td>';
+                  markup += '<td style=\"width:20%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
+                  markup += '<td style=\"width:20%;\">' + data.result[i].email +'</td>';
+                  markup += '<td style=\"width:20%;\">' + data.result[i].phone + '</td>';
+                  markup += '<td \" style=\"width:20%;\"> <button id=\"' + data.result[i].id + '\" style="margin-top: 15px; float: right" onclick="javascript:queryRemoveUserPre(' + data.result[i].id + ');"> Remove </button> </td>';
                   markup += '</tr>';
                   markup += '</table>';
                   $('#TA-list').append(markup);
@@ -742,7 +743,7 @@ function logout()
 $(function() {
     // hide all divs other than login
     $("#test").hide();
-    $("#test-admin").hide();
+    $("#admin-main").hide();
     $("#query").hide();
     $("#availableTA").hide();
     $("#TAinfo").hide();

@@ -29,7 +29,7 @@ a{
     cursor: pointer;
 }
 
-div#main-content{
+div#main-content div#admin-main{
     min-height: 100vh;
 }
 
@@ -125,7 +125,7 @@ div.login-field input{
 }
 
 
-#main-content input[type ="text"], #main-content input[type ="password"], #main-content select {
+#main-content input[type ="text"], #admin-main input[type ="text"], #main-content input[type ="password"], #admin-main input[type ="password"], #main-content select, #admin-main select {
     color: #444;
     font-size: 13px;
     font-weight: 400;
@@ -153,7 +153,7 @@ div.icon {
     top: calc(50% - 10px); /* 50% - 3/4 of icon height */
 }
 
-#main-content button{
+#main-content button #admin-main button{
     background-color: #eee;
     border: 1px solid #aaa; 
     font-size: 14px;
@@ -163,11 +163,11 @@ div.icon {
     color: #333;
 }
 
-#main-content button:focus{
+#main-content button:focus #admin-main button:focus{
     outline:0;
 }
 
-#main-content button:hover{
+#main-content button:hover #admin-main button:hover{
     background-color: #f6f6f6;
 }
 
@@ -191,7 +191,7 @@ div.icon {
     outline: 0;
 }
 
-div#main-content{
+div#main-content div#admin-main{
     background-color: #ffffff;
     border-radius: 5px;
 }
