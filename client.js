@@ -629,7 +629,7 @@ function queryListUsers()
         $("#TA-list").html("");
 
         var data = JSON.parse(data);
-
+        alert(data.result.length);
         if (data.result.length > 0)
         {
             var markup = "";
