@@ -39,6 +39,7 @@ function login()
             //alert("login successful");
             $("#login").hide();
             $("#whole-page").show();
+            $("#main-content").show();
             $("#header").show();
             $("#test").show();
             gotoQuery();
@@ -636,15 +637,42 @@ function queryListUsers()
             var markup = "";
             for(var i = 0; i < data.result.length ; i++)
                 {
+                     
+                  var fname = data.result[i].fname;
+                  var lname = data.result[i].lname;
+                  var email = data.result[i].email;
+                  var phone = data.result[i].phone;
+                  
+                  if (fname == null)
+                  {
+                    fname = "First";        
+                  }
+                                    
+                    
+                  if (lname == null)
+                  {
+                    lname = "Last";        
+                  }
+                
+                  if (email == null)
+                  {
+                    email = "Email";        
+                  }
+                
+                  if (phone == null)
+                  {
+                    phone = "Phone";        
+                  }
+                
                   markup = '<table style=\"width:100%; margin-top: 15px; margin-bottom: 20px\">';
                   markup += '<tr>';
-                  markup += '<td id=\"' + data.result[i].id + '\" style=\"width:20%;\">' + data.result[i].id + '</td>';
-                  markup += '<td style=\"width:20%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
-                  markup += '<td style=\"width:20%;\">' + data.result[i].email +'</td>';
-                  markup += '<td style=\"width:20%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td \" style=\"width:20%;\"> <button id=\"' + data.result[i].id + '\" style="margin-top: 15px; float: right" onclick="javascript:queryRemoveUserPre(' + data.result[i].id + ');"> Remove </button> </td>';
+                  markup += '<td style=\"text-align: left; width:10%;\"><div class="TA-id">' + data.result[i].id + '</div></td>';
+                  markup += '<td style=\"width:20%;\">' + fname + ' ' + lname + '</td>';
+                  markup += '<td style=\"width:27.5%;\">' + email +'</td>';
+                  markup += '<td style=\"width:27.5%;\">' + phone + '</td>';
+                  markup += '<td \" style=\"width:15%;\"> <button class ="remove-ta" id=\"' + data.result[i].id + '\" style="margin-top: 15px; float: right" onclick="javascript:queryRemoveUserPre(' + data.result[i].id + ');"> Remove </button> </td>';
                   markup += '</tr>';
-                  markup += '</table>';
+                  markup += '</table><hr/>';
                   $('#TA-list').append(markup);
                 }
         }
@@ -744,6 +772,8 @@ $(function() {
     // hide all divs other than login
     $("#test").hide();
     $("#admin-main").hide();
+    $("#admin-header").hide();
+    $("#main-content").hide();
     $("#query").hide();
     $("#availableTA").hide();
     $("#TAinfo").hide();
