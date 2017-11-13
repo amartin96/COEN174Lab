@@ -641,7 +641,7 @@ function queryListUsers()
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td <input type="button" onclick="queryRemoveUser2(' + data.result[i].id + ')"> Remove </td>';
+                  markup += '<td <button id=\"' + data.result[i].id + '\" style="margin-top: 15px" onClick="queryRemoveUser2(' + data.result[i].id + ');"> Remove </button> </td>';
                   markup += '</tr>';
                   markup += '</table>';
                   $('#TA-list').append(markup);
