@@ -674,16 +674,16 @@ function queryAddUser()
 
 function queryRemoveUserPre(idT){
     //var id1 = document.getElementById(idT).value;
-    document.getElementById("test-admin-id2").value = idT;
+    document.getElementById("test-admin-id").value = idT;
     alert(idT);
-    alert(document.getElementById("test-admin-id2").value);
+    alert(document.getElementById("test-admin-id").value);
     queryRemoveUser();
 
 }
 
 function queryRemoveUser()
 {
-    var id = $("#test-admin-id2").val();
+    var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
         var data = JSON.parse(data);
