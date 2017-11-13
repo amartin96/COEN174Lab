@@ -637,11 +637,11 @@ function queryListUsers()
                 {
                   markup = '<table style=\"width:100%; margin-top: 15px; margin-bottom: 20px\">';
                   markup += '<tr>';
-                  markup += '<td id=\"test-admin-id\" style=\"width:33%;\">' + data.result[i].id + '</td>';
+                  markup += '<td id=\"' + data.result[i].id + '\" style=\"width:33%;\">' + data.result[i].id + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td><button id=\"test-admin-remove\" >Remove</button></td>';
+                  markup += '<td <input type="button" value="Remove child1" onClick="queryRemoveUser2(' + data.result[i].id + ');"> </td>';
                   markup += '</tr>';
                   markup += '</table>';
                   $('#TA-list').append(markup);
@@ -673,11 +673,16 @@ function queryAddUser()
 
 }
 
+function queryRemoveUserPre(id){
+    var id1 = document.getElementById(id);
+    document.getElementById("test-admin-id").value = id1;
+    queryRemoveUser();
 
+}
 
 function queryRemoveUser()
 {
-    var id = $(id*='test-admin-remove-').val();
+    var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
         var data = JSON.parse(data);
