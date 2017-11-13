@@ -641,7 +641,7 @@ function queryListUsers()
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td><button type=\"button\" id=\"test-admin-remove\" >Remove</button></td>';
+                  markup += '<td><button class=\"button\" id=\"+'i'+\" >Remove</button></td>';
                   markup += '</tr>';
                   markup += '</table>';
                   $('#TA-list').append(markup);
@@ -677,7 +677,7 @@ function queryAddUser()
 
 function queryRemoveUser()
 {
-    var id = $("#test-admin-id").val();
+    var id = $(id*='test-admin-remove-').val();
     $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
         alert(data);
         var data = JSON.parse(data);
