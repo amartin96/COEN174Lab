@@ -672,8 +672,8 @@ function queryAddUser()
 
 }
 
-function queryRemoveUserPre(id){
-    var id1 = document.getElementById(id);
+function queryRemoveUserPre(idT){
+    var id1 = document.getElementById(idT);
     document.getElementById("test-admin-id").value = id1;
     queryRemoveUser();
 
