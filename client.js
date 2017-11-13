@@ -637,7 +637,7 @@ function queryListUsers()
                 {
                   markup = '<table style=\"width:100%; margin-top: 15px; margin-bottom: 20px\">';
                   markup += '<tr>';
-                  markup += '<td id=\"test-admin-id' + i + ' \" style=\"width:33%;\">' + data.result[i].id + '</td>';
+                  markup += '<td id=\"test-admin-id\" style=\"width:33%;\">' + data.result[i].id + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
