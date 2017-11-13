@@ -25,7 +25,7 @@ $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
 //$("#test-admin-remove-?").click(queryRemoveUser);
-$("button[id*='test-admin-remove-']").click(queryRemoveUser);
+//$("button[id*='test-admin-remove-']").click(queryRemoveUser);
 
 
 // login button event handler
@@ -291,7 +291,7 @@ function querySearch()
 
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         var data = JSON.parse(data);
-        
+
             if (data.length > 0)
             {
                 $("#available-TAs").show();
@@ -341,43 +341,43 @@ function queryModifyInfo()
     var lname = $("#test-modify-lname").val();
     var email = $("#test-modify-email").val();
     var phone = $("#test-modify-phone").val();
-    
+
     var fname_is_valid = /^[a-zA-Z ]+$/.test(fname);
     var lname_is_valid = /^[a-zA-Z ]+$/.test(lname);
     var phone_is_valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(phone);
-    
+
     var invalid = false;
-    
+
     if (!(fname_is_valid) || (fname == ""))
     {
-        alert("Please enter a valid first name"); 
+        alert("Please enter a valid first name");
         invalid = true;
     }
-    
+
     if (!(lname_is_valid) || (lname == ""))
     {
         alert("Please enter a valid last name");
         invalid = true;
-    }   
-    
+    }
+
     if (!(phone_is_valid) && (phone != ""))
     {
         alert("Please enter a valid 10 digit phone number");
         invalid = true;
-    }    
+    }
 
     if (email.toUpperCase().indexOf('@SCU.EDU') <= -1)
     {
         alert("Please enter a valid SCU email");
         invalid = true;
     }
-    
+
     if(invalid)
     {
         return;
     }
 
-    
+
     $.ajax({
         type: "POST",
         url: "server.php",
@@ -389,8 +389,8 @@ function queryModifyInfo()
             }
         },
         async:false
-    }); 
-    
+    });
+
 //    $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
 //        var data = JSON.parse(data);
 //        if (data.status === SUCCESS) {
@@ -415,7 +415,7 @@ function queryModifyInfo()
 
 
 function queryAddCourses()
-{ 
+{
     $.ajax({
         type: "POST",
         url: "server.php",
@@ -423,14 +423,14 @@ function queryAddCourses()
         success: function(data) { },
         async:false
     });
-    
+
     var check = SUCCESS;
 
     $(".classcheck").each(function() {
         var course = $(this).val();
         if ($(this).is(":checked"))
         {
-          
+
 //        $.ajax({
 //            type: "POST",
 //            url: "server.php",
@@ -441,8 +441,8 @@ function queryAddCourses()
 //            },
 //            async:false
 //        });
-            
-            
+
+
             $.post("server.php", { query: "add-course", course: course }, function(data) {
                 var data = JSON.parse(data);
                 check += data.status;
@@ -472,7 +472,7 @@ function queryAddCourses()
 
 
 function queryAddTime(){
-    
+
     $.ajax({
         type: "POST",
         url: "server.php",
@@ -480,8 +480,8 @@ function queryAddTime(){
         success: function(data) {},
         async:false
     });
-    
-    
+
+
 
     var days = ["M", "T", "W", "R", "F"];
     var check = SUCCESS;
@@ -513,7 +513,7 @@ function queryAddTime(){
                     highlighted = false;
                     t_end = t_hours;
 //                  alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
-                    
+
 //                        $.ajax({
 //                            type: "POST",
 //                            url: "server.php",
@@ -524,8 +524,8 @@ function queryAddTime(){
 //                            },
 //                            async:false
 //                            });
-                    
-                    
+
+
                     $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                         var data = JSON.parse(data);
                         check += data.status;
@@ -549,7 +549,7 @@ function queryAddTime(){
 //                            },
 //                            async:false
 //                            });
-            
+
                                 $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                         var data = JSON.parse(data);
                         check += data.status;
@@ -641,11 +641,12 @@ function queryListUsers()
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  markup += '<td><button type=\"button\" id=\"test-admin-remove-' + i + ' \" >Remove</button></td>';
+                  //markup += '<td><button type=\"button\" id=\"test-admin-remove-' + i + ' \" >Remove</button></td>';
+                  markup += '<td><button type=\"button\" id=\"test-admin-remove\" >Remove</button></td>';
                   markup += '</tr>';
                   markup += '</table>';
                   $('#TA-list').append(markup);
-
+                  alert(i);
                 }
         }
         else
