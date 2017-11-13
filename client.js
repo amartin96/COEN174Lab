@@ -641,7 +641,6 @@ function queryListUsers()
                   markup += '<td style=\"width:33%;\">' + data.result[i].fname + ' ' + data.result[i].lname + '</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].email +'</td>';
                   markup += '<td style=\"width:33%;\">' + data.result[i].phone + '</td>';
-                  //markup += '<td><button type=\"button\" id=\"test-admin-remove-' + i + ' \" >Remove</button></td>';
                   markup += '<td><button type=\"button\" id=\"test-admin-remove\" >Remove</button></td>';
                   markup += '</tr>';
                   markup += '</table>';
