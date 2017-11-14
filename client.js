@@ -19,6 +19,7 @@ $("#go-to-query").click(gotoQuery);
 $("#test-clear-data").click(queryClearData);
 $("#test-password-submit").click(queryChangePassword);
 $("#test-admin-list").click(queryListUsers);
+$("#TA-list-clear").click(ClearUsers);
 $("#test-admin-add").click(queryAddUser);
 $("#test-admin-remove").click(queryRemoveUser);
 $("#test-admin-logout").click(logout);
@@ -47,7 +48,7 @@ function login()
             populateCourses();
             populateAvailability();
         } else {
-            alert("login failed, status: " + data.status);
+            alert("Incorrect User ID or Password");
         }
     });
 }
@@ -66,7 +67,7 @@ function loginAdmin()
             $("#admin-main").show();
             queryListUsers();
         } else {
-            alert("login failed");
+            alert("Incorrect Username or Password");
         }
     });
 }
@@ -289,7 +290,6 @@ function querySearch()
 
     t_start = ConvertTimeformat(t_start);
     t_end = ConvertTimeformat(t_end);
-
 
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         var data = JSON.parse(data);
@@ -585,7 +585,7 @@ function ConvertTimeformat(str) {
     var time = str;
     var hours = Number(time.match(/^(\d+)/)[1]);
     var minutes = Number(time.match(/:(\d+)/)[1]);
-    var AMPM = time.match(/\s?(.*)$/)[1];
+    var AMPM = time.match(/\s(.*)$/)[1];
     if ((AMPM == "PM" || AMPM == "pm") && hours < 12) hours = hours + 12;
     if ((AMPM == "AM" || AMPM == "am") && hours == 12) hours = hours - 12;
     var sHours = hours.toString();
@@ -627,11 +627,9 @@ function queryListUsers()
 {
     $.post("server_admin.php", { query: "list-users" }, function(data) {
 
-        alert(data);
         $("#TA-list").html("");
 
         var data = JSON.parse(data);
-        alert(data.result.length);
         if (data.result.length > 0)
         {
             var markup = "";
@@ -646,8 +644,7 @@ function queryListUsers()
                   if (fname == null)
                   {
                     fname = "First";        
-                  }
-                                    
+                  }                   
                     
                   if (lname == null)
                   {
@@ -667,21 +664,15 @@ function queryListUsers()
                   markup = '<table style=\"width:100%; margin-top: 15px; margin-bottom: 20px\">';
                   markup += '<tr>';
                   markup += '<td style=\"text-align: left; width:10%;\"><div class="TA-id">' + data.result[i].id + '</div></td>';
-                  markup += '<td style=\"width:20%;\">' + fname + ' ' + lname + '</td>';
-                  markup += '<td style=\"width:27.5%;\">' + email +'</td>';
-                  markup += '<td style=\"width:27.5%;\">' + phone + '</td>';
-                  markup += '<td \" style=\"width:15%;\"> <button class ="remove-ta" id=\"' + data.result[i].id + '\" style="margin-top: 15px; float: right" onclick="javascript:queryRemoveUserPre(' + data.result[i].id + ');"> Remove </button> </td>';
+                  markup += '<td style=\"width:22%;\">' + fname + ' ' + lname + '</td>';
+                  markup += '<td style=\"width:26%;\">' + email +'</td>';
+                  markup += '<td style=\"width:27%;\">' + phone + '</td>';
+                  markup += '<td \" style=\"width:15%;\"><button class ="remove-ta" id=\"' + data.result[i].id + '\" style="margin-top: 15px; float: right" onclick="javascript:queryRemoveUser(' + data.result[i].id + ');">Delete</button> </td>';
                   markup += '</tr>';
                   markup += '</table><hr/>';
                   $('#TA-list').append(markup);
                 }
         }
-        else
-        {
-            alert("No TAs found");
-        }
-        alert(document.getElementById("test-admin-id").value);
-
     });
 
 }
@@ -690,39 +681,69 @@ function queryAddUser()
 {
     var id = $("#test-admin-id").val();
     $.post("server_admin.php", { query: "add-user", id: id }, function(data) {
-        alert(data);
-        alert(id);
-        if(id > 0){
-          alert("ID: " + id + " has been added to the list of qualified TAs");
-          queryListUsers();
-
-        }
-    });
-
-}
-
-function queryRemoveUserPre(idT){
-    //var id1 = document.getElementById(idT).value;
-    document.getElementById("test-admin-id").value = idT;
-    alert(idT);
-    alert(document.getElementById("test-admin-id").value);
-    queryRemoveUser();
-
-}
-
-function queryRemoveUser()
-{
-    var id = $("#test-admin-id").val();
-    $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
-        alert(data);
+        
         var data = JSON.parse(data);
+        
         if(data.status == SUCCESS){
-          alert("ID: " + id + " has been removed from the list of qualified TAs");
-          //var element = document.getElementById("test-admin-id");
-          //element.index = "";
+        
+          alert("Student ID " + id + " has been added to the list of qualified TAs");
           queryListUsers();
         }
+        else if (data.status == SERVER_ERROR)
+        {
+           alert("ID " + id + " has already been added");
+        }
     });
+}
+
+
+//function queryRemoveUserPre(idT){
+//    //var id1 = document.getElementById(idT).value;
+//    document.getElementById("test-admin-id").value = idT;
+//    queryRemoveUser();
+//
+//}
+
+function queryRemoveUser(id)
+{
+    if (confirm("Are you sure you want to remove ID " + id + "?") == true) 
+    {
+        $.post("server_admin.php", { query: "remove-user", id: id }, function(data) {
+            var data = JSON.parse(data);
+            if(data.status == SUCCESS){
+              alert("ID: " + id + " has been removed from the list of qualified TAs");
+              //var element = document.getElementById("test-admin-id");
+              //element.index = "";
+              queryListUsers();
+            }
+        });
+    }
+}
+
+function ClearUsers()
+{
+    if (confirm("Are you sure you want to clear TA list?") == true) 
+    {
+        $("#TA-list").html("");
+        $.post("server_admin.php", { query: "list-users" }, function(data) {
+            var data = JSON.parse(data);
+            for(var i = 0; i < data.result.length ; i++)
+                {
+    //               $.post("server_admin.php", { query: "remove-user", id: data.result[i].id }, function(data) {
+    //               }); 
+
+                    $.ajax({
+                        type: "POST",
+                        url: "server_admin.php",
+                        data: { query: "remove-user", id: data.result[i].id },
+                        success: function(data) {},
+                        async:false
+                    });
+
+                }
+
+        });
+    }
 }
 //
 //     $.post("server_admin.php", { query: "list-users" }, function(data) {
