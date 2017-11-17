@@ -8,4 +8,4 @@ WHERE id IN (
     SELECT ta_id
     FROM QualifiedCourses
     WHERE course_name = ?
-);
+) AND id != ?;

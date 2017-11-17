@@ -12,7 +12,7 @@ function querySearch()
     $db = connectToDatabase();
     $stmt = $db->stmt_init();
     $stmt->prepare(file_get_contents("query.sql"));
-    $stmt->bind_param("ssss", $_POST["day"], $_POST["t_start"], $_POST["t_end"], $_POST["course"]);
+    $stmt->bind_param("sssss", $_POST["day"], $_POST["t_start"], $_POST["t_end"], $_POST["course"], $_SESSION["username"]);
     
     if (!$stmt->execute()) {
         echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in querySearch"));
