@@ -63,6 +63,27 @@ function queryRemoveUser()
     echo json_encode(array("status" => SUCCESS));
 }
 
+function queryChangePassword()
+{
+    if (!isset($_POST["password"])) {
+        echo json_encode(array("status" => INVALID_ARGS, "message" => "unset password"));
+        return;
+    }
+
+    $db = connectToDatabase();
+    $stmt = $db->stmt_init();
+    $stmt->prepare("UPDATE Admins SET hash = ? WHERE id = ?");
+    $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $stmt->bind_param("ss", $hash, $_SESSION["username"]);
+
+    if (!$stmt->execute()) {
+        echo json_encode(array("status" => SERVER_ERROR, "message" => "failed to execute query in queryChangePassword"));
+        return;
+    }
+
+    echo json_encode(array("status" => SUCCESS));
+}
+
 session_start();
 
 sessionLogin("admin");
@@ -77,6 +98,9 @@ switch ($_POST["query"]) {
         break;
     case "remove-user":
         queryRemoveUser();
+        break;
+    case "change-password":
+        queryChangePassword();
         break;
     default:
         echo json_encode(array("status" => INVALID_ARGS, "message" => "invalid/unset query type"));
