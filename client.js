@@ -28,11 +28,9 @@ $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
 $("#admin-change-password").click(gotoChangeAdminPassword);
 $("#go-to-manage-TAs").click(gotoManageTAs);
-//$("#test-admin-remove-?").click(queryRemoveUser);
-//$("button[id*='test-admin-remove-']").click(queryRemoveUser);
 
 
-// login button event handler
+// login for TAs
 function login()
 {
     var uname = $("#login-username").val();
@@ -56,6 +54,7 @@ function login()
     });
 }
 
+// login for Admins
 function loginAdmin()
 {
     var uname = $("#login-admin-username").val();
@@ -63,7 +62,6 @@ function loginAdmin()
     $.post("login.php", { username: uname, password: pword, type: "admin" }, function(data) {
         data = JSON.parse(data);
         if (data.status === SUCCESS) {
-            //alert("login successful");
             $("#admin-login").hide();
             $("#whole-page").show();
             $("#admin-header").show();
@@ -75,11 +73,10 @@ function loginAdmin()
     });
 }
 
-
+// Populate user contact info upon login 
 function populateContactInfo()
 {
     $.post("server.php", { query: "get-info" }, function(data) {
-    //alert(data);
     data = JSON.parse(data);
     if (data.status === SUCCESS) {
         $("#test-modify-fname").val(data.result.fname);
@@ -93,6 +90,7 @@ function populateContactInfo()
     });
 }
 
+// Populate user course eligibilty info upon login 
 function populateCourses()
 {
     $.post("server.php", { query: "get-courses" }, function(data) {
@@ -121,12 +119,11 @@ function populateCourses()
     });
 }
 
+// Populate user availability upon login 
 function populateAvailability(){
     $.post("server.php", { query: "get-availability" }, function(data) {
     var data = JSON.parse(data);
     var days = ["M", "T", "W", "R", "F"];
-
-
 
     for(var i = 0 ; i < 5 ; i++)
     {
@@ -168,11 +165,6 @@ function populateAvailability(){
                 t_hours = "0" + t_hours;
             }
         });
-
-
-
-
-
     }
 
     var checked = false;
@@ -191,21 +183,22 @@ function populateAvailability(){
             $(this).prop('checked', false);
         }
 
-
     });
 }
 
-
+// Switch to admin login page
 function gotoAdminLogin(){
     $("#login").hide();
     $("#admin-login").show();
 }
 
+// Switch to TA login page
 function gotoTALogin(){
     $("#admin-login").hide();
     $("#login").show();
 }
 
+// Switch to TA contact info page
 function gotoInfo(){
     $("#test").hide();
     $("#changepassword").hide();
@@ -214,6 +207,7 @@ function gotoInfo(){
     $("#TAinfo").show();
 }
 
+// Switch to TA query page
 function gotoQuery(){
     $("#TAinfo").hide();
     $("#changepassword").hide();
@@ -222,6 +216,7 @@ function gotoQuery(){
     $("#test").show();
 }
 
+// Switch to TA change password
 function gotoChangePassword(){
     $("#TAinfo").hide();
     $("#test").hide();
@@ -230,25 +225,21 @@ function gotoChangePassword(){
     $("#changepassword").show();
 }
 
+// Switch to admin change password
 function gotoChangeAdminPassword(){
     $("#manage-TAs").hide();
     $("#admin-li").removeClass('active');
     $("#adminchangepassword").show();
 }
 
+// Switch to main admin page
 function gotoManageTAs(){
     $("#adminchangepassword").hide();
     $("#admin-li").addClass('active');
     $("#manage-TAs").show();
 }
 
-function checkstatus()
-{
-    $.post("testlogin.php", function(data) {
-        alert(data);
-    });
-}
-
+// Search for available TAs and tabulate
 function querySearch()
 {
     $("#available-TAs").hide();
@@ -330,34 +321,17 @@ function querySearch()
             {
                 alert("No available TAs found");
             }
-
     });
 }
 
-
-$("#get-courses").click(function(){
-    $.post("server.php", { query: "get-courses" }, function(data) {
-        alert(data)
-    });
-});
-
-
-$("#get-availability").click(function(){
-    $.post("server.php", { query: "get-availability" }, function(data) {
-        alert(data);
-    });
-});
-
-$("#populate-availability").click(function(){
-    populateAvailability();
-});
-
+// Save all contact information, course availabilty, and availabilty
 function saveAllInfo(){
     queryModifyInfo();
     window.setTimeout(queryAddCourses, 250);
     window.setTimeout(queryAddTime, 250);
 }
 
+// Save all contact information for a user
 function queryModifyInfo()
 {
     var fname = $("#test-modify-fname").val();
@@ -400,7 +374,6 @@ function queryModifyInfo()
         return;
     }
 
-
     $.ajax({
         type: "POST",
         url: "server.php",
@@ -414,29 +387,7 @@ function queryModifyInfo()
         async:false
     });
 
-//    $.post("server.php", { query: "modify-info", fname: fname, lname: lname, email: email, phone: phone }, function(data) {
-//        var data = JSON.parse(data);
-//        if (data.status === SUCCESS) {
-//            alert("Contact information saved");
-//        }
-//    });
-
-}
-
-//function queryAddCourses()
-//{
-//    clear_courses(function() {
-//          queryPostCourses();
-//        });
-//}
-
-//function clear_courses(callback){
-//    $.post("server.php", { query: "clear-courses" }, function(data) {
-//    });
-//    callback();
-//}
-
-
+// Save all course eligibility for a user
 function queryAddCourses()
 {
     $.ajax({
@@ -453,26 +404,11 @@ function queryAddCourses()
         var course = $(this).val();
         if ($(this).is(":checked"))
         {
-
-//        $.ajax({
-//            type: "POST",
-//            url: "server.php",
-//            data: { query: "add-course", course: course },
-//            success: function(data) {
-//                var data = JSON.parse(data);
-//                check += data.status;
-//            },
-//            async:false
-//        });
-
-
             $.post("server.php", { query: "add-course", course: course }, function(data) {
                 var data = JSON.parse(data);
                 check += data.status;
             });
         }
-
-
     });
 
     if (check === SUCCESS) {
@@ -480,20 +416,7 @@ function queryAddCourses()
     }
 }
 
-
-//function queryAddTime() {
-//    clear_availability(function() {
-//          queryPostAvailability();
-//        });
-//}
-//
-//function clear_availability(callback){
-//    $.post("server.php", { query: "clear-availability" }, function(data) {
-//    });
-//    callback();
-//}
-
-
+// Save all availability for a user    
 function queryAddTime(){
 
     $.ajax({
@@ -504,14 +427,11 @@ function queryAddTime(){
         async:false
     });
 
-
-
     var days = ["M", "T", "W", "R", "F"];
     var check = SUCCESS;
 
     for(var i = 0 ; i < 5 ; i++)
     {
-
         var t_hours = "8:00";
         var t_start = "";
         var t_end = "";
@@ -522,7 +442,6 @@ function queryAddTime(){
 
             if ($(this).hasClass('highlighted'))
             {
-
                 if(highlighted == false)
                 {
                 highlighted = true;
@@ -535,19 +454,6 @@ function queryAddTime(){
                 {
                     highlighted = false;
                     t_end = t_hours;
-//                  alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
-
-//                        $.ajax({
-//                            type: "POST",
-//                            url: "server.php",
-//                            data: { query: "add-time", day: days[i], t_start: t_start, t_end: t_end },
-//                            success: function(data) {
-//                                var data = JSON.parse(data);
-//                                check += data.status;
-//                            },
-//                            async:false
-//                            });
-
 
                     $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
                         var data = JSON.parse(data);
@@ -561,31 +467,20 @@ function queryAddTime(){
         if (highlighted == true)
         {
             t_end = t_hours;
-//            alert("Free from " + t_start + " to " + t_end + " on " + days[i]);
-//                        $.ajax({
-//                            type: "POST",
-//                            url: "server.php",
-//                            data: { query: "add-time", day: days[i], t_start: t_start, t_end: t_end },
-//                            success: function(data) {
-//                                var data = JSON.parse(data);
-//                                check += data.status;
-//                            },
-//                            async:false
-//                            });
 
-                                $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
-                        var data = JSON.parse(data);
-                        check += data.status;
-                    });
+            $.post("server.php", { query: "add-time", day: days[i], t_start: t_start, t_end: t_end }, function(data) {
+                var data = JSON.parse(data);
+                check += data.status;
+            });
         }
     }
 
     if (check === SUCCESS) {
         alert("Availability saved");
     }
-
 }
 
+// Helper function for availability to increment time 
 function add15totime(str){
     var time = str;
     var hours = Number(time.match(/^(\d+)/)[1]);
@@ -602,6 +497,7 @@ function add15totime(str){
     return(shours + ":" + sminutes + ":00");
 }
 
+// Helper function to convert AM/PM format to 24 hour format     
 function ConvertTimeformat(str) {
     var time = str;
     var hours = Number(time.match(/^(\d+)/)[1]);
@@ -616,6 +512,7 @@ function ConvertTimeformat(str) {
     return(sHours + ":" + sMinutes);
 }
 
+// Clear all availability   
 function queryClearData()
 {
     $.post("server.php", { query: "clear-availability" }, function(data) {
@@ -627,6 +524,7 @@ function queryClearData()
 
 }
 
+// Change password for TA user 
 function queryChangePassword()
 {
     var password = $("#test-password").val();
@@ -651,6 +549,7 @@ function queryChangePassword()
     }
 }
 
+// Change password for admin
 function adminChangePassword()
 {
     var password = $("#admin-password").val();
@@ -676,6 +575,7 @@ function adminChangePassword()
     }
 }
 
+// Get current list of TAs and tabulate
 function queryListUsers()
 {
     $.post("server_admin.php", { query: "list-users" }, function(data) {
@@ -729,6 +629,7 @@ function queryListUsers()
 
 }
 
+// Add eligible TA for admin
 function queryAddUser()
 {
     var id = $("#test-admin-id").val();
@@ -748,14 +649,7 @@ function queryAddUser()
     });
 }
 
-
-//function queryRemoveUserPre(idT){
-//    //var id1 = document.getElementById(idT).value;
-//    document.getElementById("test-admin-id").value = idT;
-//    queryRemoveUser();
-//
-//}
-
+// Remove eligible TA for admin
 function queryRemoveUser(id)
 {
     if (confirm("Are you sure you want to remove ID " + id + "?") == true) 
@@ -772,6 +666,7 @@ function queryRemoveUser(id)
     }
 }
 
+// Remove all eligible TAs for admin
 function ClearUsers()
 {
     if (confirm("Are you sure you want to clear TA list?") == true) 
@@ -781,9 +676,6 @@ function ClearUsers()
             var data = JSON.parse(data);
             for(var i = 0; i < data.result.length ; i++)
                 {
-    //               $.post("server_admin.php", { query: "remove-user", id: data.result[i].id }, function(data) {
-    //               }); 
-
                     $.ajax({
                         type: "POST",
                         url: "server_admin.php",
@@ -791,36 +683,12 @@ function ClearUsers()
                         success: function(data) {},
                         async:false
                     });
-
                 }
-
         });
     }
 }
-//
-//     $.post("server_admin.php", { query: "list-users" }, function(data) {
-//
-//         alert(data);
-//         $("#TA-list").html("");
-//
-//         var data = JSON.parse(data);
-//
-//         if (data.result.length > 0)
-//         {
-//             var markup = "";
-//             for(var i = 0; i < data.result.length ; i++)
-//                 {
-//                   if(data.result[i].id == id){
-//                     queryRemoveUser
-//                   }
-//                 markup = '<table id="test-admin-id-' + i + ' " style="width:100%; margin-top: 15px; margin-bottom: 20px"><tr><td style="width:33%;">' + data.result[i].id + ' ' + data.result[i].fname + ' ' + data.result[i].lname +'</td><td style="width:33%;">' + data.result[i].email +'</td><td style="width:33%;">' + data.result[i].phone + '</td> <td><button id="test-admin-remove-' + i + ' " >Remove</button></td> </tr></table><hr/>';
-//                 $('#TA-list').append(markup);
-//
-//                 }
-//         }
-//}
 
-// logout button event handler
+// Logout
 function logout()
 {
     $.post("logout.php", function(data) {
@@ -829,12 +697,6 @@ function logout()
             alert(data.message);
         }
     });
-//    $("#test").hide();
-//    $("#test-admin").hide();
-//    $("#whole-page").hide();
-//    $("#header").hide();
-//    $("#changepassword").hide();
-//    $("#login").show();
     location.reload();
     document.getElementById('query-form').reset();
 
@@ -860,22 +722,20 @@ $(function() {
     $("#changepassword").hide();
     $("#adminchangepassword").hide();
     
-    
     $('#starttimepicker').datetimepicker({
         format: 'LT'
     });
     
     $('#endtimepicker').datetimepicker({
         format: 'LT'
-    });
-    
+    });  
 
-    // Create table dragging functionality
-          var isMouseDown = false;
+    // Create availability table dragging functionality
+          var MouseIsDown = false;
           var highlighted;
           $("table#availability-table td.selectable")
             .mousedown(function () {
-              isMouseDown = true;
+              MouseIsDown = true;
               highlighted = $(this).hasClass('highlighted')
 
               if ( highlighted ) {
@@ -886,7 +746,7 @@ $(function() {
               return false; // prevent text selection
             })
             .mouseover(function () {
-              if (isMouseDown) {
+              if (MouseIsDown) {
                 if ( highlighted ) {
                   $(this).removeClass('highlighted')
                 } else {
@@ -894,12 +754,9 @@ $(function() {
                 }
               }
             })
-            .bind("selectstart", function () {
-              return false; // prevent text selection in IE
-            })
 
           $(document)
               .mouseup(function () {
-              isMouseDown = false
+              MouseisDown = false
           })
 });
