@@ -14,19 +14,22 @@
         <!-- Import Bootstrap -->
 <!--        <link rel="stylesheet" href="https://max cdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">      -->
 <!--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
+<!--        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
+        
+        
         
         
         <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
-<!--        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
-
         <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 			<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        
+        
+        
 
         <link rel="stylesheet" href="base.css">
 
@@ -823,11 +826,12 @@
             <nav class="navbar navbar-default" style="background-color: #122E53">
             <div class="container-fluid" >
                 <ul class="nav navbar-nav">
-                    <li id ="query-li" class="active"><a id="go-to-query">MANAGE TEACHING ASSISTANTS</a></li>
+                    <li id ="admin-li" class="active"><a id="go-to-manage-TAs">MANAGE TEACHING ASSISTANTS</a></li>
                 </ul>
                 <div class = "dropdown" style = "float: right;">
                     <button id = "settings-button"><i class="icon-cog icon-2x"></i></button>
                     <div class="dropdown-content">
+                    <a id="admin-change-password">CHANGE PASSWORD</a>
                     <a id="test-admin-logout">LOG OUT</a>
                     </div>
                 </div>
@@ -836,8 +840,8 @@
         </div>
             
             
-        <div id="admin-main" class="container" style="padding-top: 20px;">
-            
+        <div id="admin-main" class="container" >
+        <div id = "manage-TAs" style="padding-top: 20px;">
             <div class = "subtitle2" style="width:80%; margin-top:10px">ADD TEACHING ASSISTANTS</div>
                 <hr/>
             <!-- <button id="test-admin-list">List TAs</button> -->
@@ -858,6 +862,27 @@
             </div>
 
         </div>
+        </div>
+            
+        <div id = "adminchangepassword" style="padding-top: 20px;">
+            <div class = "subtitle2" style="margin-top: 10px;">CHANGE PASSWORD</div>
+            <hr/>
+            <div class = "container enterdata">
+                <table>
+                <tr>
+                    <td>New password: </td>
+                    <td><input type="password" id="admin-password" placeholder="password"></td>
+                </tr>
+                <tr>
+                    <td>Repeat password: </td>
+                    <td><input type="password" id="admin-password-repeat" placeholder="password"></td>
+                </tr>
+                </table>
+                <button id="admin-password-submit" style="margin-top: 15px">Change</button>
+            </div>
+
+        </div>
+            
         </div>
 
 

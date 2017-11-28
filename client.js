@@ -18,6 +18,7 @@ $("#go-to-info").click(gotoInfo);
 $("#go-to-query").click(gotoQuery);
 $("#test-clear-data").click(queryClearData);
 $("#test-password-submit").click(queryChangePassword);
+$("#admin-password-submit").click(adminChangePassword);
 $("#test-admin-list").click(queryListUsers);
 $("#TA-list-clear").click(ClearUsers);
 $("#test-admin-add").click(queryAddUser);
@@ -25,6 +26,8 @@ $("#test-admin-remove").click(queryRemoveUser);
 $("#test-admin-logout").click(logout);
 $("#test-logout").click(logout);
 $("#change-password").click(gotoChangePassword);
+$("#admin-change-password").click(gotoChangeAdminPassword);
+$("#go-to-manage-TAs").click(gotoManageTAs);
 //$("#test-admin-remove-?").click(queryRemoveUser);
 //$("button[id*='test-admin-remove-']").click(queryRemoveUser);
 
@@ -225,6 +228,18 @@ function gotoChangePassword(){
     $("#info-li").removeClass('active');
     $("#query-li").removeClass('active');
     $("#changepassword").show();
+}
+
+function gotoChangeAdminPassword(){
+    $("#manage-TAs").hide();
+    $("#admin-li").removeClass('active');
+    $("#adminchangepassword").show();
+}
+
+function gotoManageTAs(){
+    $("#adminchangepassword").hide();
+    $("#admin-li").addClass('active');
+    $("#manage-TAs").show();
 }
 
 function checkstatus()
@@ -636,12 +651,36 @@ function queryChangePassword()
     }
 }
 
+function adminChangePassword()
+{
+    var password = $("#admin-password").val();
+    var repeat = $("#admin-password-repeat").val();
+    
+    if (password == "" || repeat == "")
+    {
+       alert("Please enter a password");
+        return;
+    }
+    
+    if (password == repeat)
+    {
+        $.post("server_admin.php", { query: "change-password", password: password }, function(data) {
+            alert(data);
+            var data = JSON.parse(data);
+            if (data.status === SUCCESS) {
+                alert("Password saved successfully");
+            }
+        });
+    } else{
+        alert("Passwords don't match");
+    }
+}
+
 function queryListUsers()
 {
     $.post("server_admin.php", { query: "list-users" }, function(data) {
 
         $("#TA-list").html("");
-
         var data = JSON.parse(data);
         if (data.result.length > 0)
         {
@@ -819,6 +858,7 @@ $(function() {
     $("#whole-page").hide();
     $("#available-TAs").hide();
     $("#changepassword").hide();
+    $("#adminchangepassword").hide();
     
     
     $('#starttimepicker').datetimepicker({
