@@ -72,7 +72,7 @@ function queryChangePassword()
 
     $db = connectToDatabase();
     $stmt = $db->stmt_init();
-    $stmt->prepare("UPDATE Admins SET hash = ? WHERE id = ?");
+    $stmt->prepare("UPDATE Admins SET hash = ? WHERE username = ?");
     $hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $stmt->bind_param("ss", $hash, $_SESSION["username"]);
 
