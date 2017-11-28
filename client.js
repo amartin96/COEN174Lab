@@ -386,6 +386,7 @@ function queryModifyInfo()
         },
         async:false
     });
+}
 
 // Save all course eligibility for a user
 function queryAddCourses()
