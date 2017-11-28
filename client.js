@@ -6,7 +6,6 @@ const INVALID_ARGS = 3;
 // bind event handlers
 $("#login-submit").click(login);
 $("#login-admin-submit").click(loginAdmin);
-$("#test-checkstatus").click(checkstatus);
 $("#test-submit").click(querySearch);
 $("#save-all").click(saveAllInfo);
 $("#test-modify-submit").click(queryModifyInfo);
