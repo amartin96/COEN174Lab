@@ -291,6 +291,12 @@ function querySearch()
     t_start = ConvertTimeformat(t_start);
     t_end = ConvertTimeformat(t_end);
 
+    if (t_start > t_end)
+    {
+        alert("Invalid start and end times. Classes don't go backwards in time"); 
+        return;
+    }
+    
     $.post("server.php", { query: "search", course: course, day: day, t_start: t_start, t_end: t_end }, function(data) {
         var data = JSON.parse(data);
 
@@ -610,6 +616,13 @@ function queryChangePassword()
 {
     var password = $("#test-password").val();
     var repeat = $("#test-password-repeat").val();
+    
+    if (password == "" || repeat == "")
+    {
+       alert("Please enter a password");
+        return;
+    }
+    
     if (password == repeat)
     {
         $.post("server.php", { query: "change-password", password: password }, function(data) {
@@ -806,6 +819,16 @@ $(function() {
     $("#whole-page").hide();
     $("#available-TAs").hide();
     $("#changepassword").hide();
+    
+    
+    $('#starttimepicker').datetimepicker({
+        format: 'LT'
+    });
+    
+    $('#endtimepicker').datetimepicker({
+        format: 'LT'
+    });
+    
 
     // Create table dragging functionality
           var isMouseDown = false;
