@@ -426,4 +426,27 @@ select {
         -moz-appearance: none;
 
 }
-           
+
+.form-control{
+    height: 25px;
+    padding 0;    
+}
+
+.form-group button {
+    background-color: #0064af !important;
+    border: 1px solid #155184 !important; 
+    font-size: 14px !important;
+    padding: 6px 6px !important;
+    font-family: roboto !important;
+    border-radius: 3px !important;
+    color: #fff !important;  
+}
+
+.form-group button:hover{
+    background-color: #015696 !important;
+ 
+}
+
+.input-group-addon{
+    padding: 0px 6px;
+}

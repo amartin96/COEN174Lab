@@ -8,13 +8,23 @@
 
         <!-- import jQuery -->
 <!--        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-        <script defer src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+<!--        <script defer src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>-->
 
 
         <!-- Import Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">      
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<!--        <link rel="stylesheet" href="https://max cdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">      -->
+<!--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
         
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+<!--        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">-->
+
+        <link href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+			<script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
@@ -26,7 +36,7 @@
     </head>
     <body>
         
-        
+
         
         <div id="login" >
             <div class="container">
@@ -115,7 +125,7 @@
             
             <div class = "enterdata">
 
-            <div class = "row" style="margin-top: 30px; margin-bottom: 15px; padding: 0 20px">
+            <div class = "row" style="margin-top: 30px; margin-bottom: 5px; padding: 0 20px">
                 <form id = "query-form">
                     <div class = "col-xs-6 col-sm-3"  style="margin-bottom: 15px">
                         <div style = "width:60px; float:left">Course:</div>
@@ -167,14 +177,31 @@
                     <div class = "col-xs-6 col-sm-3" ><div></div>
                         <div style = "width:87px; float:left">Start Time: </div>
                         <div style = "margin-left: 87px">
-                            <input type="text" id="test-t_start" placeholder="9:00 AM">
+            <div class="form-group">
+                <div class='input-group date' id='starttimepicker'>
+                    <input id ="test-t_start" type='text' class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+
+        
+
 
                         </div>
                     </div>
                     <div class = "col-xs-6 col-sm-3">
                         <div style = "width:80px; float:left">End Time: </div>
                         <div style = "margin-left: 80px">
-                        <input type="text" id="test-t_end" placeholder="12:00 PM">
+                                <div class="form-group">
+                <div class='input-group date' id='endtimepicker'>
+                    <input id ="test-t_end" type='text' class="form-control" style="border-top-right-radius: 0; border-bottom-right-radius: 0;"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
                         </div>
                     </div>
                     </form>
