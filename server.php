@@ -219,6 +219,7 @@ function queryChangePassword()
 }
 
 session_start();
+session_save_path("./tmp");
 
 sessionLogin();
 

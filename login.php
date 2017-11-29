@@ -2,6 +2,7 @@
 
 require "helper.php";
 
+session_save_path("./tmp");
 session_start();
 
 # check for an existing session and log out if necessary

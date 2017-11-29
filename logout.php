@@ -3,6 +3,7 @@
 require "helper.php";
 
 session_start();
+session_save_path("./tmp");
 
 if (logout()) {
     echo json_encode(array("status" => SUCCESS));
