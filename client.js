@@ -731,32 +731,35 @@ $(function() {
     });  
 
     // Create availability table dragging functionality
-          var MouseIsDown = false;
+          var isMouseDown = false;
           var highlighted;
           $("table#availability-table td.selectable")
             .mousedown(function () {
-              MouseIsDown = true;
-              highlighted = $(this).hasClass('highlighted')
+              isMouseDown = true;
+              highlighted = $(this).hasClass('highlighted');
 
               if ( highlighted ) {
-                $(this).removeClass('highlighted')
+                $(this).removeClass('highlighted');
               } else {
-                $(this).addClass('highlighted')
+                $(this).addClass('highlighted');
               }
               return false; // prevent text selection
             })
             .mouseover(function () {
-              if (MouseIsDown) {
+              if (isMouseDown) {
                 if ( highlighted ) {
-                  $(this).removeClass('highlighted')
+                  $(this).removeClass('highlighted');
                 } else {
-                  $(this).addClass('highlighted')
+                  $(this).addClass('highlighted');
                 }
               }
+            })
+            .bind("selectstart", function () {
+              return false; // prevent text selection in IE
             })
 
           $(document)
               .mouseup(function () {
-              MouseisDown = false
+              isMouseDown = false;
           })
 });
