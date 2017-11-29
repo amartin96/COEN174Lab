@@ -84,8 +84,8 @@ function queryChangePassword()
     echo json_encode(array("status" => SUCCESS));
 }
 
-session_start();
 session_save_path("./tmp");
+session_start();
 
 sessionLogin("admin");
 
