@@ -28,6 +28,21 @@ $("#change-password").click(gotoChangePassword);
 $("#admin-change-password").click(gotoChangeAdminPassword);
 $("#go-to-manage-TAs").click(gotoManageTAs);
 
+$('#login-username, #login-password').keypress(function (e) {
+  var key = e.which;
+  if(key == 13)  // the enter key code
+   {
+       login();
+   }
+});
+
+$('#login-admin-username, #login-admin-password').keypress(function (e) {
+  var key = e.which;
+  if(key == 13)  // the enter key code
+   {
+       loginAdmin();
+   }
+});
 
 // login for TAs
 function login()
@@ -361,6 +376,12 @@ function queryModifyInfo()
         alert("Please enter a valid 10 digit phone number");
         invalid = true;
     }
+    else
+    {
+        phone = phone.replace(/^\(?(\d{3})\)?[-. ]?(\d{3})[-. ]?(\d{4})$/, "$1-$2-$3");
+        alert(phone);
+    }
+
 
     if (email.toUpperCase().indexOf('@SCU.EDU') <= -1)
     {
