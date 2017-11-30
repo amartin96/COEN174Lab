@@ -41,4 +41,4 @@ CREATE TABLE QualifiedCourses (
 );
 
 -- Manually insert a default admin account with password "password"
-INSERT INTO Admins VALUES ("admin", "$2y$10$dlDU.ecgGukEkk5MqEPJye4AcpLiu0M3LCY7L/T4K2pW5paWBbl9W");
+INSERT INTO Admins VALUES ("admin", "$2y$10$krFJPxONvYiAFO1bbjv3nOlw4.5vRnrmuJpc22g/okj0PS0cUIK1q");
