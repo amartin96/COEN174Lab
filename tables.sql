@@ -1,9 +1,8 @@
 -- clean the database
+DROP TABLE IF EXISTS Admins;
 DROP TABLE IF EXISTS AvailableTimes;
 DROP TABLE IF EXISTS QualifiedCourses;
 DROP TABLE IF EXISTS TeachingAssistants;
-DROP TABLE IF EXISTS Sections;
-DROP TABLE IF EXISTS Courses;
 
 -- Admin Credentials
 CREATE TABLE Admins (
@@ -32,11 +31,6 @@ CREATE TABLE AvailableTimes (
         ON DELETE CASCADE
 );
 
--- Used to check for valid course names
-CREATE TABLE Courses (
-    name    VARCHAR(8) UNIQUE NOT NULL
-);
-
 -- Mapping of TA IDs to courses they are qualified to teach
 CREATE TABLE QualifiedCourses (
     ta_id       INTEGER,
@@ -44,20 +38,7 @@ CREATE TABLE QualifiedCourses (
     FOREIGN KEY (ta_id)
         REFERENCES TeachingAssistants(id)
         ON DELETE CASCADE
-#     ,
-#     FOREIGN KEY (course_name)
-#         REFERENCES Courses(name)
-#         ON DELETE CASCADE
 );
 
--- Course info
-CREATE TABLE Sections (
-    id      INTEGER PRIMARY KEY,
-    name    VARCHAR(8),
-    day     ENUM('M', 'T', 'W', 'R', 'F'),
-    t_start TIME,
-    t_end   TIME,
-    FOREIGN KEY (name)
-        REFERENCES Courses(name)
-        ON DELETE CASCADE
-);
+-- Manually insert a default admin account with password "password"
+INSERT INTO Admins VALUES ("admin", "$2y$10$dlDU.ecgGukEkk5MqEPJye4AcpLiu0M3LCY7L/T4K2pW5paWBbl9W");
